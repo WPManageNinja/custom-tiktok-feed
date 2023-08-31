@@ -1,0 +1,127 @@
+<?php
+/*
+Plugin Name: Ninja TikTok Feed
+Plugin URI:   https://wpsocialninja.com/
+Description: Display a TikTok feed on your WordPress website.
+Version: 1.0.0
+Author:       WPManageNinja LLC
+Author URI:   https://wpmanageninja.com
+License:      GPLv2 or later
+Text Domain:  wp-ninja-tiktok-feed
+Domain Path:  /language
+*/
+
+if (!defined('NINJA_TIKTOK_FEED_MAIN_FILE')) {
+    exit;
+}
+
+define('NINJA_TIKTOK_FEED_MAIN_FILE', __FILE__);
+
+require_once('ninja-tiktok-feed-boot.php');
+
+add_action('init', function () {
+    load_plugin_textdomain('wp-ninja-tiktok-feed', false, basename(dirname(__FILE__)) . '/language');
+});
+
+if (!defined('NINJA_TIKTOK_FEED')) {
+    define('NINJA_TIKTOK_FEED_VERSION', '1.0.0');
+    define('NINJA_TIKTOK_FEED', true);
+    define('NINJA_TIKTOK_FEED_MAIN_FILE', __FILE__);
+    define('NINJA_TIKTOK_FEED_URL', plugin_dir_url(__FILE__));
+    define('NINJA_TIKTOK_FEED_DIR', plugin_dir_path(__FILE__));
+
+    class WPNinjaTiktokFeed
+    {
+
+        private $proScriptLoaded = false;
+
+        public function boot()
+        {
+            if (!defined('WPSOCIALREVIEWS_VERSION')) {
+                $this->injectDependency();
+                return;
+            }
+            $this->loadDependencies();
+            $this->registerHooks();
+
+        }
+
+        /**
+         * Notify the user about the WP Social Ninja dependency and instructs to install it.
+         */
+        protected function injectDependency()
+        {
+            add_action('admin_notices', function () {
+                $pluginInfo = $this->getBasePluginInstallationDetails();
+
+                $class = 'notice notice-error';
+
+                $install_url_text = __('Click Here to Install the Plugin', 'wp-ninja-tiktok-feed');
+
+                if ($pluginInfo->action == 'activate') {
+                    $install_url_text = __('Click Here to Activate the Plugin', 'wp-ninja-tiktok-feed');
+                }
+
+                $message = 'Ninja TikTok Feed Requires WP Social Ninja Base Plugin, <b><a href="' . $pluginInfo->url
+                    . '">' . $install_url_text . '</a></b>';
+
+                printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+            });
+        }
+
+        /**
+         * Get the WP Social Ninja plugin installation information e.g. the URL to install.
+         *
+         * @return \stdClass $activation
+         */
+        protected function getBasePluginInstallationDetails()
+        {
+            $activation = (object)[
+                'action' => 'install',
+                'url'    => ''
+            ];
+
+            $allPlugins = get_plugins();
+
+            $plugin_path = 'wp-social-reviews/wp-social-reviews.php';
+
+             if (isset($allPlugins[$plugin_path])) {
+                $url = wp_nonce_url(
+                    self_admin_url('plugins.php?action=activate&plugin=' . $plugin_path . ''),
+                    'activate-plugin_' . $plugin_path . ''
+                );
+
+                $activation->action = 'activate';
+            } else {
+                $api = (object)[
+                    'slug' => 'wp-social-reviews'
+                ];
+
+                $url = wp_nonce_url(
+                    self_admin_url('update.php?action=install-plugin&plugin=' . $api->slug),
+                    'install-plugin_' . $api->slug
+                );
+            }
+            $activation->url = $url;
+
+            return $activation;
+        }
+
+        public function loadDependencies()
+        {
+            require_once(NINJA_TIKTOK_FEED_DIR . 'includes/autoload.php');
+        }
+
+        public function registerHooks()
+        {
+            new \WPNinjaTiktokFeed\Hooks\Frontend();
+            new \WPNinjaTiktokFeed\Hooks\Backend();
+        }
+
+    }
+
+    add_action('plugins_loaded', function () {
+        (new WPNinjaTiktokFeed())->boot();
+    });
+}
+
