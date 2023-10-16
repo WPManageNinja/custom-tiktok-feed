@@ -12,8 +12,6 @@ Text Domain:  ninja-tiktok-feed
 Domain Path:  /language
 */
 
-//use WPNinjaTiktokFeed\App\Services\Platforms\Feeds\Tiktok\TiktokFeed;
-
 if (defined('NINJA_TIKTOK_FEED_MAIN_FILE')) {
     return;
 }
@@ -28,9 +26,6 @@ add_action('wp_social_reviews_loaded_v2', function ($app) {
 });
 
 add_action('init', function () {
-//    if(defined('WPSOCIALREVIEWS_VERSION') ){
-//        (new TiktokFeed())->registerHooks();
-//    }
     load_plugin_textdomain('ninja-tiktok-feed', false, basename(dirname(__FILE__)) . '/language');
 });
 
