@@ -12,7 +12,6 @@ spl_autoload_register(function ($class){
     if ( ! preg_match("/\b{$match}\b/", $class)) {
         return;
     }
-
     $path = plugin_dir_path(__FILE__);
 
     $file = str_replace(
@@ -22,13 +21,12 @@ spl_autoload_register(function ($class){
     );
 
     $filePath = (trailingslashit($path) . trim($file, '/') . '.php');
-
     if (file_exists($filePath)) {
         require $filePath;
     }
 });
 
-class WPTiktokFeedDependency
+class WPNinjaTiktokFeedDependency
 {
     public function init()
     {
@@ -45,10 +43,10 @@ class WPTiktokFeedDependency
 
             $class = 'notice notice-error';
 
-            $install_url_text = __('Click Here to Install the Plugin', 'wp-ninja-tiktok-feed');
+            $install_url_text = __('Click Here to Install the Plugin', 'ninja-tiktok-feed');
 
             if ($pluginInfo->action == 'activate') {
-                $install_url_text = __('Click Here to Activate the Plugin', 'wp-ninja-tiktok-feed');
+                $install_url_text = __('Click Here to Activate the Plugin', 'ninja-tiktok-feed');
             }
 
             $message = 'Ninja TikTok Feed Requires WP Social Ninja Base Plugin, <b><a href="' . $pluginInfo->url
@@ -99,7 +97,7 @@ class WPTiktokFeedDependency
 
 add_action('init', function ($app) {
     if( !defined('WPSOCIALREVIEWS_VERSION') ){
-        (new WPTiktokFeedDependency())->init();
+        (new WPNinjaTiktokFeedDependency())->init();
     }
 });
 
