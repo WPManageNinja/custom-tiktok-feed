@@ -11,32 +11,18 @@ class ShortcodeHandler
     {
         $encodedMeta = get_post_meta($templateId, '_wpsr_template_config', true);
         $template_meta = json_decode($encodedMeta, true);
+
         if (!$template_meta || empty($template_meta)) {
             return ['error_message' => __('No template is available for this shortcode!!', 'wp-social-reviews')];
         }
         $error_message = __('Please set a template platform name on your shortcode', 'wp-social-reviews');
-        if ($platform === 'reviews' || $platform === 'testimonial') {
-            $template_meta = Helper::formattedTemplateMeta($template_meta);
-            if (empty($template_meta['platform'])) {
-                return [
-                    'error_message' => $error_message
-                ];
-            }
-        } elseif ($platform === 'twitter') {
+
+        if ($platform === 'tiktok') {
             $configs = Arr::get($template_meta, 'feed_settings', []);
-            $template_meta = Config::formatTwitterConfig($configs, []);
-        } elseif ($platform === 'youtube') {
-            $configs = Arr::get($template_meta, 'feed_settings', []);
-            $template_meta = Config::formatYoutubeConfig($configs, []);
-        } elseif ($platform === 'instagram') {
-            $configs = Arr::get($template_meta, 'feed_settings', []);
-            $template_meta = Config::formatInstagramConfig($configs, []);
-        } elseif ($platform === 'facebook_feed') {
-            $configs = Arr::get($template_meta, 'feed_settings', []);
-            $template_meta = Config::formatFacebookConfig($configs, []);
+            $template_meta = Config::formatTiktokConfig($configs, []);
         }
 
-        if (($platform !== 'reviews' && $platform !== 'testimonial') && !Arr::get($template_meta, 'feed_settings.platform')) {
+        if (!Arr::get($template_meta, 'feed_settings.platform')) {
             return [
                 'error_message' => $error_message
             ];
@@ -52,13 +38,8 @@ class ShortcodeHandler
         $dynamic = Arr::get($feed, 'dynamic', $feed);
         $feeds = Arr::get($dynamic, 'items', []);
 
-        if ($platform === 'twitter') {
-            $header = Arr::get($feed, 'header', []);
-            $layout_type = Arr::get($feed_settings, 'layout_type', 'standard');
-        } else {
-            $header = Arr::get($dynamic, 'header', []);
-            $layout_type = Arr::get($feed_settings, 'layout_type', 'grid');
-        }
+        $header = Arr::get($dynamic, 'header', []);
+        $layout_type = Arr::get($feed_settings, 'layout_type', 'grid');
 
         $column_gaps = Arr::get($feed_settings, 'column_gaps', 'default');
 
