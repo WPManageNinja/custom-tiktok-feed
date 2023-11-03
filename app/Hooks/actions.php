@@ -10,7 +10,7 @@
  */
 
 /**
- * @var $app NinjaTiktokFeed\App\Application
+ * @var $app NinjaTiktokFeed\Application\Application
  */
 
 /*******
@@ -19,16 +19,16 @@
  *
  *******/
 
-(new \WPNinjaTiktokFeed\App\Hooks\Handlers\PlatformHandler())->register();
+(new \NinjaTiktokFeed\Application\Hooks\Handlers\PlatformHandler())->register();
 
-$app->addAction('ninja_tiktok_feed/tiktok_feed_template_item_wrapper_before', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
-$app->addAction('ninja_tiktok_feed/tiktok_feed_author', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 3);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_description', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_media', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_icon', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_date', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderFeedDate');
+$app->addAction('ninja_tiktok_feed/tiktok_feed_template_item_wrapper_before', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
+$app->addAction('ninja_tiktok_feed/tiktok_feed_author', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 3);
+$app->addAction('ninja_tiktok_feed/tiktok_feed_description', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
+$app->addAction('ninja_tiktok_feed/tiktok_feed_media', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
+$app->addAction('ninja_tiktok_feed/tiktok_feed_icon', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
+$app->addAction('ninja_tiktok_feed/tiktok_feed_date', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDate');
 
-$app->addAction('ninja_tiktok_feed/load_more_tiktok_button', 'WPNinjaTiktokFeed\App\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
+$app->addAction('ninja_tiktok_feed/load_more_tiktok_button', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
 
 
 $app->addAction('wp_ajax_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');

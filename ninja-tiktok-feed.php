@@ -21,7 +21,7 @@ define('NINJA_TIKTOK_FEED_MAIN_FILE', __FILE__);
 require_once('ninja-tiktok-feed-boot.php');
 
 add_action('wp_social_reviews_loaded_v2', function ($app) {
-    (new \WPNinjaTiktokFeed\App\Application($app));
+    (new \NinjaTiktokFeed\Application\Application($app));
     do_action('wp_ninja_tiktok_feed_loaded', $app);
 });
 

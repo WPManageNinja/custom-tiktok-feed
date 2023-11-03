@@ -1,8 +1,8 @@
 <?php
 
-namespace WPNinjaTiktokFeed\App\Services\Platforms\Feeds\Tiktok;
+namespace NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok;
 
-use WPNinjaTiktokFeed\App\Services\Platforms\Feeds\Tiktok\Config as TiktokConfig;
+use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config as TiktokConfig;
 use WPSocialReviews\App\Services\DataProtector;
 use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
@@ -41,7 +41,7 @@ class TiktokFeed extends BaseFeed
 
     public function pushValidPlatform($platforms)
     {
-        $isActive = get_option('wpsr_tiktok_connected_sources_config');
+        $isActive = $this->getConncetedSourceList();
         if ($isActive) {
             $platforms['tiktok'] = __('Tiktok Feed', 'wp-social-reviews');
         }
@@ -139,38 +139,35 @@ class TiktokFeed extends BaseFeed
         $app = App::getInstance();
 
         $settings = get_option('wpsr_tiktok_global_settings');
-        $clientKey = sanitize_text_field(Arr::get($settings, 'app_settings.client_key', ''));
-        $clientSecret = sanitize_text_field(Arr::get($settings, 'app_settings.client_secret', ''));
+        $clientKey = Arr::get($settings, 'app_settings.client_key', '');
+        $clientSecret = Arr::get($settings, 'app_settings.client_secret', '');
 
-        $curlPost = http_build_query(array(
-            'client_Key' => $protector->decrypt($clientKey),
-            'client_secret' => $protector->decrypt($clientSecret),
-            'refresh_token' => $refreshTokenReceived,
-            'grant_type' => 'refresh_token',
-        ));
+        $clientKey = $protector->decrypt($clientKey);
+        $clientSecret = $protector->decrypt($clientSecret);
 
-        $ch = curl_init($api_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+        $args = array(
+            'body' => array(
+                'client_Key' => $clientKey,
+                'client_secret' => $clientSecret,
+                'refresh_token' => $refreshTokenReceived,
+                'grant_type' => 'refresh_token',
+            ),
+            'headers' => array(
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Cache-Control' => 'no-cache',
+            ),
+        );
 
-        $headers = [
-            'Content-Type: application/x-www-form-urlencoded',
-            'Cache-Control: no-cache',
-        ];
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        $data = json_decode($response, true);
+        $response = wp_remote_post($api_url, $args);
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
 
         if (isset($data['open_id']) && isset($data['access_token'])) {
-            $access_token = sanitize_textarea_field($data['access_token']);
-            $refresh_token = sanitize_textarea_field($data['refresh_token']);
+            $access_token = $data['access_token'];
+            $refresh_token = $data['refresh_token'];
             $expires_in = intval($data['expires_in']);
             $expiration_time = time() + $expires_in;
-            $open_id = sanitize_textarea_field($data['open_id']);
+            $open_id = $data['open_id'];
 
             $data = [
                 'access_token' => $access_token,
@@ -384,14 +381,14 @@ class TiktokFeed extends BaseFeed
         $feedType       = Arr::get($apiSettings, 'feed_type', 'user_feed');
 
         $totalFeed      = Arr::get($apiSettings, 'feed_count');
-        $totalFeed      = !defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 20 ? 20 : $totalFeed;
+        $totalFeed      = !defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 10 ? 10 : $totalFeed;
         $totalFeed      =  apply_filters('ninja_tiktok_feed/tiktok_feeds_limit', $totalFeed);
         if(defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 200){
             $totalFeed = 200;
         }
 
-        if($totalFeed >= 5){
-            $perPage = 5;
+        if($totalFeed >= 20){
+            $perPage = 20;
         } else {
             $perPage = $totalFeed;
         }
@@ -439,7 +436,7 @@ class TiktokFeed extends BaseFeed
 //                $fields = apply_filters('ninja_tiktok_feed/tiktok_feed_api_fields', $fields);
                 $fetchUrl = $this->remoteFetchUrl . $fields ;
                 $request_data = json_encode(array(
-                    'max_count' => 5
+                    'max_count' => 20
                 ));
             } elseif ($feedType === 'specific_videos') {
                 $fields = 'video/query/?fields=id,title,video_description,duration,create_time,cover_image_url,like_count,comment_count,share_count,view_count,embed_link';
@@ -461,7 +458,7 @@ class TiktokFeed extends BaseFeed
                     "filters" => [
                         "video_ids" => $video_ids
                     ],
-                    'max_count' => 5,
+                    'max_count' => 20,
                 ));
             }
 
@@ -541,7 +538,7 @@ class TiktokFeed extends BaseFeed
     public function fetchPageFeeds($fetchUrl, $cursor, $accessToken)
     {
         $request_data = json_encode([
-                'max_count' => 5,
+                'max_count' => 20,
                 'cursor' => $cursor,
         ]);
 

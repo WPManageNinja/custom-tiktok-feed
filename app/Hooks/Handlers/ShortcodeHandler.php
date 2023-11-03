@@ -1,6 +1,6 @@
 <?php
 
-namespace WPNinjaTiktokFeed\App\Hooks\Handlers;
+namespace NinjaTiktokFeed\Application\Hooks\Handlers;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Platforms\Feeds\Config;
 

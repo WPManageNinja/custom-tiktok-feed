@@ -1,8 +1,8 @@
 <?php
 
-namespace WPNinjaTiktokFeed\App\Hooks\Handlers;
+namespace NinjaTiktokFeed\Application\Hooks\Handlers;
 
-use WPNinjaTiktokFeed\App\Services\Platforms\Feeds\Tiktok\TiktokFeed;
+use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
 use WPSocialReviews\Framework\Foundation\App;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper as GlobalHelper;

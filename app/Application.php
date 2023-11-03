@@ -1,6 +1,6 @@
 <?php
 
-namespace WPNinjaTiktokFeed\App;
+namespace NinjaTiktokFeed\Application;
 
 class Application
 {

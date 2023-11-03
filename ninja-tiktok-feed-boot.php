@@ -8,14 +8,14 @@ define('NINJA_TIKTOK_FEED_URL', plugin_dir_url(__FILE__));
 define('NINJA_TIKTOK_FEED_DIR', plugin_dir_path(__FILE__));
 
 spl_autoload_register(function ($class){
-    $match = 'WPNinjaTiktokFeed';
+    $match = 'NinjaTiktokFeed';
     if ( ! preg_match("/\b{$match}\b/", $class)) {
         return;
     }
     $path = plugin_dir_path(__FILE__);
 
     $file = str_replace(
-        ['WPNinjaTiktokFeed', '\\', '/App/'],
+        ['NinjaTiktokFeed', '\\', '/Application/'],
         ['', DIRECTORY_SEPARATOR, 'app/'],
         $class
     );
@@ -26,7 +26,7 @@ spl_autoload_register(function ($class){
     }
 });
 
-class WPNinjaTiktokFeedDependency
+class NinjaTiktokFeedDependency
 {
     public function init()
     {
@@ -97,7 +97,7 @@ class WPNinjaTiktokFeedDependency
 
 add_action('init', function ($app) {
     if( !defined('WPSOCIALREVIEWS_VERSION') ){
-        (new WPNinjaTiktokFeedDependency())->init();
+        (new NinjaTiktokFeedDependency())->init();
     }
 });
 

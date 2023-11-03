@@ -1,6 +1,6 @@
 <?php
 
-namespace WPNinjaTiktokFeed\App\Services\Platforms\Feeds\Tiktok;
+namespace NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok;
 
 use WPSocialReviews\Framework\Support\Arr;
 
