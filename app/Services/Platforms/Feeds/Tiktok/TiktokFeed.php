@@ -21,8 +21,6 @@ class TiktokFeed extends BaseFeed
 {
     public $platform = 'tiktok';
 
-    public $cursorValue = '';
-
     public $feedData = [];
     protected $protector;
     protected $platfromData;
@@ -168,6 +166,7 @@ class TiktokFeed extends BaseFeed
             $expires_in = intval($data['expires_in']);
             $expiration_time = time() + $expires_in;
             $open_id = $data['open_id'];
+            $this->saveVerificationConfigs($access_token);
 
             $data = [
                 'access_token' => $access_token,
@@ -220,7 +219,7 @@ class TiktokFeed extends BaseFeed
         $cache_names = [
             'user_account_header_' . $userId,
             'user_feed_id_' . $userId,
-            'hashtag_feed_id_' . $userId,
+            'specific_videos_id_' . $userId,
         ];
 
         foreach ($cache_names as $cache_name) {
@@ -636,33 +635,6 @@ class TiktokFeed extends BaseFeed
         return $allData;
     }
 
-    public function getNextPageUrlResponse($nextUrl, $pageData)
-    {
-        $response = wp_remote_get($nextUrl);
-
-        if(is_wp_error($response)) {
-            $errorMessage = ['error_message' => $response->get_error_message()];
-            return $errorMessage;
-        }
-
-        if(Arr::get($response, 'response.code') !== 200) {
-            $errorMessage = $this->getErrorMessage($response);
-            return ['error_message' => $errorMessage];
-        }
-
-        if(Arr::get($response, 'response.code') === 200) {
-            $result = json_decode(wp_remote_retrieve_body($response), true);
-
-            $newData = Arr::get($result, 'data', []);
-            $oldData = Arr::get($pageData, 'data', []);
-
-            $pageData = [];
-            $pageData['data'] = array_merge($newData, $oldData);
-        }
-
-        return $pageData;
-    }
-
     public function getAccountDetails($account)
     {
         $connectedAccounts = $this->getConncetedSourceList();
@@ -774,7 +746,7 @@ class TiktokFeed extends BaseFeed
             $sourceId    = substr($optionName, $id_position + strlen('_id_'),
                 $num_position - ($id_position + strlen('_id_')));
 
-            $feedTypes = ['user_feed', 'hashtag_feed'];
+            $feedTypes = ['user_feed', 'specific_videos'];
             $connectedSources = $this->getConncetedSourceList();
             if(in_array($feed_type, $feedTypes)) {
                 if(isset($connectedSources[$sourceId])) {
