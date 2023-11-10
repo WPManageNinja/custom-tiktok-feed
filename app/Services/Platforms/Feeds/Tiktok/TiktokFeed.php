@@ -25,6 +25,7 @@ class TiktokFeed extends BaseFeed
     protected $protector;
     protected $platfromData;
     private $remoteFetchUrl = 'https://open.tiktokapis.com/v2/';
+
     protected $cacheHandler;
 
 
@@ -39,7 +40,7 @@ class TiktokFeed extends BaseFeed
 
     public function pushValidPlatform($platforms)
     {
-        $isActive = $this->getConncetedSourceList();
+        $isActive = get_option('wpsr_tiktok_connected_sources_config');
         if ($isActive) {
             $platforms['tiktok'] = __('Tiktok Feed', 'wp-social-reviews');
         }
@@ -49,8 +50,8 @@ class TiktokFeed extends BaseFeed
     public function handleCredential($args = [])
     {
         try {
-            if(!empty($args['access_token'])){
-                $this->saveVerificationConfigs($args['access_token']);
+            if(!empty($args['access_code'])){
+                $this->saveVerificationConfigs($args['access_code']);
             }
 
             wp_send_json_success([
@@ -65,50 +66,105 @@ class TiktokFeed extends BaseFeed
         }
     }
 
-    public function saveVerificationConfigs($accessToken = '')
+    public function saveVerificationConfigs($access_code = '')
     {
-        $fetchUrl = $this->remoteFetchUrl.'user/info/?fields=open_id,union_id,avatar_url,display_name,profile_deep_link';
-        $response = wp_remote_get($fetchUrl, [
-            'headers' => [
-                'Authorization' => "Bearer ". $accessToken,
-                'Content-Type' => 'application/json'
-            ],
-        ]);
-        if(is_wp_error($response)) {
-            throw new \Exception($response->get_error_message());
-        }
+        $user_credentials = $this->getUserCredentials();
+        $args = http_build_query(array(
+            'client_Key' => $user_credentials['clientKey'],
+            'client_secret' => $user_credentials['clientSecret'],
+            'code' => $access_code,
+            'grant_type' => 'authorization_code',
+//                        'redirect_uri' => $redirectUri
+            'redirect_uri' => 'https://gutendev.com/wp-json/wpsocialreviews/tiktok_callback'
+        ));
 
-        if(200 !== wp_remote_retrieve_response_code($response)) {
-            $errorMessage = $this->getErrorMessage($response);
-            throw new \Exception($errorMessage);
-        }
+        $fetchUrl = $this->remoteFetchUrl.'oauth/token/';
+
+        $response = wp_remote_post($fetchUrl, array(
+            'body' => $args,
+        ));
 
         if (200 === wp_remote_retrieve_response_code($response)) {
             $responseArr = json_decode(wp_remote_retrieve_body($response), true);
-            $name = Arr::get($responseArr, 'data.user.display_name');
-            $profile_url = Arr::get($responseArr, 'data.user.profile_deep_link');
-            $avatar = Arr::get($responseArr, 'data.user.avatar_url');
-            $open_id = Arr::get($responseArr, 'data.user.open_id');
+            $access_token = Arr::get($responseArr, 'access_token');
+            $refresh_token = Arr::get($responseArr, 'refresh_token');
+            $expires_in = intval(Arr::get($responseArr, 'expires_in'));
+            $expiration_time = time() + $expires_in;
+            $open_id = Arr::get($responseArr, 'open_id');
 
-            $configs = get_option('wpsr_tiktok_connected_sources_config', []);
-            $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
+            $fetchUrl = $this->remoteFetchUrl . 'user/info/?fields=avatar_url,display_name,profile_deep_link';
+            $response = wp_remote_get($fetchUrl, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $access_token,
+                    'Content-Type' => 'application/json'
+                ],
+            ]);
+            if (is_wp_error($response)) {
+                throw new \Exception($response->get_error_message());
+            }
 
-            if (array_key_exists($open_id, $sourceList)) {
-                $existingData = $sourceList[$open_id];
+            if (200 !== wp_remote_retrieve_response_code($response)) {
+                $errorMessage = $this->getErrorMessage($response);
+                throw new \Exception($errorMessage);
+            }
+
+            if (200 === wp_remote_retrieve_response_code($response)) {
+                $responseArr = json_decode(wp_remote_retrieve_body($response), true);
+                $name = Arr::get($responseArr, 'data.user.display_name');
+                $profile_url = Arr::get($responseArr, 'data.user.profile_deep_link');
+                $avatar = Arr::get($responseArr, 'data.user.avatar_url');
+
                 $data = [
                     'display_name' => $name,
                     'avatar_url' => $avatar,
                     'profile_url' => $profile_url,
+                    'access_token' => $access_token,
+                    'refresh_token' => $refresh_token,
+                    'expiration_time' => $expiration_time,
+                    'open_id' => $open_id,
                 ];
 
-                $mergedData = array_merge($existingData, $data);
-                $sourceList[$open_id] = $mergedData;
-
+                $sourceList[$open_id] = $data;
                 update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
                 $this->setGlobalSettings();
             }
         }
+    }
 
+    public function updateUserHeaderInfo($access_token)
+    {
+        $fetchUrl = $this->remoteFetchUrl . 'user/info/?fields=open_id,avatar_url,profile_deep_link';
+        $response = wp_remote_get($fetchUrl, [
+            'headers' => [
+                'Authorization' => "Bearer " . $access_token,
+                'Content-Type' => 'application/json'
+            ],
+        ]);
+        if (is_wp_error($response)) {
+            throw new \Exception($response->get_error_message());
+        }
+        if (200 !== wp_remote_retrieve_response_code($response)) {
+            $errorMessage = $this->getErrorMessage($response);
+            throw new \Exception($errorMessage);
+        }
+        if (200 === wp_remote_retrieve_response_code($response)) {
+            $responseArr = json_decode(wp_remote_retrieve_body($response), true);
+            $profile_url = Arr::get($responseArr, 'data.user.profile_deep_link');
+            $avatar = Arr::get($responseArr, 'data.user.avatar_url');
+            $open_id = Arr::get($responseArr, 'data.user.open_id');
+            $data = [
+                'avatar_url' => $avatar,
+                'profile_url' => $profile_url,
+            ];
+            $configs = get_option('wpsr_tiktok_connected_sources_config', []);
+            $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
+
+            $existingData = $sourceList[$open_id];
+            $mergedData = array_merge($existingData, $data);
+
+            $sourceList[$open_id] = $mergedData;
+            update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
+        }
     }
 
     public function maybeRefreshToken($page)
@@ -166,7 +222,7 @@ class TiktokFeed extends BaseFeed
             $expires_in = intval($data['expires_in']);
             $expiration_time = time() + $expires_in;
             $open_id = $data['open_id'];
-            $this->saveVerificationConfigs($access_token);
+            $this->updateUserHeaderInfo($access_token);
 
             $data = [
                 'access_token' => $access_token,
@@ -199,8 +255,10 @@ class TiktokFeed extends BaseFeed
     public function getVerificationConfigs()
     {
         $connected_source_list  = $this->getConncetedSourceList();
+        $user_credentials = $this->getUserCredentials();
         wp_send_json_success([
             'connected_source_list'  => $connected_source_list,
+            'user_credentials' =>       $user_credentials,
             'status'                 => true,
         ], 200);
     }
@@ -213,7 +271,7 @@ class TiktokFeed extends BaseFeed
 
         if (!count($sources)) {
             delete_option('wpsr_tiktok_connected_sources_config');
-            delete_option('wpsr_tiktok_global_settings');
+//            delete_option('wpsr_tiktok_global_settings');
         }
 
         $cache_names = [
@@ -234,14 +292,7 @@ class TiktokFeed extends BaseFeed
     {
         $configs = get_option('wpsr_tiktok_connected_sources_config', []);
         $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
-        $filteredSourceList = [];
-        foreach ($sourceList as $key => $data) {
-            if (isset($data['refresh_token']) && isset($data['expiration_time']) && isset($data['avatar_url'])) {
-                $filteredSourceList[$key] = $data;
-            }
-        }
-
-        return $filteredSourceList;
+        return $sourceList;
     }
 
 
@@ -601,10 +652,7 @@ class TiktokFeed extends BaseFeed
             'redirectUri' => $redirectUri,
         ];
 
-        wp_send_json_success([
-            'message'  => __('success', 'wp-social-reviews'),
-            'configs' => $configs
-        ], 200);
+        return $configs;
     }
 
     public function formatData ($data = [])
