@@ -7,6 +7,7 @@ use WPSocialReviews\Framework\Foundation\App;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper as GlobalHelper;
 use WPSocialReviews\App\Services\GlobalSettings;
+use NinjaTiktokFeed\Application\Traits\LoadView;
 
 class TiktokTemplateHandler
 {
@@ -19,6 +20,7 @@ class TiktokTemplateHandler
      * @since 3.7.0
      *
      **/
+    use LoadView;
     public function renderTemplateItemWrapper($template_meta = []){
         $app = App::getInstance();
 
@@ -121,5 +123,11 @@ class TiktokTemplateHandler
             'feed' => $feed,
             'total' => $total
         ));
+    }
+    public function loadTokTokView($fileName, $data)
+    {
+        $html = $this->loadView('html_code', $data);
+        header("Content-Type: text/html");
+        echo $html;
     }
 }

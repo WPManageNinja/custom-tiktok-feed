@@ -33,3 +33,33 @@ $app->addAction('ninja_tiktok_feed/load_more_tiktok_button', 'NinjaTiktokFeed\Ap
 
 $app->addAction('wp_ajax_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
 $app->addAction('wp_ajax_nopriv_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
+$app->addAction('ninja_tiktok_feed/load_tiktok_view', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@loadTokTokView', 10, 2);
+
+
+add_action('rest_api_init', function () use ($app)  {
+    register_rest_route('wpsocialreviews', '/tiktok_callback/', array(
+        'methods'             => 'GET',
+        'callback'            => function (\WP_REST_Request $request) use ($app) {
+            $code = $request->get_param('code');
+            if (isset($code)) {
+                error_log('inside here '. print_r($code, true));
+                $filename = 'html_code';
+                $data = [
+                    'code' => $code
+                ];
+                do_action('ninja_tiktok_feed/load_tiktok_view', $filename, $data);
+
+                die();
+            } else {
+                return rest_ensure_response(array(
+                    'success' => false,
+                    'message' => 'An error occurred while retrieving the access code. Please try again later.'
+                ));
+                die();
+            }
+        },
+        'permission_callback' => function() {
+            return true;
+        }
+    ));
+});

@@ -258,7 +258,7 @@ class TiktokFeed extends BaseFeed
         $user_credentials = $this->getUserCredentials();
         wp_send_json_success([
             'connected_source_list'  => $connected_source_list,
-            'user_credentials' =>       $user_credentials,
+            'settings' =>       $user_credentials,
             'status'                 => true,
         ], 200);
     }
