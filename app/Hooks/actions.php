@@ -59,6 +59,9 @@ add_action('rest_api_init', function () use ($app)  {
             }
         },
         'permission_callback' => function() {
+            if(current_user_can('manage_options')) {
+                return false;
+            }
             return true;
         }
     ));

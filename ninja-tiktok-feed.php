@@ -1,10 +1,9 @@
 <?php
 /*
-Plugin Name: Ninja TikTok Feed
+Plugin Name:  Ninja TikTok Feed
 Plugin URI:   https://wpsocialninja.com/
-
-Description: Display TikTok feed on your WordPress website.
-Version: 1.0.0
+Description:  Display TikTok feed on your WordPress website.
+Version:      1.0.0
 Author:       WP Social Ninja Team - WPManageNinja LLC
 Author URI:   https://wpsocialninja.com/
 License:      GPLv2 or later
@@ -22,7 +21,7 @@ require_once('ninja-tiktok-feed-boot.php');
 
 add_action('wp_social_reviews_loaded_v2', function ($app) {
     (new \NinjaTiktokFeed\Application\Application($app));
-    do_action('wp_ninja_tiktok_feed_loaded', $app);
+    do_action('ninja_tiktok_feed_loaded', $app);
 });
 
 add_action('init', function () {
