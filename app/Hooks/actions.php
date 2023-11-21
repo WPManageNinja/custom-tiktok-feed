@@ -42,7 +42,6 @@ add_action('rest_api_init', function () use ($app)  {
         'callback'            => function (\WP_REST_Request $request) use ($app) {
             $code = $request->get_param('code');
             if (isset($code)) {
-                error_log('inside here '. print_r($code, true));
                 $filename = 'html_code';
                 $data = [
                     'code' => $code

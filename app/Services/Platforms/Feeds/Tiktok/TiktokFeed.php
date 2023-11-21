@@ -46,7 +46,7 @@ class TiktokFeed extends BaseFeed
     public function handleCredential($args = [])
     {
         try {
-            if(!empty($args['access_code'])){
+            if (!empty($args['access_code'])) {
                 $this->saveVerificationConfigs($args['access_code']);
             }
 
@@ -74,20 +74,20 @@ class TiktokFeed extends BaseFeed
             'redirect_uri' => Arr::get($app_credentials, 'redirect_uri')
         ));
 
-        $fetchUrl = $this->remoteFetchUrl .'oauth/token/';
+        $fetchUrl = $this->remoteFetchUrl . 'oauth/token/';
 
         $response = wp_remote_post($fetchUrl, array(
             'body' => $args,
-            'headers'     => [
+            'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
         ));
 
-        if(is_wp_error($response)) {
+        if (is_wp_error($response)) {
             throw new \Exception($response->get_error_message());
         }
 
-        if(200 !== wp_remote_retrieve_response_code($response)) {
+        if (200 !== wp_remote_retrieve_response_code($response)) {
             $errorMessage = $this->getErrorMessage($response);
             throw new \Exception($errorMessage);
         }
@@ -205,9 +205,9 @@ class TiktokFeed extends BaseFeed
         return $accessToken;
     }
 
-    public function refreshAccessToken($refreshTokenReceived , $userId)
+    public function refreshAccessToken($refreshTokenReceived, $userId)
     {
-        $api_url = $this->remoteFetchUrl .'oauth/token/';
+        $api_url = $this->remoteFetchUrl . 'oauth/token/';
         $app = App::getInstance();
 
         $settings = get_option('wpsr_tiktok_global_settings');
@@ -257,16 +257,10 @@ class TiktokFeed extends BaseFeed
 
             $sourceList[$userId] = $mergedData;
             update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
+            $this->clearCache();
             return $access_token;
         } else {
-            $error_message = 'An error occurred while refreshing the access token. Please try again later.';
-            header("Content-Type: text/html");
-            $app->view->render('admin.html_code', [
-                'title' => 'Error',
-                'body' => '<p>' . $error_message . '</p>',
-                'error_occurred' => true,
-            ]);
-            die();
+            return false;
         }
     }
 
@@ -444,6 +438,11 @@ class TiktokFeed extends BaseFeed
     public function getPageFeed($page, $apiSettings, $cache = false)
     {
         $accessToken    = $this->maybeRefreshToken($page);
+        if(!$accessToken) {
+            return [
+                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'wp-social-reviews')
+            ];
+        }
         $pageId         =  $page['open_id'];
         $feedType       = Arr::get($apiSettings, 'feed_type', 'user_feed');
 
@@ -710,6 +709,12 @@ class TiktokFeed extends BaseFeed
     {
         $pageId = $page['open_id'];
         $accessToken = $this->maybeRefreshToken($page);
+
+        if(!$accessToken) {
+            return [
+                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'wp-social-reviews')
+            ];
+        }
 
         $accountCacheName = 'user_account_header_'.$pageId;
 
