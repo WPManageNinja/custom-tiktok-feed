@@ -88,7 +88,7 @@
 
     <div class="instruction">
         <h2>Instruction</h2>
-        <img src="https://wpsocialninja.com/wp-content/uploads/2022/09/wpsn-google-access-code-instruction.png" />
+        <img src="<?php echo NINJA_TIKTOK_FEED_URL . 'assets/images/wpsn-tiktok-code-instruction.png'; ?>" />
     </div>
 </div>
 
