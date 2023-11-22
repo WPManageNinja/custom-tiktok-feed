@@ -141,6 +141,7 @@ class TiktokFeed extends BaseFeed
                     'open_id' => $open_id,
                 ];
 
+                $sourceList = $this->getConncetedSourceList();
                 $sourceList[$open_id] = $data;
                 update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
 
