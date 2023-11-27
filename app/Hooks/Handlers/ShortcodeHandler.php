@@ -5,7 +5,7 @@ use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
 use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler as BaseShortCodeHandler;
 use WPSocialReviews\Framework\Support\Arr;
-use WPSocialReviews\App\Services\Platforms\Feeds\Config;
+use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config;
 use NinjaTiktokFeed\Application\Traits\LoadView;
 
 

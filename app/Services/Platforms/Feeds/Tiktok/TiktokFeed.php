@@ -8,7 +8,6 @@ use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
 use WPSocialReviews\App\Services\Platforms\Feeds\CacheHandler;
 use WPSocialReviews\App\Services\Platforms\Feeds\Common\FeedFilters;
-use WPSocialReviews\App\Services\Platforms\Feeds\Config;
 use WPSocialReviews\App\Services\Platforms\PlatformData;
 use WPSocialReviews\Framework\Foundation\App;
 use WPSocialReviews\Framework\Support\Arr;
@@ -352,7 +351,7 @@ class TiktokFeed extends BaseFeed
         $feed_template_style_meta = get_post_meta($postId, '_wpsr_template_styles_config', true);
         $decodedMeta     = json_decode($feed_meta, true);
         $feed_settings   = Arr::get($decodedMeta, 'feed_settings', array());
-        $feed_settings   = Config::formatTiktokConfig($feed_settings, array());
+        $feed_settings   = TiktokConfig::formatTiktokConfig($feed_settings, array());
         $settings        = $this->getTemplateMeta($feed_settings, $postId);
         $templateDetails = get_post($postId);
         $settings['feed_type'] = Arr::get($settings, 'feed_settings.source_settings.feed_type');
@@ -396,7 +395,7 @@ class TiktokFeed extends BaseFeed
     {
         $styles_config = Arr::get($settings, 'styles_config');
 
-        $format_feed_settings = Config::formatTiktokConfig($settings['feed_settings'], array());
+        $format_feed_settings = TiktokConfig::formatTiktokConfig($settings['feed_settings'], array());
         $settings             = $this->getTemplateMeta($format_feed_settings);
         $settings['feed_type'] = Arr::get($settings, 'feed_settings.source_settings.feed_type');
 

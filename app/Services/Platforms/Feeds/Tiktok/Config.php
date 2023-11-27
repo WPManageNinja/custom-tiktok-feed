@@ -2,6 +2,7 @@
 
 namespace NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok;
 
+use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Helper as TiktokHelper;
 use WPSocialReviews\Framework\Support\Arr;
 
 if (!defined('ABSPATH')) {
@@ -13,6 +14,112 @@ class Config
     public function __construct()
     {
 
+    }
+
+    public static function formatTiktokConfig($settings, $response)
+    {
+        $accounts    = TiktokHelper::getConncetedSourceList();
+        $selectedAccounts = Arr::get($settings, 'source_settings.selected_accounts', []);
+
+        $firstKey = '';
+        if(!empty($accounts) && empty($selectedAccounts)) {
+            $accountsKeys = array_keys($accounts);
+            $firstKey = ''.$accountsKeys[0];
+            $selectedAccounts = Arr::get($settings, 'source_settings.account_ids', [0 => $firstKey]);
+        }
+
+        return array(
+            'feed_settings' => array(
+                'platform'                  => 'tiktok',
+                'template'                  => Arr::get($settings, 'template', 'template1'),
+                'layout_type'               => Arr::get($settings, 'layout_type', 'grid'),
+                'column_number'             => Arr::get($settings, 'column_number', '4'),
+                'responsive_column_number'  => array(
+                    'desktop'  => Arr::get($settings, 'responsive_column_number.desktop', Arr::get($settings,'column_number', '4')),
+                    'tablet'   => Arr::get($settings, 'responsive_column_number.tablet','6'),
+                    'mobile'   => Arr::get($settings, 'responsive_column_number.mobile', '12')
+                ),
+                'column_gaps'               => Arr::get($settings, 'column_gaps', 'default'),
+                'enable_style'           => Arr::get($settings,'enable_style', 'false'),
+                'source_settings'  => array(
+                    'feed_type'         => Arr::get($settings, 'source_settings.feed_type', 'user_feed'),
+                    'selected_accounts' => $selectedAccounts,
+                    'specific_videos'    => sanitize_text_field(Arr::get($settings,'source_settings.specific_videos', '')),
+                    'feed_count'        => (int) Arr::get($settings, 'source_settings.feed_count', 50),
+                ),
+                'filters'  => array(
+                    'total_posts'      => (int) Arr::get($settings,'filters.total_posts', 50),
+                    'total_posts_number'  => array(
+                        'desktop'  => (int) Arr::get($settings, 'filters.total_posts_number.desktop', Arr::get($settings,'filters.total_posts', 50)),
+                        'mobile'   => (int) Arr::get($settings, 'filters.total_posts_number.mobile', Arr::get($settings,'filters.total_posts', 50))
+                    ),
+                    'post_order'       => Arr::get($settings,'filters.post_order', 'ascending'),
+                    'includes_inputs'  => sanitize_text_field(Arr::get($settings,'filters.includes_inputs', '')),
+                    'excludes_inputs'  => sanitize_text_field(Arr::get($settings,'filters.excludes_inputs', '')),
+                    'hide_posts_by_id' => sanitize_text_field(Arr::get($settings,'filters.hide_posts_by_id', '')),
+                ),
+                'post_settings' => array(
+                    'display_mode'            => Arr::get($settings,'post_settings.display_mode', 'tiktok'),
+                    'display_author_photo'    => Arr::get($settings,'post_settings.display_author_photo', 'true'),
+                    'display_author_name'     => Arr::get($settings,'post_settings.display_author_photo', 'true'),
+                    'display_date'            => Arr::get($settings,'post_settings.display_date', 'true'),
+                    'display_description'     => Arr::get($settings,'post_settings.display_description', 'true'),
+                    'display_views_count'     => Arr::get($settings,'post_settings.display_views_count', 'true'),
+                    'display_likes_count'     => Arr::get($settings,'post_settings.display_likes_count', 'true'),
+                    'display_comments_count'  => Arr::get($settings,'post_settings.display_comments_count', 'true'),
+                    'display_play_icon'       => Arr::get($settings,'post_settings.display_play_icon', 'true'),
+                    'display_platform_icon'   => Arr::get($settings,'post_settings.display_platform_icon', 'true'),
+                    'content_length'       => (int) Arr::get($settings,'post_settings.content_length', 15),
+                ),
+                'header_settings' => array(
+                    'display_header'             => Arr::get($settings,'header_settings.display_header', 'true'),
+                    'account_to_show'            => Arr::get($settings,'header_settings.account_to_show', $firstKey),
+                    'display_profile_photo'      => Arr::get($settings,'header_settings.display_profile_photo', 'true'),
+                    'display_page_name'          => Arr::get($settings,'header_settings.display_page_name', 'true'),
+                    'display_description'        => Arr::get($settings,'header_settings.display_description', 'true'),
+//                    'display_posts_counter'      => Arr::get($settings,'header_settings.display_posts_counter', 'true'),
+                    'display_likes_counter'      => Arr::get($settings,'header_settings.display_likes_counter', 'true'),
+                    'display_followers_counter'  => Arr::get($settings,'header_settings.display_followers_counter', 'true'),
+                    'display_following_counter'  => Arr::get($settings,'header_settings.display_following_counter', 'true'),
+                ),
+                'carousel_settings' => array(
+                    'autoplay'         => Arr::get($settings,'carousel_settings.autoplay', 'true'),
+                    'autoplay_speed'   => (int) Arr::get($settings,'carousel_settings.autoplay_speed', 3000),
+                    'slides_to_show'   => (int) Arr::get($settings,'carousel_settings.slides_to_show', 3),
+                    'responsive_slides_to_show'  => array(
+                        'desktop'  => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.desktop', Arr::get($settings, 'carousel_settings.slides_to_show', 3)),
+                        'tablet'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.tablet',2),
+                        'mobile'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.mobile', 1)
+                    ),
+                    'slides_to_scroll' => (int) Arr::get($settings,'carousel_settings.slides_to_scroll', 3),
+                    'responsive_slides_to_scroll' => array(
+                        'desktop'  => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.desktop', Arr::get($settings, 'carousel_settings.slides_to_scroll', 3)),
+                        'tablet'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.tablet',2),
+                        'mobile'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.mobile', 1)
+                    ),
+                    'navigation'       => Arr::get($settings,'carousel_settings.navigation', 'dot')
+                ),
+                'popup_settings'     => array(
+                    'display_sidebar'       => Arr::get($settings,'popup_settings.display_sidebar', 'true'),
+                    'display_profile_photo' => Arr::get($settings,'popup_settings.display_profile_photo', 'true'),
+                    'display_username'      => Arr::get($settings,'popup_settings.display_username', 'true'),
+                    'display_caption'       => Arr::get($settings,'popup_settings.display_caption', 'true'),
+                    'display_date'          => Arr::get($settings,'popup_settings.display_date', 'true'),
+                    'display_cta_btn'      => Arr::get($settings,'popup_settings.display_cta_btn', 'true'),
+                    'autoplay'              => Arr::get($settings,'popup_settings.autoplay', 'true')
+                ),
+                'follow_button_settings' => array(
+                    'display_follow_button'      => Arr::get($settings,'follow_button_settings.display_follow_button', 'true'),
+                    'follow_button_text'         => sanitize_text_field(Arr::get($settings,'follow_button_settings.follow_button_text', __('Follow on TikTok', 'wp-social-reviews'))),
+                    'follow_button_position'     => Arr::get($settings,'follow_button_settings.follow_button_position', 'header'),
+                ),
+                'pagination_settings' => array(
+                    'pagination_type' => Arr::get($settings,'pagination_settings.pagination_type', 'none'),
+                    'load_more_button_text' => sanitize_text_field(Arr::get($settings, 'pagination_settings.load_more_button_text', __('Load More', 'wp-social-reviews'))),
+                    'paginate'        => (int) Arr::get($settings,'pagination_settings.paginate', 6),
+                ),
+            ),
+        );
     }
 
     public function getStyleElement()
