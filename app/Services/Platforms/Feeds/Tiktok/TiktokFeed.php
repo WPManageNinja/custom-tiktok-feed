@@ -502,7 +502,7 @@ class TiktokFeed extends BaseFeed
 //                $fields = apply_filters('ninja_tiktok_feed/tiktok_feed_api_fields', $fields);
                 $fetchUrl = $this->remoteFetchUrl . $fields ;
                 $request_data = json_encode(array(
-                    'max_count' => 20
+                    'max_count' => $perPage
                 ));
             } elseif ($feedType === 'specific_videos') {
                 $fields = 'video/query/?fields=id,title,video_description,duration,create_time,cover_image_url,like_count,comment_count,share_count,view_count,embed_link';
@@ -524,7 +524,7 @@ class TiktokFeed extends BaseFeed
                     "filters" => [
                         "video_ids" => $video_ids
                     ],
-                    'max_count' => 20,
+                    'max_count' => $perPage,
                 ));
             }
 

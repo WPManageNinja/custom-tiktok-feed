@@ -101,6 +101,7 @@ class Config
                 ),
                 'popup_settings'     => array(
                     'display_sidebar'       => Arr::get($settings,'popup_settings.display_sidebar', 'true'),
+                    'display_video'         => Arr::get($settings,'popup_settings.display_video', 'true'),
                     'display_profile_photo' => Arr::get($settings,'popup_settings.display_profile_photo', 'true'),
                     'display_username'      => Arr::get($settings,'popup_settings.display_username', 'true'),
                     'display_caption'       => Arr::get($settings,'popup_settings.display_caption', 'true'),
