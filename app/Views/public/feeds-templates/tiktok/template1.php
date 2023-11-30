@@ -9,7 +9,7 @@ if (!empty($feeds) && is_array($feeds)) {
 
     // Check if the feed type is user_feed and the pro version is not defined
     if ($feed_type !== 'user_feed' && !defined('WPSOCIALREVIEWS_PRO')) {
-        echo '<p>' . __('You need to upgrade to pro to use this feature.', 'wp-social-reviews') . '</p>';
+        echo '<p>' . __('You need to upgrade to pro to use this feature.', 'ninja-tiktok-feed') . '</p>';
         return;
     }
 

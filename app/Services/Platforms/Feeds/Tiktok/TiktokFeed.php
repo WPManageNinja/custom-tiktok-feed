@@ -37,7 +37,7 @@ class TiktokFeed extends BaseFeed
     {
         $isActive = get_option('wpsr_tiktok_connected_sources_config');
         if ($isActive) {
-            $platforms['tiktok'] = __('TikTok Feed', 'wp-social-reviews');
+            $platforms['tiktok'] = __('TikTok Feed', 'ninja-tiktok-feed');
         }
         return $platforms;
     }
@@ -50,7 +50,7 @@ class TiktokFeed extends BaseFeed
             }
 
             wp_send_json_success([
-                'message' => __('You are Successfully Verified.', 'wp-social-reviews'),
+                'message' => __('You are Successfully Verified.', 'ninja-tiktok-feed'),
                 'status' => true
             ], 200);
 
@@ -297,7 +297,7 @@ class TiktokFeed extends BaseFeed
         }
 
         wp_send_json_success([
-            'message' => __('Successfully Disconnected!', 'wp-social-reviews'),
+            'message' => __('Successfully Disconnected!', 'ninja-tiktok-feed'),
         ], 200);
     }
     public function getConncetedSourceList()
@@ -321,7 +321,7 @@ class TiktokFeed extends BaseFeed
                 $data['items'] = $response;
             }
         } else {
-            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds', 'wp-social-reviews');
+            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds', 'ninja-tiktok-feed');
         }
 
         $account = Arr::get($feed_settings, 'header_settings.account_to_show');
@@ -359,7 +359,7 @@ class TiktokFeed extends BaseFeed
 
         $translations = GlobalSettings::getTranslations();
         wp_send_json_success([
-            'message'          => __('Success', 'wp-social-reviews'),
+            'message'          => __('Success', 'ninja-tiktok-feed'),
             'settings'         => $settings,
             'sources'          => $this->getConncetedSourceList(),
             'template_details' => $templateDetails,
@@ -387,7 +387,7 @@ class TiktokFeed extends BaseFeed
 
         $this->cacheHandler->clearPageCaches($this->platform);
         wp_send_json_success([
-            'message' => __('Template Saved Successfully!!', 'wp-social-reviews'),
+            'message' => __('Template Saved Successfully!!', 'ninja-tiktok-feed'),
         ], 200);
     }
 
@@ -440,7 +440,7 @@ class TiktokFeed extends BaseFeed
         $accessToken    = $this->maybeRefreshToken($page);
         if(!$accessToken) {
             return [
-                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'wp-social-reviews')
+                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'ninja-tiktok-feed')
             ];
         }
         $pageId         =  $page['open_id'];
@@ -511,7 +511,7 @@ class TiktokFeed extends BaseFeed
 
                 if (empty($video_ids)) {
                     return [
-                        'error_message' => __('Please enter at least one video id', 'wp-social-reviews')
+                        'error_message' => __('Please enter at least one video id', 'ninja-tiktok-feed')
                     ];
                 }
 
@@ -712,7 +712,7 @@ class TiktokFeed extends BaseFeed
 
         if(!$accessToken) {
             return [
-                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'wp-social-reviews')
+                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'ninja-tiktok-feed')
             ];
         }
 
@@ -770,7 +770,7 @@ class TiktokFeed extends BaseFeed
         } else if ($message) {
             $error = $message;
         } else {
-            $error = __('Something went wrong', 'wp-social-reviews');
+            $error = __('Something went wrong', 'ninja-tiktok-feed');
         }
         return $error;
     }
@@ -837,7 +837,7 @@ class TiktokFeed extends BaseFeed
         $this->cacheHandler->clearPageCaches($this->platform);
         $this->cacheHandler->clearCache();
         wp_send_json_success([
-            'message' => __('Cache cleared successfully!', 'wp-social-reviews'),
+            'message' => __('Cache cleared successfully!', 'ninja-tiktok-feed'),
         ], 200);
     }
 }

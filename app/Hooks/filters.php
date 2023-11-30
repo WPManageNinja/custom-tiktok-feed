@@ -1,3 +1,19 @@
 <?php
+/**
+ * All registered filter's handlers should be in app\Hooks\Handlers,
+ * addFilter is similar to add_filter and addCustomFlter is just a
+ * wrapper over add_filter which will add a prefix to the hook name
+ * using the plugin slug to make it unique in all wordpress plugins,
+ * ex: $app->addCustomFilter('foo', ['FooHandler', 'handleFoo']) is
+ * equivalent to add_filter('slug-foo', ['FooHandler', 'handleFoo']).
+ */
 
-// Silence Is Golden.
+/**
+ * $app
+ * @var $app NinjaTiktokFeed\Application\Application
+ */
+
+// tiktok feed hooks
+$app->addFilter('ninja_tiktok_feed/get_paginated_feed_html', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@getPaginatedFeedHtml', 10, 2);
+$app->addFilter('ninja_tiktok_feed/render_tiktok_template', 'NinjaTiktokFeed\Application\Hooks\Handlers\ShortcodeHandler@renderTiktokTemplate', 10, 2);
+$app->addFilter('ninja_tiktok_feed/format_tiktok_config', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@formatTiktokConfig', 10, 2);

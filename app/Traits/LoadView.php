@@ -8,7 +8,7 @@ Trait LoadView
     {
         // normalize the filename
         $fileName = str_replace(array('../', './'), '', $fileName);
-        $basePath = NINJA_TIKTOK_FEED_DIR . 'app/Views/public/';
+        $basePath = NINJA_TIKTOK_FEED_DIR . 'app/Views/';
 
 
         $filePath = $basePath . $fileName . '.php';

@@ -3,10 +3,13 @@
 namespace NinjaTiktokFeed\Application\Hooks\Handlers;
 
 use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
+use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper as GlobalHelper;
 use WPSocialReviews\App\Services\GlobalSettings;
 use NinjaTiktokFeed\Application\Traits\LoadView;
+use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
+
 
 class TiktokTemplateHandler
 {
@@ -27,7 +30,7 @@ class TiktokTemplateHandler
         $mobile_column = Arr::get($template_meta, 'responsive_column_number.mobile');
 
         $classes = 'wpsr-mb-30 wpsr-col-' . esc_attr($desktop_column) . ' wpsr-col-sm-' . esc_attr($tablet_column) . ' wpsr-col-xs-' . esc_attr($mobile_column);
-        $html = $this->loadView('feeds-templates/tiktok/elements/item-parent-wrapper', array(
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/item-parent-wrapper', array(
             'classes' => $classes,
         ));
         echo $html;
@@ -35,7 +38,7 @@ class TiktokTemplateHandler
 
     public function renderFeedAuthor($feed = [], $template_meta = [], $displayStatistics = false)
     {
-        $html = $this->loadView('feeds-templates/tiktok/elements/author', array(
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/author', array(
             'feed'          => $feed,
             'account'       => Arr::get($feed, 'user'),
             'template_meta' => $template_meta,
@@ -51,7 +54,7 @@ class TiktokTemplateHandler
         }
         $allowed_tags = GlobalHelper::allowedHtmlTags();
 
-        $html =$this->loadView('feeds-templates/tiktok/elements/description', array(
+        $html =$this->loadView('public/feeds-templates/tiktok/elements/description', array(
             'feed'          => $feed,
             'allowed_tags'  => $allowed_tags,
             'message'       => Arr::get($feed, 'description'),
@@ -62,7 +65,7 @@ class TiktokTemplateHandler
 
     public function renderFeedMedia($feed = [], $template_meta = [])
     {
-        $html = $this->loadView('feeds-templates/tiktok/elements/media', array(
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/media', array(
             'feed'          => $feed,
             'template_meta' => $template_meta,
         ));
@@ -71,7 +74,7 @@ class TiktokTemplateHandler
 
     public function renderFeedIcon($class = '')
     {
-        $html = $this->loadView('feeds-templates/tiktok/elements/icon', array(
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/icon', array(
             'class' => $class
         ));
         echo $html;
@@ -80,7 +83,7 @@ class TiktokTemplateHandler
     public function renderFeedDate($feed = [])
     {
         $translations =  GlobalSettings::getTranslations();
-        $html = $this->loadView('feeds-templates/tiktok/elements/date', array(
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/date', array(
             'feed'  => $feed
         ));
         echo $html;
@@ -96,7 +99,7 @@ class TiktokTemplateHandler
         $sinceId = (($page - 1) * $pagination_settings['paginate']);
         $maxId = ($sinceId + $pagination_settings['paginate']) - 1;
 
-        return (string)$this->loadView('feeds-templates/tiktok/template1', array(
+        return (string)$this->loadView('public/feeds-templates/tiktok/template1', array(
             'templateId' => $templateId,
             'feeds' => $settings['feeds'],
             'template_meta' => $settings['feed_settings'],
@@ -109,7 +112,7 @@ class TiktokTemplateHandler
 
     public function renderLoadMoreButton ($template_meta = null, $templateId = null, $paginate = null, $layout_type = "", $total = null, $feed_type = "", $feed = null)
     {
-        $html = $this->loadView('feeds-templates/tiktok/elements/load-more', array(
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/load-more', array(
             'template_meta' => $template_meta,
             'templateId' => $templateId,
             'paginate' => $paginate,
@@ -119,6 +122,23 @@ class TiktokTemplateHandler
             'total' => $total
         ));
         echo $html;
+    }
+
+    public function tiktokFeedStatistics ($displayStatistics, $template_meta, $feed)
+    {
+        if ($displayStatistics === 'false') {
+            return;
+        }
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/statistics', array(
+            'template_meta' => $template_meta,
+            'feed' => $feed
+        ));
+        echo $html;
+    }
+
+    public function formatTiktokConfig($configs = [] , $response)
+    {
+        return Config::formatTiktokConfig($configs, $response);
     }
     public function loadTokTokView($fileName, $data)
     {

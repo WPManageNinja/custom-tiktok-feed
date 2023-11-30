@@ -4,10 +4,6 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>WP Social Ninja TikTok Access Code</title>
-    <meta name='robots' content='max-image-preview:large'/>
-    <link rel="icon" href="https://wpsocialninja.com/wp-content/uploads/2022/05/cropped-WPSN-New-fabicon-01-32x32.png" sizes="32x32" />
-    <link rel="icon" href="https://wpsocialninja.com/wp-content/uploads/2022/05/cropped-WPSN-New-fabicon-01-192x192.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="https://wpsocialninja.com/wp-content/uploads/2022/05/cropped-WPSN-New-fabicon-01-180x180.png" />
 
     <style>
         body {

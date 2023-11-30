@@ -27,6 +27,7 @@ $app->addAction('ninja_tiktok_feed/tiktok_feed_description', 'NinjaTiktokFeed\Ap
 $app->addAction('ninja_tiktok_feed/tiktok_feed_media', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
 $app->addAction('ninja_tiktok_feed/tiktok_feed_icon', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
 $app->addAction('ninja_tiktok_feed/tiktok_feed_date', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDate');
+$app->addAction('ninja_tiktok_feed/tiktok_feed_statistics', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@tiktokFeedStatistics', 10, 3);
 
 $app->addAction('ninja_tiktok_feed/load_more_tiktok_button', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
 
@@ -42,7 +43,7 @@ add_action('rest_api_init', function () use ($app)  {
         'callback'            => function (\WP_REST_Request $request) use ($app) {
             $code = $request->get_param('code');
             if (isset($code)) {
-                $filename = 'html_code';
+                $filename = 'admin/html_code';
                 $data = [
                     'code' => $code
                 ];
