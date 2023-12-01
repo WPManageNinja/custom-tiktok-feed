@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-/assets
 /svn
 
 # local env files
