@@ -1,18 +1,18 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
-$profileImage = esc_url( Arr::get($feed, 'user.profile_image_url', ''));
-$userName = esc_attr( Arr::get($feed, 'user.name', ''));
-$mediaUrl = esc_url( Arr::get($feed, 'media.url', ''));
+$profileImage = Arr::get($feed, 'user.profile_image_url', '');
+$userName = Arr::get($feed, 'user.name', '');
+$mediaUrl = Arr::get($feed, 'media.url', '');
 ?>
 <div class="wpsr-tiktok-feed-video-playmode wpsr-feed-link">
     <?php if( is_array($account)){ ?>
         <?php if( Arr::get($account, 'profile_image_url') && Arr::get($template_meta, 'post_settings.display_author_photo') === 'true'){ ?>
-            <img src="<?php echo $profileImage ?>" alt="<?php echo $userName; ?>" class="wpsr-tiktok-feed-author-avatar">
+            <img src="<?php echo esc_url($profileImage) ?>" alt="<?php echo esc_attr($userName); ?>" class="wpsr-tiktok-feed-author-avatar">
         <?php } ?>
 
         <div class="wpsr-feed-avatar-right">
             <?php if( Arr::get($template_meta, 'post_settings.display_author_name') === 'true'){ ?>
-                <a href="<?php echo $mediaUrl ?>" target="_blank" rel="nofollow">
+                <a href="<?php echo esc_url($mediaUrl) ?>" target="_blank" rel="nofollow">
                     @<?php echo $userName; ?>
                 </a>
             <?php }
