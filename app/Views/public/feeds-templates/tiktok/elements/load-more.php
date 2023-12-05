@@ -3,8 +3,9 @@ use WPSocialReviews\Framework\Support\Arr;
 
 $feed_type = $feed_type ? $feed_type : '';
 $feed_id =  Arr::get($feed, 'id', '');
+$load_more_button_text = Arr::get($template_meta, 'pagination_settings.load_more_button_text');
 
-echo '<div class="wpsr-tiktok-load-more wpsr_more wpsr-load-more-default"
+echo '<button aria-label="'.esc_attr($load_more_button_text).'" class="wpsr-tiktok-load-more wpsr_more wpsr-load-more-default"
         id="wpsr-tiktok-load-more-btn-' . esc_attr($templateId) . '"
         data-paginate="' . intval($paginate) . '"
         data-template_id="' . intval($templateId) . '"
@@ -14,9 +15,9 @@ echo '<div class="wpsr-tiktok-load-more wpsr_more wpsr-load-more-default"
         data-feed_type="' . esc_attr($feed_type) . '"
         data-feed_id="' . esc_attr($feed_id) . '"
         data-total="' . intval($total) . '">
-                '.Arr::get($template_meta, 'pagination_settings.load_more_button_text').'
+                '.esc_html($load_more_button_text).'
         <div class="wpsr-load-icon-wrapper">
             <span></span>
         </div>
-    </div>';
+    </button>';
 ?>

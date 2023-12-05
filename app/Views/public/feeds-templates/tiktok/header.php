@@ -92,7 +92,7 @@ if ($header_settings['display_header'] === 'true' && !empty($header)) {
 
 echo '<div class="wpsr-tiktok-feed-wrapper-inner">';
 if ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) {
-    echo '<div class="swiper-container">';
+    echo '<div class="swiper-container" tabindex="0">';
 }
 $rowClasses = $layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO') ? 'swiper-wrapper' : 'wpsr-row';
 

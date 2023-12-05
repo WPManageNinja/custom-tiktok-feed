@@ -11,7 +11,7 @@ if( $layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) {
               <div class="wpsr-swiper-prev-next wpsr-swiper-prev swiper-button-prev"></div>';
     }
     if( $feed_settings['carousel_settings']['navigation'] === 'dot' || $feed_settings['carousel_settings']['navigation'] === 'both') {
-        echo '<div class="wpsr-swiper-pagination swiper-pagination"></div>';
+        echo '<div class="wpsr-swiper-pagination swiper-pagination" aria-label="Pagination"></div>';
     }
     echo '</div>';
 }

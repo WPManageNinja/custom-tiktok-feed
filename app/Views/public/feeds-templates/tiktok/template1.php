@@ -26,7 +26,7 @@ if (!empty($feeds) && is_array($feeds)) {
                 do_action('ninja_tiktok_feed/tiktok_feed_template_item_wrapper_before', $template_meta);
             }
             ?>
-            <div class="wpsr-tiktok-feed-item <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>">
+            <div role="group" class="wpsr-tiktok-feed-item <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>">
                 <?php if ($feed_type === 'user_feed') {
                     if ($displayPlatformIcon === 'true') {
                         /**
