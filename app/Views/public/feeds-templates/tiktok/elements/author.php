@@ -20,10 +20,15 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
                 /**
                  * tiktok_feed_date hook.
                  *
-                 * @hooked TiktokTemplateHandler::renderFeedDate 10
+                 * @hooked render_feed_date 10
                  * */
                 do_action('ninja_tiktok_feed/tiktok_feed_date', $feed);
             }
+            /**
+             * tiktok_feed_statistics hook.
+             *
+             * @hooked render_tiktok_feed_statistics 10
+             * */
             do_action('ninja_tiktok_feed/tiktok_feed_statistics', $displayStatistics, $template_meta, $feed);
             ?>
         </div>

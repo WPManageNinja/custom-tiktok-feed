@@ -1,7 +1,6 @@
 <?php
 
 use WPSocialReviews\Framework\Support\Arr;
-use WPSocialReviews\App\Services\Helper as GlobalHelper;
 
 //carousel
 $dataAttrs  = array();
@@ -47,51 +46,47 @@ if ($header_settings['display_header'] === 'true' && !empty($header)) {
         <div class="wpsr-tiktok-feed-header wpsr-col-12 ' . ($header_settings['display_profile_photo'] === 'false' ? 'wpsr-tiktok-feed-profile-pic-hide' : '') . '">
             <div class="wpsr-tiktok-feed-user-info-wrapper">
                 <div class="wpsr-tiktok-feed-user-info-head">
-
                     <div class="wpsr-tiktok-feed-header-info">';
-    if ($header['avatar_url'] && $header_settings['display_profile_photo'] === 'true') {
-        echo '<a rel="nofollow" href="' . esc_url($header['profile_deep_link']) . '" target="_blank" class="wpsr-tiktok-feed-user-profile-pic">
-                        <img src="' . esc_url($header['avatar_url']) . '" alt="' . esc_attr($header['display_name']) . '">
-                    </a>';
-    }
+                        if ($header['avatar_url'] && $header_settings['display_profile_photo'] === 'true') {
+                            echo '<a rel="nofollow" href="' . esc_url($header['profile_deep_link']) . '" target="_blank" class="wpsr-tiktok-feed-user-profile-pic">
+                                    <img src="' . esc_url($header['avatar_url']) . '" alt="' . esc_attr($header['display_name']) . '">
+                                  </a>';
+                        }
 
-    echo '<div class="wpsr-tiktok-feed-user-info">
-                            <div class="wpsr-tiktok-feed-user-info-name-wrapper">';
-    if ($header['display_name'] && $header_settings['display_page_name'] === 'true') {
-        echo '<a class="wpsr-tiktok-feed-user-info-name" rel="nofollow" href="' . esc_url($header['profile_deep_link']) . '" title="' . esc_attr($header['display_name']) . '" target="_blank">
-                                    ' . esc_html($header['display_name']) . '
-                                </a>';
-    }
-    echo '</div>';
+                        echo '<div class="wpsr-tiktok-feed-user-info">
+                                <div class="wpsr-tiktok-feed-user-info-name-wrapper">';
+                        if ($header['display_name'] && $header_settings['display_page_name'] === 'true') {
+                            echo '<a class="wpsr-tiktok-feed-user-info-name" rel="nofollow" href="' . esc_url($header['profile_deep_link']) . '" title="' . esc_attr($header['display_name']) . '" target="_blank">
+                                      ' . esc_html($header['display_name']) . '
+                                  </a>';
+                        }
+                        echo '</div>';
 
-    if (defined('WPSOCIALREVIEWS_PRO') && $header['bio_description'] && $header_settings['display_description'] === 'true') {
-        echo '<div class="wpsr-tiktok-feed-user-info-description">
-                                <p>' . esc_html($header['bio_description']) . '</p>
-                            </div>';
-    }
+                        if (defined('WPSOCIALREVIEWS_PRO')) {
+                            /**
+                             * tiktok_feed_bio_description hook.
+                             *
+                             * @hooked render_tiktok_feed_bio_description 10
+                             * */
+                            do_action('wpsocialreviews/tiktok_feed_bio_description', $header_settings, $header);
 
-   if(defined('WPSOCIALREVIEWS_PRO')) {
-    echo '<div class="wpsr-tiktok-feed-user-statistics">';
-    if ($header_settings['display_likes_counter'] === 'true') {
-        echo '<span>' . GlobalHelper::shortNumberFormat($header['likes_count']) . ' Likes</span>';
-    }
-    if ($header_settings['display_followers_counter'] === 'true') {
-        echo '<span>' . GlobalHelper::shortNumberFormat($header['follower_count']) . ' Follower</span>';
-    }
-    if ($header_settings['display_following_counter'] === 'true') {
-        echo '<span>' . GlobalHelper::shortNumberFormat($header['following_count']) . ' Following</span>';
-    }
-    echo '</div>'; }
-   echo' </div>
-                    </div>';
+                            /**
+                             * tiktok_feed_statistics hook.
+                             *
+                             * @hooked render_tiktok_feed_statistics 10
+                             * */
+                            do_action('wpsocialreviews/tiktok_header_statistics', $header_settings, $header);
+                        }
 
-    if ($feed_settings['follow_button_settings']['display_follow_button'] === 'true' && $feed_settings['follow_button_settings']['follow_button_position'] !== 'footer') {
-        do_action('wpsocialreviews/tiktok_follow_button', $feed_settings, $header);
-    }
+                echo' </div>
+            </div>';
 
+            if ($feed_settings['follow_button_settings']['display_follow_button'] === 'true' && $feed_settings['follow_button_settings']['follow_button_position'] !== 'footer') {
+                do_action('wpsocialreviews/tiktok_follow_button', $feed_settings, $header);
+            }
     echo '</div>
-            </div>
         </div>
+      </div>
     </div>';
 }
 
