@@ -33,7 +33,7 @@ class TiktokTemplateHandler
         $html = $this->loadView('public/feeds-templates/tiktok/elements/item-parent-wrapper', array(
             'classes' => $classes,
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function renderFeedAuthor($feed = [], $template_meta = [], $displayStatistics = false)
@@ -44,7 +44,7 @@ class TiktokTemplateHandler
             'template_meta' => $template_meta,
             'displayStatistics' => $displayStatistics
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function renderFeedDescription($feed = [], $template_meta = [])
@@ -60,7 +60,7 @@ class TiktokTemplateHandler
             'message'       => Arr::get($feed, 'description'),
             'content_length'    => Arr::get($template_meta, 'post_settings.content_length' , 15),
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function renderFeedMedia($feed = [], $template_meta = [])
@@ -69,7 +69,7 @@ class TiktokTemplateHandler
             'feed'          => $feed,
             'template_meta' => $template_meta,
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function renderFeedIcon($class = '')
@@ -77,7 +77,7 @@ class TiktokTemplateHandler
         $html = $this->loadView('public/feeds-templates/tiktok/elements/icon', array(
             'class' => $class
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function renderFeedDate($feed = [])
@@ -86,7 +86,7 @@ class TiktokTemplateHandler
         $html = $this->loadView('public/feeds-templates/tiktok/elements/date', array(
             'feed'  => $feed
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function getPaginatedFeedHtml($templateId = null, $page = null , $feed_id = null , $feed_type = '')
@@ -121,7 +121,7 @@ class TiktokTemplateHandler
             'feed' => $feed,
             'total' => $total
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function tiktokFeedStatistics ($displayStatistics, $template_meta, $feed)
@@ -133,7 +133,7 @@ class TiktokTemplateHandler
             'template_meta' => $template_meta,
             'feed' => $feed
         ));
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
     public function formatTiktokConfig($configs = [] , $response)
@@ -144,6 +144,6 @@ class TiktokTemplateHandler
     {
         $html = $this->loadView($fileName, $data);
         header("Content-Type: text/html");
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 }

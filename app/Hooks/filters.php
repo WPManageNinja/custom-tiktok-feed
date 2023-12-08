@@ -14,6 +14,6 @@
  */
 
 // tiktok feed hooks
-$app->addFilter('ninja_tiktok_feed/get_paginated_feed_html', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@getPaginatedFeedHtml', 10, 2);
-$app->addFilter('ninja_tiktok_feed/render_tiktok_template', 'NinjaTiktokFeed\Application\Hooks\Handlers\ShortcodeHandler@renderTiktokTemplate', 10, 2);
-$app->addFilter('ninja_tiktok_feed/format_tiktok_config', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@formatTiktokConfig', 10, 2);
+$app->addFilter('wpsocialreviews/get_paginated_feed_html', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@getPaginatedFeedHtml', 10, 2);
+$app->addFilter('wpsocialreviews/render_tiktok_template', 'NinjaTiktokFeed\Application\Hooks\Handlers\ShortcodeHandler@renderTiktokTemplate', 10, 2);
+$app->addFilter('wpsocialreviews/format_tiktok_config', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@formatTiktokConfig', 10, 2);

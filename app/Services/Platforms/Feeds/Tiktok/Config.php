@@ -580,7 +580,7 @@ class Config
                     ),
                 ),
                 'post_title' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info h3 a, '. $prefix.'.wpsr-tiktok-album_feed .wpsr-tiktok-feed-item .wpsr-tiktok-feed-album-name, '. $prefix.'.wpsr-tiktok-album_feed .wpsr-tiktok-feed-album-header .wpsr-tiktok-feed-album-name',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info h3 a',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_title.color.text_color', '')
                     ),

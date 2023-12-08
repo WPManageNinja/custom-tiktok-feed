@@ -9,7 +9,6 @@ use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
 use WPSocialReviews\App\Services\Platforms\Feeds\CacheHandler;
 use WPSocialReviews\App\Services\Platforms\Feeds\Common\FeedFilters;
 use WPSocialReviews\App\Services\Platforms\PlatformData;
-use WPSocialReviews\Framework\Foundation\App;
 use WPSocialReviews\Framework\Support\Arr;
 
 if (!defined('ABSPATH')) {
@@ -208,7 +207,6 @@ class TiktokFeed extends BaseFeed
     public function refreshAccessToken($refreshTokenReceived, $userId)
     {
         $api_url = $this->remoteFetchUrl . 'oauth/token/';
-        $app = App::getInstance();
 
         $settings = get_option('wpsr_tiktok_global_settings');
         $clientId = Arr::get($settings, 'app_settings.client_id', '');

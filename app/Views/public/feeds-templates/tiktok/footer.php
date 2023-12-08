@@ -31,7 +31,7 @@ if (Arr::get($feed_settings, 'follow_button_settings.follow_button_position') !=
      *
      * @hooked render_tiktok_like_button_html 10
      * */
-    do_action('wpsocialreviews/tiktok_follow_button', $feed_settings, $header);
+    do_action('ninja_tiktok_feed/tiktok_follow_button', $feed_settings, $header);
 
 }
 echo '</div>';
