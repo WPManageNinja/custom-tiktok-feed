@@ -168,8 +168,8 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Likes', 'ninja-tiktok-feed'),
-                    'key'      => 'likes',
+                    'title'     => __('Statistics', 'ninja-tiktok-feed'),
+                    'key'      => 'statistics',
                     'divider' => true,
                     'typography' => true,
                     'padding' => false,
@@ -236,22 +236,6 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Post Title', 'ninja-tiktok-feed'),
-                    'key'      => 'post_title',
-                    'divider' => false,
-                    'typography' => true,
-                    'padding' => false,
-                    'border' => false,
-                    'styles' => array(
-                        array(
-                            'title'      => __('Text Color:', 'ninja-tiktok-feed'),
-                            'fieldKey'  => 'text_color',
-                            'type'      => 'color_picker',
-                            'flex'      => true,
-                        )
-                    )
-                ),
-                array(
                     'title'     => __('Post Text', 'ninja-tiktok-feed'),
                     'key'      => 'post_content',
                     'divider' => false,
@@ -261,21 +245,6 @@ class Config
                     'styles' => array(
                         array(
                             'title'      => __('Text Color:', 'ninja-tiktok-feed'),
-                            'fieldKey'  => 'text_color',
-                            'type'      => 'color_picker',
-                            'flex'      => true,
-                        )
-                    )
-                ),
-                array(
-                    'key'      => 'link_color',
-                    'divider' => false,
-                    'typography' => false,
-                    'padding' => false,
-                    'border' => false,
-                    'styles' => array(
-                        array(
-                            'title'      => __('Link Color:', 'ninja-tiktok-feed'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -298,11 +267,11 @@ class Config
                     )
                 ),
             ),
-            'like_and_share' => array(
-                'title' => __('Like and Share Button', 'ninja-tiktok-feed'),
-                'key'  => 'like_and_share',
+            'follow_button' => array(
+                'title' => __('Follow Button', 'ninja-tiktok-feed'),
+                'key'  => 'follow_button',
                 array(
-                    'key'      => 'like_and_share',
+                    'key'      => 'follow_button',
                     'divider' => false,
                     'typography' => true,
                     'padding' => true,
@@ -444,31 +413,31 @@ class Config
                         ),
                     ),
                 ),
-                'likes' => array(
+                'statistics' => array(
                     'selector' => $prefix.' .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span',
                     'color'  => array(
-                        'text_color' => Arr::get($settings,'styles.likes.color.text_color', ''),
+                        'text_color' => Arr::get($settings,'styles.statistics.color.text_color', ''),
                     ),
                     'typography' => array(
                         'font_size' => array(
-                            'desktop' => Arr::get($settings,'styles.likes.typography.font_size.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.likes.typography.font_size.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.likes.typography.font_size.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.statistics.typography.font_size.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.statistics.typography.font_size.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.statistics.typography.font_size.mobile', ''),
                         ),
                         'letter_spacing'  => array(
-                            'desktop' => Arr::get($settings,'styles.likes.typography.letter_spacing.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.likes.typography.letter_spacing.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.likes.typography.letter_spacing.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.statistics.typography.letter_spacing.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.statistics.typography.letter_spacing.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.statistics.typography.letter_spacing.mobile', ''),
                         ),
                         'line_height'  => array(
-                            'desktop' => Arr::get($settings,'styles.likes.typography.line_height.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.likes.typography.line_height.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.likes.typography.line_height.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.statistics.typography.line_height.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.statistics.typography.line_height.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.statistics.typography.line_height.mobile', ''),
                         ),
-                        'font_weight'  => Arr::get($settings,'styles.likes.typography.font_weight', ''),
-                        'font_style'  => Arr::get($settings,'styles.likes.typography.font_style', ''),
-                        'text_transform'  => Arr::get($settings,'styles.likes.typography.text_transform', ''),
-                        'text_decoration'  => Arr::get($settings,'styles.likes.typography.text_decoration', ''),
+                        'font_weight'  => Arr::get($settings,'styles.statistics.typography.font_weight', ''),
+                        'font_style'  => Arr::get($settings,'styles.statistics.typography.font_style', ''),
+                        'text_transform'  => Arr::get($settings,'styles.statistics.typography.text_transform', ''),
+                        'text_decoration'  => Arr::get($settings,'styles.statistics.typography.text_decoration', ''),
                     ),
                 ),
                 'header_box' => array(
@@ -526,7 +495,7 @@ class Config
                     ),
                 ),
                 'author' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-author .wpsr-tiktok-feed-author-info a',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link a, .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.author.color.text_color', '')
                     ),
@@ -553,7 +522,7 @@ class Config
                     ),
                 ),
                 'post_date' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-author .wpsr-tiktok-feed-time , .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-tiktok-feed-video-statistics .wpsr-tiktok-feed-video-statistic-item',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link .wpsr-feed-avatar-right .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_date.color.text_color', '')
                     ),
@@ -579,35 +548,8 @@ class Config
                         'text_decoration'  => Arr::get($settings,'styles.post_date.typography.text_decoration', ''),
                     ),
                 ),
-                'post_title' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info h3 a',
-                    'color'  => array(
-                        'text_color' => Arr::get($settings,'styles.post_title.color.text_color', '')
-                    ),
-                    'typography' => array(
-                        'font_size' => array(
-                            'desktop' => Arr::get($settings,'styles.post_title.typography.font_size.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.post_title.typography.font_size.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.post_title.typography.font_size.mobile', ''),
-                        ),
-                        'letter_spacing'  => array(
-                            'desktop' => Arr::get($settings,'styles.post_title.typography.letter_spacing.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.post_title.typography.letter_spacing.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.post_title.typography.letter_spacing.mobile', ''),
-                        ),
-                        'line_height'  => array(
-                            'desktop' => Arr::get($settings,'styles.post_title.typography.line_height.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.post_title.typography.line_height.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.post_title.typography.line_height.mobile', ''),
-                        ),
-                        'font_weight'  => Arr::get($settings,'styles.post_title.typography.font_weight', ''),
-                        'font_style'  => Arr::get($settings,'styles.post_title.typography.font_style', ''),
-                        'text_transform'  => Arr::get($settings,'styles.post_title.typography.text_transform', ''),
-                        'text_decoration'  => Arr::get($settings,'styles.post_title.typography.text_decoration', ''),
-                    ),
-                ),
                 'post_content' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-content',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link a',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_content.color.text_color', '')
                     ),
@@ -633,68 +575,62 @@ class Config
                         'text_decoration'  => Arr::get($settings,'styles.post_content.typography.text_decoration', ''),
                     ),
                 ),
-                'link_color' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-inner p a',
-                    'color'  => array(
-                        'text_color' => Arr::get($settings,'styles.link_color.color.text_color', '')
-                    ),
-                ),
                 'read_more_link_color' => array(
                     'selector' => $prefix.' .wpsr_add_read_more .wpsr_read_more, .wpsr_add_read_more .wpsr_read_less',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.read_more_link_color.color.text_color', '')
                     ),
                 ),
-                'like_and_share' => array(
+                'follow_button' => array(
                     'selector' => $prefix.' .wpsr-tiktok-feed-follow-button-group .wpsr-tiktok-feed-btn a',
                     'color'  => array(
-                        'text_color' => Arr::get($settings,'styles.like_and_share.color.text_color', ''),
-                        'fill_color' => Arr::get($settings,'styles.like_and_share.color.fill_color', ''),
-                        'background_color' => Arr::get($settings,'styles.like_and_share.color.background_color', ''),
+                        'text_color' => Arr::get($settings,'styles.follow_button.color.text_color', ''),
+                        'fill_color' => Arr::get($settings,'styles.follow_button.color.fill_color', ''),
+                        'background_color' => Arr::get($settings,'styles.follow_button.color.background_color', ''),
                     ),
                     'typography' => array(
                         'font_size'  => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.typography.font_size.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.typography.font_size.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.typography.font_size.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.typography.font_size.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.typography.font_size.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.typography.font_size.mobile', ''),
                         ),
                         'letter_spacing'  => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.typography.letter_spacing.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.typography.letter_spacing.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.typography.letter_spacing.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.typography.letter_spacing.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.typography.letter_spacing.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.typography.letter_spacing.mobile', ''),
                         ),
                         'line_height'  => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.typography.line_height.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.typography.line_height.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.typography.line_height.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.typography.line_height.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.typography.line_height.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.typography.line_height.mobile', ''),
                         ),
-                        'font_weight'  => Arr::get($settings,'styles.like_and_share.typography.font_weight', ''),
-                        'font_style'  => Arr::get($settings,'styles.like_and_share.typography.font_style', ''),
-                        'text_transform'  => Arr::get($settings,'styles.like_and_share.typography.text_transform', ''),
-                        'text_decoration'  => Arr::get($settings,'styles.like_and_share.typography.text_decoration', ''),
+                        'font_weight'  => Arr::get($settings,'styles.follow_button.typography.font_weight', ''),
+                        'font_style'  => Arr::get($settings,'styles.follow_button.typography.font_style', ''),
+                        'text_transform'  => Arr::get($settings,'styles.follow_button.typography.text_transform', ''),
+                        'text_decoration'  => Arr::get($settings,'styles.follow_button.typography.text_decoration', ''),
                     ),
                     'padding' => array(
                         'top' => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.padding.top.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.padding.top.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.padding.top.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.padding.top.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.padding.top.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.padding.top.mobile', ''),
                         ),
                         'right' => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.padding.right.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.padding.right.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.padding.right.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.padding.right.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.padding.right.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.padding.right.mobile', ''),
                         ),
                         'bottom' => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.padding.bottom.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.padding.bottom.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.padding.bottom.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.padding.bottom.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.padding.bottom.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.padding.bottom.mobile', ''),
                         ),
                         'left' => array(
-                            'desktop' => Arr::get($settings,'styles.like_and_share.padding.left.desktop', ''),
-                            'tablet' => Arr::get($settings,'styles.like_and_share.padding.left.tablet', ''),
-                            'mobile' => Arr::get($settings,'styles.like_and_share.padding.left.mobile', ''),
+                            'desktop' => Arr::get($settings,'styles.follow_button.padding.left.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.follow_button.padding.left.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.follow_button.padding.left.mobile', ''),
                         ),
-                        'linked' => Arr::get($settings,'styles.like_and_share.padding.linked', false),
+                        'linked' => Arr::get($settings,'styles.follow_button.padding.linked', false),
                     ),
                 ),
                 'tiktok_pagination' => array(
