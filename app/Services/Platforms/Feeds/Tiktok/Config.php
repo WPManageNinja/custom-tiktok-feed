@@ -18,7 +18,7 @@ class Config
 
     public static function formatTiktokConfig($settings, $response)
     {
-        $accounts    = TiktokHelper::getConncetedSourceList();
+        $accounts    = TiktokHelper::getConnectedSourceList();
         $selectedAccounts = Arr::get($settings, 'source_settings.selected_accounts', []);
 
         $firstKey = '';

@@ -139,7 +139,7 @@ class TiktokFeed extends BaseFeed
                     'open_id' => $open_id,
                 ];
 
-                $sourceList = $this->getConncetedSourceList();
+                $sourceList = $this->getConnectedSourceList();
                 $sourceList[$open_id] = $data;
                 update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
 
@@ -265,7 +265,7 @@ class TiktokFeed extends BaseFeed
 
     public function getVerificationConfigs()
     {
-        $connected_source_list  = $this->getConncetedSourceList();
+        $connected_source_list  = $this->getConnectedSourceList();
         $app_credentials = $this->getAppCredentials();
         wp_send_json_success([
             'connected_source_list'  => $connected_source_list,
@@ -276,7 +276,7 @@ class TiktokFeed extends BaseFeed
 
     public function clearVerificationConfigs($userId)
     {
-        $sources = $this->getConncetedSourceList();
+        $sources = $this->getConnectedSourceList();
         unset($sources[$userId]);
         update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sources));
 
@@ -299,7 +299,7 @@ class TiktokFeed extends BaseFeed
             'message' => __('Successfully Disconnected!', 'ninja-tiktok-feed'),
         ], 200);
     }
-    public function getConncetedSourceList()
+    public function getConnectedSourceList()
     {
         $configs = get_option('wpsr_tiktok_connected_sources_config', []);
         $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
@@ -363,7 +363,7 @@ class TiktokFeed extends BaseFeed
         wp_send_json_success([
             'message'          => __('Success', 'ninja-tiktok-feed'),
             'settings'         => $settings,
-            'sources'          => $this->getConncetedSourceList(),
+            'sources'          => $this->getConnectedSourceList(),
             'template_details' => $templateDetails,
             'elements'         => $tiktokConfig->getStyleElement(),
             'translations'     => $translations
@@ -415,7 +415,7 @@ class TiktokFeed extends BaseFeed
     public function getMultipleFeeds($apiSettings)
     {
         $ids = Arr::get($apiSettings, 'selected_accounts');
-        $connectedAccounts = $this->getConncetedSourceList();
+        $connectedAccounts = $this->getConnectedSourceList();
         $multiple_feeds = [];
         foreach ($ids as $id) {
             if (isset($connectedAccounts[$id])) {
@@ -697,7 +697,7 @@ class TiktokFeed extends BaseFeed
 
     public function getAccountDetails($account)
     {
-        $connectedAccounts = $this->getConncetedSourceList();
+        $connectedAccounts = $this->getConnectedSourceList();
         $pageDetails = [];
         if (isset($connectedAccounts[$account])) {
             $pageInfo = $connectedAccounts[$account];
@@ -812,7 +812,7 @@ class TiktokFeed extends BaseFeed
                 $num_position - ($id_position + strlen('_id_')));
 
             $feedTypes = ['user_feed', 'specific_videos'];
-            $connectedSources = $this->getConncetedSourceList();
+            $connectedSources = $this->getConnectedSourceList();
             if(in_array($feed_type, $feedTypes)) {
                 if(isset($connectedSources[$sourceId])) {
                     $page = $connectedSources[$sourceId];
