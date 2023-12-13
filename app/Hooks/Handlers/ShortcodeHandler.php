@@ -14,6 +14,10 @@ class ShortcodeHandler
     use LoadView;
     public function renderTiktokTemplate($templateId, $platform)
     {
+        if (defined('LSCWP_V')) {
+            do_action('litespeed_tag_add', 'wpsn_purge_tiktok');
+        }
+
         do_action('wpsocialreviews/before_display_tiktok_feed');
         $shortcodeHandler = new BaseShortCodeHandler();
 
@@ -64,11 +68,11 @@ class ShortcodeHandler
                 $create_time = Arr::get($feed, 'created_at');
                 $feeds[$index]['time_ago'] = sprintf(__('%s ago'), human_time_diff($create_time));
             }
-            (new BaseShortCodeHandler())->makePopupModal($feeds, $settings['header'], $settings['feed_settings'], $templateId, $platform);
-            (new BaseShortCodeHandler())->enqueuePopupScripts();
+            $shortcodeHandler->makePopupModal($feeds, $settings['header'], $settings['feed_settings'], $templateId, $platform);
+            $shortcodeHandler->enqueuePopupScripts();
         }
 
-        (new BaseShortCodeHandler())->enqueueScripts();
+        $shortcodeHandler->enqueueScripts();
         do_action('wpsocialreviews/load_template_assets', $templateId);
 
         $html = '';

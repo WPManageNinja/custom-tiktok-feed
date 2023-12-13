@@ -42,7 +42,7 @@ if (!empty($feeds) && is_array($feeds)) {
                     ?>
                     <div class="wpsr-tiktok-feed-inner">
                         <div class="wpsr-tiktok-feed-statistics">
-                            <a href="<?php echo esc_url($videoLink) ?>" class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link" target="_blank" rel="nofollow">
+                            <a href="<?php echo esc_url($videoLink); ?>" class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link" target="_blank" rel="nofollow">
                             </a>
 
                             <div class="wpsr-tiktok-icon-position" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>" data-template-id="<?php echo esc_attr($templateId); ?>">

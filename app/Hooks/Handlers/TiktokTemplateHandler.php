@@ -19,7 +19,7 @@ class TiktokTemplateHandler
      *
      * @param $template_meta
      *
-     * @since 3.7.0
+     * @since 3.13.0
      *
      **/
     use LoadView;
@@ -80,15 +80,6 @@ class TiktokTemplateHandler
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
-    public function renderFeedDate($feed = [])
-    {
-        $translations =  GlobalSettings::getTranslations();
-        $html = $this->loadView('public/feeds-templates/tiktok/elements/date', array(
-            'feed'  => $feed
-        ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
-    }
-
     public function getPaginatedFeedHtml($templateId = null, $page = null , $feed_id = null , $feed_type = '')
     {
         $shortcodeHandler = new ShortcodeHandler();
@@ -124,23 +115,11 @@ class TiktokTemplateHandler
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
-    public function tiktokFeedStatistics ($displayStatistics, $template_meta, $feed)
-    {
-        if ($displayStatistics === 'false') {
-            return;
-        }
-        $html = $this->loadView('public/feeds-templates/tiktok/elements/statistics', array(
-            'template_meta' => $template_meta,
-            'feed' => $feed
-        ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
-    }
-
     public function formatTiktokConfig($configs = [] , $response)
     {
         return Config::formatTiktokConfig($configs, $response);
     }
-    public function loadTokTokView($fileName, $data)
+    public function loadTikTokView($fileName, $data)
     {
         $html = $this->loadView($fileName, $data);
         header("Content-Type: text/html");

@@ -500,25 +500,23 @@ class TiktokFeed extends BaseFeed
 
         if(!$feeds) {
             if($feedType === 'user_feed') {
-                $fields = 'video/list/?fields=id,title,video_description,duration,create_time,cover_image_url,like_count,comment_count,share_count,view_count,embed_link';
+                $fields = 'video/list/?fields=id,title,duration,cover_image_url,embed_link';
+                $fields = apply_filters('ninja_tiktok_feed/tiktok_video_api_details', $fields);
                 $fetchUrl = $this->remoteFetchUrl . $fields ;
                 $request_data = json_encode(array(
                     'max_count' => $perPage
                 ));
             } elseif ($feedType === 'specific_videos') {
-                $fetchUrl = apply_filters('wpsocialreviews/tiktok_specific_video_api_details', $this->remoteFetchUrl);
-                $video_ids = Arr::get($apiSettings, 'specific_videos', []);
+                $fields = apply_filters('ninja_tiktok_feed/tiktok_specific_video_api_details', '');
+                $fetchUrl = $this->remoteFetchUrl . $fields;
+
+                $video_ids = apply_filters('ninja_tiktok_feed/tiktok_specific_video_ids', $apiSettings);
 
                 if (empty($video_ids)) {
                     return [
                         'error_message' => __('Please enter at least one video id', 'ninja-tiktok-feed')
                     ];
                 }
-
-                $video_ids = explode(',', $video_ids);
-                $video_ids = array_map('trim', $video_ids);
-
-                update_option('wpsr_tiktok_specific_video_ids', $video_ids);
 
                 $request_data = json_encode(array(
                     "filters" => [
