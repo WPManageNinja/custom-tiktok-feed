@@ -33,9 +33,8 @@ class Config
                 'platform'                  => 'tiktok',
                 'template'                  => Arr::get($settings, 'template', 'template1'),
                 'layout_type'               => Arr::get($settings, 'layout_type', 'grid'),
-                'column_number'             => Arr::get($settings, 'column_number', '4'),
                 'responsive_column_number'  => array(
-                    'desktop'  => Arr::get($settings, 'responsive_column_number.desktop', Arr::get($settings,'column_number', '4')),
+                    'desktop'  => Arr::get($settings, 'responsive_column_number.desktop', '4'),
                     'tablet'   => Arr::get($settings, 'responsive_column_number.tablet','6'),
                     'mobile'   => Arr::get($settings, 'responsive_column_number.mobile', '12')
                 ),
@@ -48,10 +47,9 @@ class Config
                     'feed_count'        => (int) Arr::get($settings, 'source_settings.feed_count', 50),
                 ),
                 'filters'  => array(
-                    'total_posts'      => (int) Arr::get($settings,'filters.total_posts', 50),
                     'total_posts_number'  => array(
-                        'desktop'  => (int) Arr::get($settings, 'filters.total_posts_number.desktop', Arr::get($settings,'filters.total_posts', 50)),
-                        'mobile'   => (int) Arr::get($settings, 'filters.total_posts_number.mobile', Arr::get($settings,'filters.total_posts', 50))
+                        'desktop'  => (int) Arr::get($settings, 'filters.total_posts_number.desktop', 50),
+                        'mobile'   => (int) Arr::get($settings, 'filters.total_posts_number.mobile', 50)
                     ),
                     'post_order'       => Arr::get($settings,'filters.post_order', 'ascending'),
                     'includes_inputs'  => sanitize_text_field(Arr::get($settings,'filters.includes_inputs', '')),
@@ -85,15 +83,13 @@ class Config
                 'carousel_settings' => array(
                     'autoplay'         => Arr::get($settings,'carousel_settings.autoplay', 'true'),
                     'autoplay_speed'   => (int) Arr::get($settings,'carousel_settings.autoplay_speed', 3000),
-                    'slides_to_show'   => (int) Arr::get($settings,'carousel_settings.slides_to_show', 3),
                     'responsive_slides_to_show'  => array(
-                        'desktop'  => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.desktop', Arr::get($settings, 'carousel_settings.slides_to_show', 3)),
+                        'desktop'  => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.desktop', 3),
                         'tablet'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.tablet',2),
                         'mobile'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_show.mobile', 1)
                     ),
-                    'slides_to_scroll' => (int) Arr::get($settings,'carousel_settings.slides_to_scroll', 3),
                     'responsive_slides_to_scroll' => array(
-                        'desktop'  => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.desktop', Arr::get($settings, 'carousel_settings.slides_to_scroll', 3)),
+                        'desktop'  => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.desktop', 3),
                         'tablet'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.tablet',2),
                         'mobile'   => (int)Arr::get($settings, 'carousel_settings.responsive_slides_to_scroll.mobile', 1)
                     ),

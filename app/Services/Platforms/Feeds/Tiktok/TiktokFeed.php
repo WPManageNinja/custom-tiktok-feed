@@ -23,6 +23,10 @@ class TiktokFeed extends BaseFeed
     protected $platfromData;
     private $remoteFetchUrl = 'https://open.tiktokapis.com/v2/';
     protected $cacheHandler;
+    private $client_key = 'aw8zfgo0aio2dc7i';
+    private $client_secret = 'ALbhpM9NbyUm8llOTqLVthRJtxPYTD5g';
+    private $redirect_uri = 'https://gutendev.com/wp-json/wpsocialreviews/tiktok_callback';
+
 
     public function __construct()
     {
@@ -62,14 +66,18 @@ class TiktokFeed extends BaseFeed
 
     protected function getAccessToken($access_code = '')
     {
-        $app_credentials = $this->getAppCredentials();
+//        $app_credentials = $this->getAppCredentials();
 
         $args = build_query(array(
-            'client_key' => Arr::get($app_credentials, 'client_id'),
-            'client_secret' => $this->protector->maybe_decrypt(Arr::get($app_credentials, 'client_secret')),
+//            'client_key' => Arr::get($app_credentials, 'client_id'),
+//            'client_secret' => $this->protector->maybe_decrypt(Arr::get($app_credentials, 'client_secret')),
+            'client_key' => $this->client_key,
+            'client_secret' => $this->client_secret,
             'code' => $access_code,
             'grant_type' => 'authorization_code',
-            'redirect_uri' => Arr::get($app_credentials, 'redirect_uri')
+            'redirect_uri' => $this->redirect_uri,
+//            'redirect_uri' => Arr::get($app_credentials, 'redirect_uri')
+
         ));
 
         $fetchUrl = $this->remoteFetchUrl . 'oauth/token/';
@@ -208,17 +216,19 @@ class TiktokFeed extends BaseFeed
     {
         $api_url = $this->remoteFetchUrl . 'oauth/token/';
 
-        $settings = get_option('wpsr_tiktok_global_settings');
-        $clientId = Arr::get($settings, 'app_settings.client_id', '');
-        $clientSecret = Arr::get($settings, 'app_settings.client_secret', '');
-
-        $clientId = $this->protector->decrypt($clientId);
-        $clientSecret = $this->protector->decrypt($clientSecret);
+//        $settings = get_option('wpsr_tiktok_global_settings');
+//        $clientId = Arr::get($settings, 'app_settings.client_id', '');
+//        $clientSecret = Arr::get($settings, 'app_settings.client_secret', '');
+//
+//        $clientId = $this->protector->decrypt($clientId);
+//        $clientSecret = $this->protector->decrypt($clientSecret);
 
         $args = array(
             'body' => array(
-                'client_key' => $clientId,
-                'client_secret' => $clientSecret,
+//                'client_key' => $clientId,
+//                'client_secret' => $clientSecret,
+                'client_key' => $this->client_key,
+                'client_secret' => $this->client_secret,
                 'refresh_token' => $refreshTokenReceived,
                 'grant_type' => 'refresh_token',
             ),
@@ -266,10 +276,8 @@ class TiktokFeed extends BaseFeed
     public function getVerificationConfigs()
     {
         $connected_source_list  = $this->getConnectedSourceList();
-        $app_credentials = $this->getAppCredentials();
         wp_send_json_success([
             'connected_source_list'  => $connected_source_list,
-            'app_settings'           => $app_credentials,
             'status'                 => true,
         ], 200);
     }
@@ -649,21 +657,21 @@ class TiktokFeed extends BaseFeed
         return $curMedia;
     }
 
-    public function getAppCredentials()
-    {
-        $settings = get_option('wpsr_' . $this->platform . '_global_settings');
-        $enableApp = Arr::get($settings, 'app_settings.enable_app', 'false');
-        $client_id = Arr::get($settings, 'app_settings.client_id', '');
-        $client_secret = Arr::get($settings, 'app_settings.client_secret', '');
-        $redirect_uri = Arr::get($settings, 'app_settings.redirect_uri', '');
-
-        return [
-            'enable_app' => $enableApp,
-            'client_id' => $this->protector->maybe_decrypt($client_id),
-            'client_secret' => $client_secret,
-            'redirect_uri' => $redirect_uri,
-        ];
-    }
+//    public function getAppCredentials()
+//    {
+//        $settings = get_option('wpsr_' . $this->platform . '_global_settings');
+//        $enableApp = Arr::get($settings, 'app_settings.enable_app', 'false');
+//        $client_id = Arr::get($settings, 'app_settings.client_id', '');
+//        $client_secret = Arr::get($settings, 'app_settings.client_secret', '');
+//        $redirect_uri = Arr::get($settings, 'app_settings.redirect_uri', '');
+//
+//        return [
+//            'enable_app' => $enableApp,
+//            'client_id' => $this->protector->maybe_decrypt($client_id),
+//            'client_secret' => $client_secret,
+//            'redirect_uri' => $redirect_uri,
+//        ];
+//    }
 
     public function formatData ($data = [])
     {
