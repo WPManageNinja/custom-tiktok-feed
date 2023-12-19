@@ -296,7 +296,7 @@ class TiktokFeed extends BaseFeed
         $cache_names = [
             'user_account_header_' . $userId,
             'user_feed_id_' . $userId,
-            'specific_videos_id_' . $userId,
+//            'specific_videos_id_' . $userId,
         ];
 
         foreach ($cache_names as $cache_name) {
@@ -476,29 +476,30 @@ class TiktokFeed extends BaseFeed
 
         if ($feedType === 'user_feed') {
             $pageCacheName  = $feedType.'_id_'.$pageId.'_num_'.$totalFeed;
-        } elseif ($feedType === 'specific_videos') {
-            $apiSpecificVideos = Arr::get($apiSettings, 'specific_videos', []);
-            $video_ids = array_map('trim', explode(',', $apiSpecificVideos));
-
-            $cached_video_ids = get_option('wpsr_tiktok_specific_video_ids', []);
-
-            $difference1 = array_diff($video_ids, $cached_video_ids);
-            $difference2 = array_diff($cached_video_ids, $video_ids);
-
-            $pageCacheName = $feedType . '_id_' . $pageId . '_video_ids_' . count($video_ids);
-
-            if (!empty($difference1) && !empty($difference2)) {
-                if(!empty($cached_video_ids)){
-                    $this->cacheHandler->clearCacheByName($pageCacheName);
-                }
-                $cache = false;
-            }
-
-            if($cached_video_ids !== $video_ids) {
-                update_option('wpsr_tiktok_specific_video_ids', $video_ids);
-            }
-
         }
+//        elseif ($feedType === 'specific_videos') {
+//            $apiSpecificVideos = Arr::get($apiSettings, 'specific_videos', []);
+//            $video_ids = array_map('trim', explode(',', $apiSpecificVideos));
+//
+//            $cached_video_ids = get_option('wpsr_tiktok_specific_video_ids', []);
+//
+//            $difference1 = array_diff($video_ids, $cached_video_ids);
+//            $difference2 = array_diff($cached_video_ids, $video_ids);
+//
+//            $pageCacheName = $feedType . '_id_' . $pageId . '_video_ids_' . count($video_ids);
+//
+//            if (!empty($difference1) && !empty($difference2)) {
+//                if(!empty($cached_video_ids)){
+//                    $this->cacheHandler->clearCacheByName($pageCacheName);
+//                }
+//                $cache = false;
+//            }
+//
+//            if($cached_video_ids !== $video_ids) {
+//                update_option('wpsr_tiktok_specific_video_ids', $video_ids);
+//            }
+//
+//        }
 
         $feeds = [];
         if(!$cache) {
@@ -514,25 +515,26 @@ class TiktokFeed extends BaseFeed
                 $request_data = json_encode(array(
                     'max_count' => $perPage
                 ));
-            } elseif ($feedType === 'specific_videos') {
-                $fields = apply_filters('ninja_tiktok_feed/tiktok_specific_video_api_details', '');
-                $fetchUrl = $this->remoteFetchUrl . $fields;
-
-                $video_ids = apply_filters('ninja_tiktok_feed/tiktok_specific_video_ids', $apiSettings);
-
-                if (empty($video_ids)) {
-                    return [
-                        'error_message' => __('Please enter at least one video id', 'ninja-tiktok-feed')
-                    ];
-                }
-
-                $request_data = json_encode(array(
-                    "filters" => [
-                        "video_ids" => $video_ids
-                    ],
-                    'max_count' => $perPage,
-                ));
             }
+//            elseif ($feedType === 'specific_videos') {
+//                $fields = apply_filters('ninja_tiktok_feed/tiktok_specific_video_api_details', '');
+//                $fetchUrl = $this->remoteFetchUrl . $fields;
+//
+//                $video_ids = apply_filters('ninja_tiktok_feed/tiktok_specific_video_ids', $apiSettings);
+//
+//                if (empty($video_ids)) {
+//                    return [
+//                        'error_message' => __('Please enter at least one video id', 'ninja-tiktok-feed')
+//                    ];
+//                }
+//
+//                $request_data = json_encode(array(
+//                    "filters" => [
+//                        "video_ids" => $video_ids
+//                    ],
+//                    'max_count' => $perPage,
+//                ));
+//            }
 
             $args     = array(
                 'headers' => [
@@ -817,7 +819,8 @@ class TiktokFeed extends BaseFeed
             $sourceId    = substr($optionName, $id_position + strlen('_id_'),
                 $num_position - ($id_position + strlen('_id_')));
 
-            $feedTypes = ['user_feed', 'specific_videos'];
+//            $feedTypes = ['user_feed', 'specific_videos'];
+            $feedTypes = ['user_feed'];
             $connectedSources = $this->getConnectedSourceList();
             if(in_array($feed_type, $feedTypes)) {
                 if(isset($connectedSources[$sourceId])) {
