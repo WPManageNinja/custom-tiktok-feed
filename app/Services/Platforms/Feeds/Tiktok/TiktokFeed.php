@@ -508,7 +508,7 @@ class TiktokFeed extends BaseFeed
 
         if(!$feeds) {
             if($feedType === 'user_feed') {
-                $fields = 'video/list/?fields=id,title,duration,cover_image_url,embed_link';
+                $fields = 'video/list/?fields=id,title,duration,cover_image_url,embed_link,create_time';
                 $fields = apply_filters('ninja_tiktok_feed/tiktok_video_api_details', $fields);
                 $fetchUrl = $this->remoteFetchUrl . $fields ;
                 $request_data = json_encode(array(
