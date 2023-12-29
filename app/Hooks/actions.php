@@ -35,6 +35,14 @@ $app->addAction('wp_ajax_nopriv_wpsr_get_more_feeds', 'ShortcodeHandler@handleLo
 $app->addAction('ninja_tiktok_feed/load_tiktok_view', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@loadTikTokView', 10, 2);
 
 
+/*
+ * Elementor Widget Init
+ */
+if (defined('ELEMENTOR_VERSION')) {
+    new NinjaTiktokFeed\Application\Services\Widgets\ElementorWidget();
+}
+
+
 add_action('rest_api_init', function () use ($app)  {
     register_rest_route('wpsocialreviews', '/tiktok_callback/', array(
         'methods'             => 'GET',
