@@ -43,6 +43,14 @@ if (defined('ELEMENTOR_VERSION')) {
 }
 
 
+/*
+ * Beaver Builder Widget Init
+ */
+if ( class_exists( 'FLBuilder' ) ) {
+    new NinjaTiktokFeed\Application\Services\Widgets\Beaver\BeaverWidget();
+}
+
+
 add_action('rest_api_init', function () use ($app)  {
     register_rest_route('wpsocialreviews', '/tiktok_callback/', array(
         'methods'             => 'GET',
