@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Ninja TikTok Feed
 Plugin URI:   https://wpsocialninja.com/
-Description:  Display TikTok feed on your WordPress website.
+Description:  Create eye-catchy and responsive TikTok feed on your WordPress website.
 Version:      1.0.0
 Author:       WP Social Ninja Team - WPManageNinja LLC
 Author URI:   https://wpsocialninja.com/

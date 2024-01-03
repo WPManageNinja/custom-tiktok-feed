@@ -59,11 +59,11 @@ This plugin by WP Social Ninja is specially built for TikTok feed to give you th
 
 **Number of feeds:** This filter option of Ninja TikTok feed will allow you to show how many feeds you want to show.
 
-**Posts order:** Display your Tikok feed with your desired post order. You have Ascending and Descending orders to choose from.
+**Posts order:** Display your TikTok feed with your desired post order. You have Ascending and Descending orders to choose from.
 
 **Feed Settings:** The multiple feed setting options will allow you to open your post either in default or in TikTok. Also, you can choose to display/hide the **Author Name**, **Photo**, **Description**, or **Platform Icon**.
 
-**Header Settings:** To give your TikTok feed a different look or decorate it deversely, you can use the header part of your TikTok where you have a **Profile picture**, **Account Name**; with Ninja TikTok Feed, you are free to hide/display them in your feed.
+**Header Settings:** To give your TikTok feed a different look or decorate it diversely, you can use the header part of your TikTok where you have a **Profile picture**, **Account Name**; with Ninja TikTok Feed, you are free to hide/display them in your feed.
 
 **Pagination:** If you have multiple videos and want to keep them on multiple pages, you have **Pagination** option, it will let you select how many feeds you want to show on one page and customize the button text.
 
@@ -77,9 +77,9 @@ This plugin by WP Social Ninja is specially built for TikTok feed to give you th
 
 **Posts Order Variations:** You will get variations on which order you want to display your TikTok feed. You can choose your favorite one from **Ascending**, **Descending**, **Most Viewed**, **Most Liked**, and **Random**.
 
-**Number of Feeds to Display:** Decorate your page with the number of TikTok videos you need to display; just set the number from from **Filter** settings.
+**Number of Feeds to Display:** Decorate your page with the number of TikTok videos you need to display; just set the number from **Filter** settings.
 
-**Filter Feed with search terms/Hashtags:** Show or hide your TikTok post & display by targetting specific words/hashtags on your website.
+**Filter Feed with search terms/Hashtags:** Show or hide your TikTok post & display by targeting specific words/hashtags on your website.
 
 **Open posts on Platform/Popup box:** You can open your TikTok feed with the original platform post or open it with a popup box on your site.
 
@@ -117,6 +117,7 @@ A TikTok plugin will let you fetch your TikTok videos and embed them on your web
 = Can you embed a TikTok video on WordPress? =
 
 Yes, embedding TikTok video is easy when you use **Ninja TikTok Feed**, WordPress plugin for TikTok feed. With its easy installation process and unlimited customization options you can create a TikTok feed and embed it on your WordPress website.
+
 = How do I show TikTok feed on my website? =
 
 Here are the steps you need to follow to show your TikTok feed by Ninja TikTok Feed:
