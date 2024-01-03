@@ -36,6 +36,15 @@ $app->addAction('ninja_tiktok_feed/load_tiktok_view', 'NinjaTiktokFeed\Applicati
 
 
 /*
+ * Oxygen Widget Init
+ */
+if (class_exists('OxyEl') ) {
+    if ( file_exists( NINJA_TIKTOK_FEED_DIR.'app/Services/Widgets/Oxygen/OxygenWidget.php' ) ) {
+        new NinjaTiktokFeed\Application\Services\Widgets\Oxygen\OxygenWidget();
+    }
+}
+
+/*
  * Elementor Widget Init
  */
 if (defined('ELEMENTOR_VERSION')) {
