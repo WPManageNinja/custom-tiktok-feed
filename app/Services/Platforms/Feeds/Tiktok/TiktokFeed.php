@@ -23,9 +23,9 @@ class TiktokFeed extends BaseFeed
     protected $platfromData;
     private $remoteFetchUrl = 'https://open.tiktokapis.com/v2/';
     protected $cacheHandler;
-    private $client_key = 'aw8zfgo0aio2dc7i';
-    private $client_secret = 'ALbhpM9NbyUm8llOTqLVthRJtxPYTD5g';
-    private $redirect_uri = 'https://gutendev.com/wp-json/wpsocialreviews/tiktok_callback';
+    private $client_key = 'aw4cddbhcvsbl34m';
+    private $client_secret = 'IV2QhJ7nxhvEthCI2QqZTTPpoNZOPZB6';
+    private $redirect_uri = 'https://wpsocialninja.com/wp-json/wpsocialreviews/tiktok_callback';
 
 
     public function __construct()
