@@ -22,7 +22,7 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
                 <div class="wpsr-feed-avatar-right">
                     <?php if( Arr::get($template_meta, 'post_settings.display_author_name') === 'true'){ ?>
                         <a href="<?php echo esc_url($mediaUrl); ?>" target="_blank" rel="nofollow">
-                            @<?php echo esc_html($userName); ?>
+                            <?php echo esc_html($userName); ?>
                         </a>
                     <?php }
                     /**
