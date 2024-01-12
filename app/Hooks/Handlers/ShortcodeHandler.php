@@ -80,7 +80,7 @@ class ShortcodeHandler
         $html .=  $this->loadView('public/feeds-templates/tiktok/header', array(
             'templateId'    => $templateId,
             'template'      => $template,
-            'header'        => $settings['header']['data']['user'],
+            'header'        => Arr::get($settings, 'header.data.user'),
             'feed_settings' => $settings['feed_settings'],
             'layout_type'   => $settings['layout_type'],
             'column_gaps'   => $settings['column_gaps'],

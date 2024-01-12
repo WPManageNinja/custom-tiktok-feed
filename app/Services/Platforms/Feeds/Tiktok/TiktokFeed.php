@@ -77,7 +77,6 @@ class TiktokFeed extends BaseFeed
             'grant_type' => 'authorization_code',
             'redirect_uri' => $this->redirect_uri,
 //            'redirect_uri' => Arr::get($app_credentials, 'redirect_uri')
-
         ));
 
         $fetchUrl = $this->remoteFetchUrl . 'oauth/token/';
@@ -140,9 +139,9 @@ class TiktokFeed extends BaseFeed
                     'display_name' => $name,
                     'avatar_url' => $avatar,
                     'profile_url' => $profile_url,
-                    'access_token' => $access_token,
+                    'access_token' => $this->protector->encrypt($access_token),
                     'refresh_token' => $refresh_token,
-                    'expiration_time' => $expires_in,
+                    'expiration_time' => time() + $expires_in,
                     'refresh_expires_in' => $refresh_expires_in,
                     'open_id' => $open_id,
                 ];
@@ -157,48 +156,12 @@ class TiktokFeed extends BaseFeed
         }
     }
 
-    public function updateUserHeaderInfo($access_token)
+    public function maybeRefreshToken($account)
     {
-        $fetchUrl = $this->remoteFetchUrl . 'user/info/?fields=open_id,avatar_url,profile_deep_link';
-        $response = wp_remote_get($fetchUrl, [
-            'headers' => [
-                'Authorization' => "Bearer " . $access_token,
-                'Content-Type' => 'application/json'
-            ],
-        ]);
-        if (is_wp_error($response)) {
-            throw new \Exception($response->get_error_message());
-        }
-        if (200 !== wp_remote_retrieve_response_code($response)) {
-            $errorMessage = $this->getErrorMessage($response);
-            throw new \Exception($errorMessage);
-        }
-        if (200 === wp_remote_retrieve_response_code($response)) {
-            $responseArr = json_decode(wp_remote_retrieve_body($response), true);
-            $profile_url = Arr::get($responseArr, 'data.user.profile_deep_link');
-            $avatar = Arr::get($responseArr, 'data.user.avatar_url');
-            $open_id = Arr::get($responseArr, 'data.user.open_id');
-            $data = [
-                'avatar_url' => $avatar,
-                'profile_url' => $profile_url,
-            ];
-            $configs = get_option('wpsr_tiktok_connected_sources_config', []);
-            $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
-
-            $existingData = $sourceList[$open_id];
-            $mergedData = array_merge($existingData, $data);
-
-            $sourceList[$open_id] = $mergedData;
-            update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
-        }
-    }
-
-    public function maybeRefreshToken($page)
-    {
-        $accessToken = $page['access_token'];
-        $userId = $page['open_id'];
-        $configs = get_option('wpsr_tiktok_connected_sources_config', []);
-        $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
+        $accessToken    = Arr::get($account, 'access_token');
+        $userId         = Arr::get($account, 'open_id');
+        $configs        = get_option('wpsr_tiktok_connected_sources_config', []);
+        $sourceList     = Arr::get($configs, 'sources') ? $configs['sources'] : [];
 
         if (array_key_exists($userId, $sourceList)) {
             $existingData = $sourceList[$userId];
@@ -248,10 +211,9 @@ class TiktokFeed extends BaseFeed
             $expires_in = intval($data['expires_in']);
             $expiration_time = time() + $expires_in;
             $open_id = $data['open_id'];
-            $this->updateUserHeaderInfo($access_token);
 
             $data = [
-                'access_token' => $access_token,
+                'access_token' => $this->protector->encrypt($access_token),
                 'refresh_token' => $refresh_token,
                 'expiration_time' => $expiration_time,
                 'open_id' => $open_id,
@@ -265,8 +227,6 @@ class TiktokFeed extends BaseFeed
 
             $sourceList[$userId] = $mergedData;
             update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
-            $this->cacheHandler->clearPageCaches($this->platform);
-            $this->cacheHandler->clearCache();
             return $access_token;
         } else {
             return false;
@@ -307,16 +267,13 @@ class TiktokFeed extends BaseFeed
             'message' => __('Successfully Disconnected!', 'ninja-tiktok-feed'),
         ], 200);
     }
+
     public function getConnectedSourceList()
     {
         $configs = get_option('wpsr_tiktok_connected_sources_config', []);
         $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
-        foreach ($sourceList as $userId => $source) {
-            $this->maybeRefreshToken($source);
-        }
         return $sourceList;
     }
-
 
     public function getTemplateMeta($settings = array(), $postId = null)
     {
@@ -331,7 +288,7 @@ class TiktokFeed extends BaseFeed
                 $data['items'] = $response;
             }
         } else {
-            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds', 'ninja-tiktok-feed');
+            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds.', 'ninja-tiktok-feed');
         }
 
         $account = Arr::get($feed_settings, 'header_settings.account_to_show');
@@ -427,9 +384,8 @@ class TiktokFeed extends BaseFeed
         $multiple_feeds = [];
         foreach ($ids as $id) {
             if (isset($connectedAccounts[$id])) {
-                $pageInfo = $connectedAccounts[$id];
-
-                $feed = $this->getPageFeed($pageInfo, $apiSettings);
+                $accountInfo = $connectedAccounts[$id];
+                $feed = $this->getAccountFeed($accountInfo, $apiSettings);
                 if(isset($feed['error_message'])) {
                     return $feed;
                 }
@@ -445,20 +401,15 @@ class TiktokFeed extends BaseFeed
         return $tiktok_feeds;
     }
 
-    public function getPageFeed($page, $apiSettings, $cache = false)
+    public function getAccountFeed($account, $apiSettings, $cache = false)
     {
-        $accessToken    = $this->maybeRefreshToken($page);
-        if(!$accessToken) {
-            return [
-                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'ninja-tiktok-feed')
-            ];
-        }
-        $pageId         =  $page['open_id'];
+        $accessToken    = $this->protector->decrypt($account['access_token']) ? $this->protector->decrypt($account['access_token']) : $account['access_token'];
+        $accountId         = Arr::get($account, 'open_id');
         $feedType       = Arr::get($apiSettings, 'feed_type', 'user_feed');
 
         $totalFeed      = Arr::get($apiSettings, 'feed_count');
         $totalFeed      = !defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 10 ? 10 : $totalFeed;
-        $totalFeed      =  apply_filters('ninja_tiktok_feed/tiktok_feeds_limit', $totalFeed);
+        $totalFeed      = apply_filters('ninja_tiktok_feed/tiktok_feeds_limit', $totalFeed);
         if(defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 200){
             $totalFeed = 200;
         }
@@ -474,9 +425,8 @@ class TiktokFeed extends BaseFeed
             $pages++;
         }
 
-        if ($feedType === 'user_feed') {
-            $pageCacheName  = $feedType.'_id_'.$pageId.'_num_'.$totalFeed;
-        }
+        $accountCacheName  = $feedType.'_id_'.$accountId.'_num_'.$totalFeed;
+
 //        elseif ($feedType === 'specific_videos') {
 //            $apiSpecificVideos = Arr::get($apiSettings, 'specific_videos', []);
 //            $video_ids = array_map('trim', explode(',', $apiSpecificVideos));
@@ -486,11 +436,11 @@ class TiktokFeed extends BaseFeed
 //            $difference1 = array_diff($video_ids, $cached_video_ids);
 //            $difference2 = array_diff($cached_video_ids, $video_ids);
 //
-//            $pageCacheName = $feedType . '_id_' . $pageId . '_video_ids_' . count($video_ids);
+//            $accountCacheName = $feedType . '_id_' . $accountId . '_video_ids_' . count($video_ids);
 //
 //            if (!empty($difference1) && !empty($difference2)) {
 //                if(!empty($cached_video_ids)){
-//                    $this->cacheHandler->clearCacheByName($pageCacheName);
+//                    $this->cacheHandler->clearCacheByName($accountCacheName);
 //                }
 //                $cache = false;
 //            }
@@ -503,18 +453,23 @@ class TiktokFeed extends BaseFeed
 
         $feeds = [];
         if(!$cache) {
-            $feeds = $this->cacheHandler->getFeedCache($pageCacheName);
+            $feeds = $this->cacheHandler->getFeedCache($accountCacheName);
         }
         $fetchUrl = '';
 
         if(!$feeds) {
+            $request_data = '';
+            $fields = '';
+
+            $body_args = [];
+
             if($feedType === 'user_feed') {
                 $fields = 'video/list/?fields=id,title,duration,cover_image_url,embed_link,create_time';
                 $fields = apply_filters('ninja_tiktok_feed/tiktok_video_api_details', $fields);
                 $fetchUrl = $this->remoteFetchUrl . $fields ;
-                $request_data = json_encode(array(
+                $body_args = [
                     'max_count' => $perPage
-                ));
+                ];
             }
 //            elseif ($feedType === 'specific_videos') {
 //                $fields = apply_filters('ninja_tiktok_feed/tiktok_specific_video_api_details', '');
@@ -536,44 +491,41 @@ class TiktokFeed extends BaseFeed
 //                ));
 //            }
 
-            $args     = array(
-                'headers' => [
-                    'Authorization' => "Bearer ". $accessToken,
-                    'Content-Type' => 'application/json'
-                ],
-                'body' => $request_data,
-                'timeout'   => 60
-            );
-            $pages_data = wp_remote_post($fetchUrl, $args);
+            $account_data = $this->makeRequest($fetchUrl, $accessToken, $body_args);
 
-            if(is_wp_error($pages_data)) {
-                $errorMessage = ['error_message' => $pages_data->get_error_message()];
+            if(is_wp_error($account_data)) {
+                $errorMessage = ['error_message' => $account_data->get_error_message()];
                 return $errorMessage;
             }
 
-            if(Arr::get($pages_data, 'response.code') !== 200) {
-                $errorMessage = $this->getErrorMessage($pages_data);
+            if(Arr::get($account_data, 'response.code') !== 200) {
+                $errorMessage = $this->getErrorMessage($account_data);
                 return ['error_message' => $errorMessage];
             }
 
-            if (Arr::get($pages_data, 'response.code') === 200) {
-                $page_feeds = json_decode(wp_remote_retrieve_body($pages_data), true);
+            if (Arr::get($account_data, 'response.code') === 200) {
+                $account_feeds = json_decode(wp_remote_retrieve_body($account_data), true);
 
-                if (isset($page_feeds['data']) && !empty($page_feeds['data'])) {
-                    $this->feedData = $page_feeds['data']['videos'];
+                if (isset($account_feeds['data']) && !empty($account_feeds['data'])) {
+                    $this->feedData = $account_feeds['data']['videos'];
 
-                    if (isset($page_feeds['data']['has_more']) && !empty($page_feeds['data']['has_more']) && isset($page_feeds['data']['cursor']) && ($page_feeds['data']['cursor']) !== 0) {
+                    if (isset($account_feeds['data']['has_more']) && !empty($account_feeds['data']['has_more']) && isset($account_feeds['data']['cursor']) && ($account_feeds['data']['cursor']) !== 0) {
                         $x = 0;
                         while ($x < $pages) {
-                            $cursorIs = $page_feeds['data']['cursor'];
+                            $cursorIs = $account_feeds['data']['cursor'];
                             $fetchUrl = $this->remoteFetchUrl . $fields;
-                            $pages_data = $this->fetchPageFeeds($fetchUrl, $cursorIs, $accessToken);
-                            $page_feeds = json_decode(wp_remote_retrieve_body($pages_data), true);
-                            $new_data = $page_feeds['data']['videos'];
+                            $body_args = [
+                                'max_count' => 20,
+                                'cursor' => $cursorIs,
+                            ];
+                            $account_data = $this->makeRequest($fetchUrl, $accessToken, $body_args);
+
+                            $account_feeds = json_decode(wp_remote_retrieve_body($account_data), true);
+                            $new_data = $account_feeds['data']['videos'];
                             $this->feedData = array_merge($this->feedData, $new_data);
                             $x++;
 
-                            if (isset($page_feeds['data']['has_more']) && $page_feeds['data']['has_more'] === false) {
+                            if (isset($account_feeds['data']['has_more']) && $account_feeds['data']['has_more'] === false) {
                                 break;
                             }
                         }
@@ -581,25 +533,23 @@ class TiktokFeed extends BaseFeed
 
                     $this->feedData = array_slice($this->feedData, 0, $totalFeed);
 
-                    $page_feeds['data']['videos'] = $this->feedData;
+                    $account_feeds['data']['videos'] = $this->feedData;
 
                     $configs = get_option('wpsr_tiktok_connected_sources_config', []);
                     $sourceList = Arr::get($configs, 'sources', []);
-                    $sourceFrom = Arr::get($sourceList, $pageId, '');
+                    $sourceFrom = Arr::get($sourceList, $accountId, '');
 
-                    if (isset($page_feeds['data']['videos'])) {
-                        foreach ($page_feeds['data']['videos'] as &$feed) {
+                    if (isset($account_feeds['data']['videos'])) {
+                        foreach ($account_feeds['data']['videos'] as &$feed) {
                             $feed['from'] = $sourceFrom;
                         }
                     }
 
-                    $dataFormatted = $this->formatData($page_feeds['data']);
-                    $page_feeds['data'] = $dataFormatted;
-                    $this->cacheHandler->createCache($pageCacheName, $dataFormatted);
-
+                    $dataFormatted = $this->formatData($account_feeds['data']);
+                    $account_feeds['data'] = $dataFormatted;
+                    $this->cacheHandler->createCache($accountCacheName, $dataFormatted);
                 }
-
-                $feeds = Arr::get($page_feeds, 'data', []);
+                $feeds = Arr::get($account_feeds, 'data', []);
             }
         }
 
@@ -610,22 +560,22 @@ class TiktokFeed extends BaseFeed
         return $feeds;
     }
 
-    public function fetchPageFeeds($fetchUrl, $cursor, $accessToken)
-    {
-        $request_data = json_encode([
-                'max_count' => 20,
-                'cursor' => $cursor,
-        ]);
 
+    public function makeRequest($url, $accessToken, $bodyArgs)
+    {
         $args = [
             'headers' => [
                 'Authorization' => "Bearer " . $accessToken,
                 'Content-Type' => 'application/json',
             ],
-            'body' => $request_data,
             'timeout' => 60,
         ];
-        return wp_remote_post($fetchUrl, $args);
+
+        if ($bodyArgs) {
+            $args['body'] = json_encode($bodyArgs);
+        }
+
+        return wp_remote_post($url, $args);
     }
 
     public function getFormattedUser($user)
@@ -675,7 +625,7 @@ class TiktokFeed extends BaseFeed
 //        ];
 //    }
 
-    public function formatData ($data = [])
+    public function formatData($data = [])
     {
         $allData = $data;
         $videos = Arr::get($data, 'videos', []);
@@ -695,7 +645,7 @@ class TiktokFeed extends BaseFeed
 
             $formattedVideos[$index]['created_at'] = Arr::get($video, 'create_time', '');
             $formattedVideos[$index]['title'] = Arr::get($video, 'title', '');
-            $formattedVideos[$index]['description'] = Arr::get($video, 'video_description', '');
+            $formattedVideos[$index]['text'] = Arr::get($video, 'video_description', '');
         }
 
         $allData['videos'] = $formattedVideos;
@@ -706,29 +656,21 @@ class TiktokFeed extends BaseFeed
     public function getAccountDetails($account)
     {
         $connectedAccounts = $this->getConnectedSourceList();
-        $pageDetails = [];
+        $accountDetails = [];
         if (isset($connectedAccounts[$account])) {
-            $pageInfo = $connectedAccounts[$account];
-            $pageDetails  = $this->getPageDetails($pageInfo, false);
+            $accountInfo = $connectedAccounts[$account];
+            $accountDetails  = $this->getHeaderDetails($accountInfo, false);
         }
-        return $pageDetails;
+        return $accountDetails;
     }
 
-    public function getPageDetails($page, $cacheFetch = false)
+    public function getHeaderDetails($account, $cacheFetch = false)
     {
-        $pageId = $page['open_id'];
-        $accessToken = $this->maybeRefreshToken($page);
-
-        if(!$accessToken) {
-            return [
-                'error_message' => __('An error occurred while refreshing the access token. Please try again later.', 'ninja-tiktok-feed')
-            ];
-        }
-
-        $accountCacheName = 'user_account_header_'.$pageId;
+        $accountId         = Arr::get($account, 'open_id');
+        $accessToken    = $this->protector->decrypt($account['access_token']) ? $this->protector->decrypt($account['access_token']) : $account['access_token'];
+        $accountCacheName = 'user_account_header_'.$accountId;
 
         $accountData = [];
-
         if(!$cacheFetch) {
             $accountData = $this->cacheHandler->getFeedCache($accountCacheName);
         }
@@ -742,7 +684,6 @@ class TiktokFeed extends BaseFeed
                 ],
             );
             $accountData = wp_remote_get($fetchUrl , $args);
-
 
             if(is_wp_error($accountData)) {
                 return ['error_message' => $accountData->get_error_message()];
@@ -824,10 +765,11 @@ class TiktokFeed extends BaseFeed
             $connectedSources = $this->getConnectedSourceList();
             if(in_array($feed_type, $feedTypes)) {
                 if(isset($connectedSources[$sourceId])) {
-                    $page = $connectedSources[$sourceId];
+                    $account = $connectedSources[$sourceId];
+                    $this->maybeRefreshToken($account);
                     $apiSettings['feed_type'] = $feed_type;
                     $apiSettings['feed_count'] = $total;
-                    $this->getPageFeed($page, $apiSettings, true);
+                    $this->getAccountFeed($account, $apiSettings, true);
                 }
             }
 
@@ -835,8 +777,8 @@ class TiktokFeed extends BaseFeed
             $accountId = substr($optionName, $accountIdPosition + strlen('_account_header_'), strlen($optionName));
             if(!empty($accountId)) {
                 if(isset($connectedSources[$accountId])) {
-                    $page = $connectedSources[$accountId];
-                    $this->getPageDetails($page, true);
+                    $account = $connectedSources[$accountId];
+                    $this->getHeaderDetails($account, true);
                 }
             }
         }

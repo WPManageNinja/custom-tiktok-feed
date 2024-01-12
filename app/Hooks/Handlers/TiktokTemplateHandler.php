@@ -57,7 +57,7 @@ class TiktokTemplateHandler
         $html =$this->loadView('public/feeds-templates/tiktok/elements/description', array(
             'feed'          => $feed,
             'allowed_tags'  => $allowed_tags,
-            'message'       => Arr::get($feed, 'description'),
+            'message'       => Arr::get($feed, 'text'),
             'content_length'    => Arr::get($template_meta, 'post_settings.content_length' , 15),
         ));
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
