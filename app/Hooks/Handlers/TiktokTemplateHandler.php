@@ -42,7 +42,8 @@ class TiktokTemplateHandler
             'feed'          => $feed,
             'account'       => Arr::get($feed, 'user'),
             'template_meta' => $template_meta,
-            'displayStatistics' => $displayStatistics
+            'displayStatistics' => $displayStatistics,
+            'author_image'      => $authorImage
         ));
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }

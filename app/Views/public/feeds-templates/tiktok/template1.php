@@ -68,7 +68,7 @@ if (!empty($feeds) && is_array($feeds)) {
                                      *
                                      * @hooked TiktokTemplateHandler::renderFeedAuthor 10
                                      * */
-                                    do_action('ninja_tiktok_feed/tiktok_feed_author', $feed, $template_meta, $displayStatistics = 'false');
+                                    do_action('ninja_tiktok_feed/tiktok_feed_author', $feed, $template_meta, $displayStatistics = 'true');
                                     ?>
                                 </div>
                             </div>
@@ -84,19 +84,6 @@ if (!empty($feeds) && is_array($feeds)) {
                                  * */
                                 do_action('ninja_tiktok_feed/tiktok_feed_media', $feed, $template_meta);
                                 ?>
-
-                                <div class="wpsr-tiktok-feed-video-info">
-                                    <div>
-                                        <?php
-                                        /**
-                                         * tiktok_feed_media hook.
-                                         *
-                                         * @hooked TiktokTemplateHandler::renderFeedAuthor 10
-                                         * */
-                                        do_action('ninja_tiktok_feed/tiktok_feed_author', $feed, $template_meta, $displayStatistics = 'true');
-                                        ?>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
