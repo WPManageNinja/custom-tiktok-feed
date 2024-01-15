@@ -1,7 +1,7 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
-$profileImage = Arr::get($feed, 'user.profile_image_url', '');
-$userName = Arr::get($feed, 'user.name', '');
+$profileImage = Arr::get($account, 'profile_image_url', '');
+$userName = Arr::get($account, 'name', '');
 $mediaUrl = Arr::get($feed, 'media.url', '');
 ?>
 <div class="wpsr-tiktok-feed-video-playmode wpsr-feed-link">
@@ -12,7 +12,7 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
          *
          * @hooked render_tiktok_feed_statistics 10
          * */
-        do_action('ninja_tiktok_feed/tiktok_feed_statistics', $displayStatistics, $template_meta, $feed);
+        do_action('ninja_tiktok_feed/tiktok_feed_statistics', $template_meta, $feed);
         if( is_array($account)){ ?>
             <div class="wpsr-tiktok-feed-author-avatar-wrapper">
                 <?php if( Arr::get($account, 'profile_image_url') && Arr::get($template_meta, 'post_settings.display_author_photo') === 'true'){ ?>

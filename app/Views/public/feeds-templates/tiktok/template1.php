@@ -68,7 +68,7 @@ if (!empty($feeds) && is_array($feeds)) {
                                      *
                                      * @hooked TiktokTemplateHandler::renderFeedAuthor 10
                                      * */
-                                    do_action('ninja_tiktok_feed/tiktok_feed_author', $feed, $template_meta, $displayStatistics = 'true');
+                                    do_action('ninja_tiktok_feed/tiktok_feed_author', $feed, $template_meta);
                                     ?>
                                 </div>
                             </div>

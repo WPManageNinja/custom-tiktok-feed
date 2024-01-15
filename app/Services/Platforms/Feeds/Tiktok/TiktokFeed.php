@@ -211,12 +211,14 @@ class TiktokFeed extends BaseFeed
             $expires_in = intval($data['expires_in']);
             $expiration_time = time() + $expires_in;
             $open_id = $data['open_id'];
+            $accountDetails = $this->getAccountDetails($open_id);
 
             $data = [
                 'access_token' => $this->protector->encrypt($access_token),
                 'refresh_token' => $refresh_token,
                 'expiration_time' => $expiration_time,
                 'open_id' => $open_id,
+                'avatar_url' => Arr::get($accountDetails, 'data.user.avatar_url', ''),
             ];
 
             $configs = get_option('wpsr_tiktok_connected_sources_config', []);
@@ -535,13 +537,13 @@ class TiktokFeed extends BaseFeed
 
                     $account_feeds['data']['videos'] = $this->feedData;
 
-                    $configs = get_option('wpsr_tiktok_connected_sources_config', []);
-                    $sourceList = Arr::get($configs, 'sources', []);
-                    $sourceFrom = Arr::get($sourceList, $accountId, '');
-
                     if (isset($account_feeds['data']['videos'])) {
                         foreach ($account_feeds['data']['videos'] as &$feed) {
-                            $feed['from'] = $sourceFrom;
+                            $accountDetails = $this->getAccountDetails($accountId);
+                            $feed['from']['avatar_url'] = Arr::get($accountDetails, 'data.user.avatar_url', '');
+                            $feed['from']['display_name'] = Arr::get($accountDetails, 'data.user.display_name', '');
+                            $feed['from']['profile_url'] = Arr::get($accountDetails, 'data.user.profile_url', '');
+                            $feed['from']['id'] = Arr::get($accountDetails, 'data.user.open_id', '');
                         }
                     }
 

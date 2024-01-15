@@ -22,7 +22,7 @@
 (new \NinjaTiktokFeed\Application\Hooks\Handlers\PlatformHandler())->register();
 
 $app->addAction('ninja_tiktok_feed/tiktok_feed_template_item_wrapper_before', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
-$app->addAction('ninja_tiktok_feed/tiktok_feed_author', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 3);
+$app->addAction('ninja_tiktok_feed/tiktok_feed_author', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 2);
 $app->addAction('ninja_tiktok_feed/tiktok_feed_description', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
 $app->addAction('ninja_tiktok_feed/tiktok_feed_media', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
 $app->addAction('ninja_tiktok_feed/tiktok_feed_icon', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);

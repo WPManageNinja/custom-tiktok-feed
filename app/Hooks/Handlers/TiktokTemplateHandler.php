@@ -36,15 +36,14 @@ class TiktokTemplateHandler
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
-    public function renderFeedAuthor($feed = [], $template_meta = [], $displayStatistics = false)
+    public function renderFeedAuthor($feed = [], $template_meta = [])
     {
         $html = $this->loadView('public/feeds-templates/tiktok/elements/author', array(
             'feed'          => $feed,
             'account'       => Arr::get($feed, 'user'),
-            'template_meta' => $template_meta,
-            'displayStatistics' => $displayStatistics,
-            'author_image'      => $authorImage
+            'template_meta' => $template_meta
         ));
+
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
@@ -116,7 +115,7 @@ class TiktokTemplateHandler
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
-    public function formatTiktokConfig($configs = [] , $response)
+    public function formatTiktokConfig($configs = [] , $response = [])
     {
         return Config::formatTiktokConfig($configs, $response);
     }
