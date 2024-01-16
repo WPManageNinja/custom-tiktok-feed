@@ -264,8 +264,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link a' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a' => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a' => 'color: {{VALUE}}'
                 ],
             ]
         );
@@ -275,7 +274,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_author_typography',
                 'label' => __('Typography', 'wp-social-reviews'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link a, {{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a'
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a'
             ]
         );
 
@@ -294,8 +293,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link .wpsr-feed-avatar-right .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -305,7 +303,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_date_typography',
                 'label' => __('Typography', 'wp-social-reviews'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link .wpsr-feed-avatar-right .wpsr-tiktok-feed-time, {{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
             ]
         );
 
@@ -324,7 +322,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link a' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -334,7 +332,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_title_typography',
                 'label' => __('Typography', 'wp-social-reviews'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link a',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p',
             ]
         );
 
@@ -473,7 +471,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -483,7 +481,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_header_statistics_typography',
                 'label' => __('Typography', 'wp-social-reviews'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span',
             ]
         );
 

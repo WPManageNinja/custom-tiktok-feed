@@ -3,7 +3,7 @@ use WPSocialReviews\Framework\Support\Arr;
 $mediaUrl = Arr::get($feed, 'media.url', '');
 ?>
 <div class="wpsr-feed-description-link">
-    <a href="<?php echo esc_url($mediaUrl); ?>" data-num-words-trim="<?php echo esc_attr($content_length);?>" target="_blank" rel="nofollow" class="wpsr-tiktok-feed-video-playmode">
+    <p data-num-words-trim="<?php echo esc_attr($content_length);?>" >
         <?php echo wp_kses($message, $allowed_tags); ?>
-    </a>
+    </p>
 </div>

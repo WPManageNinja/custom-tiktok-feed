@@ -410,7 +410,7 @@ class Config
                     ),
                 ),
                 'statistics' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.statistics.color.text_color', ''),
                     ),
@@ -491,7 +491,7 @@ class Config
                     ),
                 ),
                 'author' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link a, .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.author.color.text_color', '')
                     ),
@@ -518,7 +518,7 @@ class Config
                     ),
                 ),
                 'post_date' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-video-info .wpsr-feed-link .wpsr-feed-avatar-right .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_date.color.text_color', '')
                     ),
@@ -545,7 +545,7 @@ class Config
                     ),
                 ),
                 'post_content' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link a',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_content.color.text_color', '')
                     ),
