@@ -3,7 +3,13 @@ use WPSocialReviews\Framework\Support\Arr;
 $mediaUrl = Arr::get($feed, 'media.url', '');
 ?>
 <div class="wpsr-feed-description-link">
-    <p data-num-words-trim="<?php echo esc_attr($content_length);?>" >
-        <?php echo wp_kses($message, $allowed_tags); ?>
+    <p>
+        <?php
+        if ($trim_title_words) {
+            echo esc_html(wp_trim_words($message, $trim_title_words, '...'));
+        } else {
+            echo esc_html($message);
+        }
+        ?>
     </p>
 </div>

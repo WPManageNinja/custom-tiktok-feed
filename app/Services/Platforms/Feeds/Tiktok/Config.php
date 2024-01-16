@@ -67,7 +67,7 @@ class Config
                     'display_comments_count'  => Arr::get($settings,'post_settings.display_comments_count', 'true'),
                     'display_play_icon'       => Arr::get($settings,'post_settings.display_play_icon', 'true'),
                     'display_platform_icon'   => Arr::get($settings,'post_settings.display_platform_icon', 'true'),
-                    'content_length'       => (int) Arr::get($settings,'post_settings.content_length', 15),
+                    'content_length'          => (int) Arr::get($settings,'post_settings.content_length', null),
                 ),
                 'header_settings' => array(
                     'display_header'             => Arr::get($settings,'header_settings.display_header', 'true'),
