@@ -105,7 +105,7 @@ FLBuilder::register_module('WPSR_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span',
+                            'selector'  => '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p',
                             'property'  => 'color',
                         ),
                     ),
@@ -133,7 +133,7 @@ FLBuilder::register_module('WPSR_Fl_TikTok_Module', array(
                         'responsive'  			=> true,
                         'preview'				=> array(
                             'type'					=> 'css',
-                            'selector'				=> '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span'
+                            'selector'				=> '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p'
                         )
                     ),
                 ),

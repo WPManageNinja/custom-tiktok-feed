@@ -16,7 +16,7 @@
 }
 <?php } ?>
 <?php if ( ! empty( $settings->tt_header_statistics_count_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span {
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p {
     color: <?php echo FLBuilderColor::hex_or_rgb( $settings->tt_header_statistics_count_color ); ?>;
 }
 <?php } ?>
@@ -108,7 +108,7 @@ FLBuilderCSS::typography_field_rule( array(
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_header_account_statistics_counter_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics p",
 ) );
 
 

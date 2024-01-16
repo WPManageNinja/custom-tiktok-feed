@@ -53,11 +53,15 @@ class TiktokTemplateHandler
             return;
         }
         $allowed_tags = GlobalHelper::allowedHtmlTags();
+        $text = Arr::get($feed, 'text');
+        if (strlen($text) === 0) {
+            return;
+        }
 
         $html =$this->loadView('public/feeds-templates/tiktok/elements/description', array(
             'feed'          => $feed,
             'allowed_tags'  => $allowed_tags,
-            'message'       => Arr::get($feed, 'text'),
+            'message'       => $text,
             'content_length'    => Arr::get($template_meta, 'post_settings.content_length' , 15),
         ));
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
