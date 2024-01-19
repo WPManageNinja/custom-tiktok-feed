@@ -1,13 +1,13 @@
 <?php
 
-namespace NinjaTiktokFeed\Application\Hooks\Handlers;
+namespace CustomTiktokFeed\Application\Hooks\Handlers;
 
-use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
-use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config;
+use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
+use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper as GlobalHelper;
 use WPSocialReviews\App\Services\GlobalSettings;
-use NinjaTiktokFeed\Application\Traits\LoadView;
+use CustomTiktokFeed\Application\Traits\LoadView;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
 
 

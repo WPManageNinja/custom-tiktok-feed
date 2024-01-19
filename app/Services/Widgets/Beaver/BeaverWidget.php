@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaTiktokFeed\Application\Services\Widgets\Beaver;
+namespace CustomTiktokFeed\Application\Services\Widgets\Beaver;
 
 
 class BeaverWidget
@@ -22,8 +22,8 @@ class BeaverWidget
 
     public function init_widgets()
     {
-        if ( file_exists( NINJA_TIKTOK_FEED_DIR.'app/Services/Widgets/Beaver/TikTok/TikTokWidget.php' ) ) {
-            require_once NINJA_TIKTOK_FEED_DIR.'app/Services/Widgets/Beaver/TikTok/TikTokWidget.php';
+        if ( file_exists( CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/Beaver/TikTok/TikTokWidget.php' ) ) {
+            require_once CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/Beaver/TikTok/TikTokWidget.php';
         }
     }
 

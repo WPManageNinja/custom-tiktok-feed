@@ -1,11 +1,11 @@
 <?php
 
-namespace NinjaTiktokFeed\Application\Hooks\Handlers;
-use NinjaTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
+namespace CustomTiktokFeed\Application\Hooks\Handlers;
+use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
 use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler as BaseShortCodeHandler;
 use WPSocialReviews\Framework\Support\Arr;
-use NinjaTiktokFeed\Application\Traits\LoadView;
+use CustomTiktokFeed\Application\Traits\LoadView;
 
 
 
@@ -38,7 +38,7 @@ class ShortcodeHandler
         }
 
         if (sizeof(Arr::get($settings, 'feeds')) === 0) {
-            return '<p>' . __('Posts are not available!', 'ninja-tiktok-feed') . '</p>';
+            return '<p>' . __('Posts are not available!', 'custom-tiktok-feed') . '</p>';
         }
 
         //template mapping
@@ -48,7 +48,7 @@ class ShortcodeHandler
 
         $template = Arr::get($settings['feed_settings'], 'template', '');
         if (!isset($templateMapping[$template])) {
-            return '<p>' . __('No Templates found!! Please save and try again', 'ninja-tiktok-feed') . '</p>';
+            return '<p>' . __('No Templates found!! Please save and try again', 'custom-tiktok-feed') . '</p>';
         }
 
         $file = $templateMapping[$template];

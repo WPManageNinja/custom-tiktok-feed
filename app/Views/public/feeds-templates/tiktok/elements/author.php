@@ -12,7 +12,7 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
          *
          * @hooked render_tiktok_feed_statistics 10
          * */
-        do_action('ninja_tiktok_feed/tiktok_feed_statistics', $template_meta, $feed);
+        do_action('custom_tiktok_feed/tiktok_feed_statistics', $template_meta, $feed);
         if( is_array($account)){ ?>
             <div class="wpsr-tiktok-feed-author-avatar-wrapper">
                 <?php if( Arr::get($account, 'profile_image_url') && Arr::get($template_meta, 'post_settings.display_author_photo') === 'true'){ ?>
@@ -30,7 +30,7 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
                      *
                      * @hooked render_feed_date 10
                      * */
-                    do_action('ninja_tiktok_feed/tiktok_feed_date', $template_meta, $feed);
+                    do_action('custom_tiktok_feed/tiktok_feed_date', $template_meta, $feed);
                     ?>
                 </div>
             </div>

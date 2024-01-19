@@ -10,7 +10,7 @@
  */
 
 /**
- * @var $app NinjaTiktokFeed\Application\Application
+ * @var $app CustomTiktokFeed\Application\Application
  */
 
 /*******
@@ -19,28 +19,28 @@
  *
  *******/
 
-(new \NinjaTiktokFeed\Application\Hooks\Handlers\PlatformHandler())->register();
+(new \CustomTiktokFeed\Application\Hooks\Handlers\PlatformHandler())->register();
 
-$app->addAction('ninja_tiktok_feed/tiktok_feed_template_item_wrapper_before', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
-$app->addAction('ninja_tiktok_feed/tiktok_feed_author', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 2);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_description', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_media', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
-$app->addAction('ninja_tiktok_feed/tiktok_feed_icon', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
+$app->addAction('custom_tiktok_feed/tiktok_feed_template_item_wrapper_before', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
+$app->addAction('custom_tiktok_feed/tiktok_feed_author', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 2);
+$app->addAction('custom_tiktok_feed/tiktok_feed_description', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
+$app->addAction('custom_tiktok_feed/tiktok_feed_media', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
+$app->addAction('custom_tiktok_feed/tiktok_feed_icon', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
 
-$app->addAction('ninja_tiktok_feed/load_more_tiktok_button', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
+$app->addAction('custom_tiktok_feed/load_more_tiktok_button', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
 
 
 $app->addAction('wp_ajax_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
 $app->addAction('wp_ajax_nopriv_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
-$app->addAction('ninja_tiktok_feed/load_tiktok_view', 'NinjaTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@loadTikTokView', 10, 2);
+$app->addAction('custom_tiktok_feed/load_tiktok_view', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@loadTikTokView', 10, 2);
 
 
 /*
  * Oxygen Widget Init
  */
 if (class_exists('OxyEl') ) {
-    if ( file_exists( NINJA_TIKTOK_FEED_DIR.'app/Services/Widgets/Oxygen/OxygenWidget.php' ) ) {
-        new NinjaTiktokFeed\Application\Services\Widgets\Oxygen\OxygenWidget();
+    if ( file_exists( CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/Oxygen/OxygenWidget.php' ) ) {
+        new CustomTiktokFeed\Application\Services\Widgets\Oxygen\OxygenWidget();
     }
 }
 
@@ -48,7 +48,7 @@ if (class_exists('OxyEl') ) {
  * Elementor Widget Init
  */
 if (defined('ELEMENTOR_VERSION')) {
-    new NinjaTiktokFeed\Application\Services\Widgets\ElementorWidget();
+    new CustomTiktokFeed\Application\Services\Widgets\ElementorWidget();
 }
 
 
@@ -56,36 +56,36 @@ if (defined('ELEMENTOR_VERSION')) {
  * Beaver Builder Widget Init
  */
 if ( class_exists( 'FLBuilder' ) ) {
-    new NinjaTiktokFeed\Application\Services\Widgets\Beaver\BeaverWidget();
+    new CustomTiktokFeed\Application\Services\Widgets\Beaver\BeaverWidget();
 }
 
 
-add_action('rest_api_init', function () use ($app)  {
-    register_rest_route('wpsocialreviews', '/tiktok_callback/', array(
-        'methods'             => 'GET',
-        'callback'            => function (\WP_REST_Request $request) use ($app) {
-            $code = $request->get_param('code');
-            if (isset($code)) {
-                $filename = 'admin/html_code';
-                $data = [
-                    'code' => $code
-                ];
-                do_action('ninja_tiktok_feed/load_tiktok_view', $filename, $data);
-
-                die();
-            } else {
-                return rest_ensure_response(array(
-                    'success' => false,
-                    'message' => 'An error occurred while retrieving the access code. Please try again later.'
-                ));
-                die();
-            }
-        },
-        'permission_callback' => function() {
-            if(current_user_can('manage_options')) {
-                return false;
-            }
-            return true;
-        }
-    ));
-});
+//add_action('rest_api_init', function () use ($app)  {
+//    register_rest_route('wpsocialreviews', '/tiktok_callback/', array(
+//        'methods'             => 'GET',
+//        'callback'            => function (\WP_REST_Request $request) use ($app) {
+//            $code = $request->get_param('code');
+//            if (isset($code)) {
+//                $filename = 'admin/html_code';
+//                $data = [
+//                    'code' => $code
+//                ];
+//                do_action('custom_tiktok_feed/load_tiktok_view', $filename, $data);
+//
+//                die();
+//            } else {
+//                return rest_ensure_response(array(
+//                    'success' => false,
+//                    'message' => 'An error occurred while retrieving the access code. Please try again later.'
+//                ));
+//                die();
+//            }
+//        },
+//        'permission_callback' => function() {
+//            if(current_user_can('manage_options')) {
+//                return false;
+//            }
+//            return true;
+//        }
+//    ));
+//});

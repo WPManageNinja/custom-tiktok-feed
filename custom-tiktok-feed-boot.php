@@ -2,20 +2,20 @@
 
 !defined('WPINC') && die;
 
-define('NINJA_TIKTOK_FEED_VERSION', '1.0.0');
-define('NINJA_TIKTOK_FEED', true);
-define('NINJA_TIKTOK_FEED_URL', plugin_dir_url(__FILE__));
-define('NINJA_TIKTOK_FEED_DIR', plugin_dir_path(__FILE__));
+define('CUSTOM_TIKTOK_FEED_VERSION', '1.0.0');
+define('CUSTOM_TIKTOK_FEED', true);
+define('CUSTOM_TIKTOK_FEED_URL', plugin_dir_url(__FILE__));
+define('CUSTOM_TIKTOK_FEED_DIR', plugin_dir_path(__FILE__));
 
 spl_autoload_register(function ($class){
-    $match = 'NinjaTiktokFeed';
+    $match = 'CustomTiktokFeed';
     if ( ! preg_match("/\b{$match}\b/", $class)) {
         return;
     }
     $path = plugin_dir_path(__FILE__);
 
     $file = str_replace(
-        ['NinjaTiktokFeed', '\\', '/Application/'],
+        ['CustomTiktokFeed', '\\', '/Application/'],
         ['', DIRECTORY_SEPARATOR, 'app/'],
         $class
     );
@@ -26,7 +26,7 @@ spl_autoload_register(function ($class){
     }
 });
 
-class NinjaTiktokFeedDependency
+class CustomTiktokFeedDependency
 {
     public function init()
     {
@@ -43,13 +43,13 @@ class NinjaTiktokFeedDependency
 
             $class = 'notice notice-error';
 
-            $install_url_text = __('Click Here to Install the Plugin', 'ninja-tiktok-feed');
+            $install_url_text = __('Click Here to Install the Plugin', 'custom-tiktok-feed');
 
             if ($pluginInfo->action == 'activate') {
-                $install_url_text = __('Click Here to Activate the Plugin', 'ninja-tiktok-feed');
+                $install_url_text = __('Click Here to Activate the Plugin', 'custom-tiktok-feed');
             }
 
-            $message = 'Ninja TikTok Feed Requires WP Social Ninja Base Plugin, <b><a href="' . $pluginInfo->url
+            $message = 'Custom TikTok Feed Requires WP Social Ninja Base Plugin, <b><a href="' . $pluginInfo->url
                 . '">' . $install_url_text . '</a></b>';
 
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
@@ -97,7 +97,7 @@ class NinjaTiktokFeedDependency
 
 add_action('init', function ($app) {
     if( !defined('WPSOCIALREVIEWS_VERSION') ){
-        (new NinjaTiktokFeedDependency())->init();
+        (new CustomTiktokFeedDependency())->init();
     }
 });
 

@@ -1,5 +1,5 @@
 <?php
-namespace NinjaTiktokFeed\Application\Services\Widgets\Oxygen;
+namespace CustomTiktokFeed\Application\Services\Widgets\Oxygen;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
 use WPSocialReviews\App\Services\Widgets\Helper;
 

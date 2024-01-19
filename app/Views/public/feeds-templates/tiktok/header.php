@@ -67,20 +67,20 @@ if ($header_settings['display_header'] === 'true' && !empty($header)) {
                          *
                          * @hooked render_tiktok_feed_bio_description 10
                          * */
-                        do_action('ninja_tiktok_feed/tiktok_feed_bio_description', $header_settings, $header);
+                        do_action('custom_tiktok_feed/tiktok_feed_bio_description', $header_settings, $header);
 
                         /**
                          * tiktok_feed_statistics hook.
                          *
                          * @hooked render_tiktok_feed_statistics 10
                          * */
-                        do_action('ninja_tiktok_feed/tiktok_header_statistics', $header_settings, $header);
+                        do_action('custom_tiktok_feed/tiktok_header_statistics', $header_settings, $header);
 
                 echo' </div>
             </div>';
 
             if ($feed_settings['follow_button_settings']['display_follow_button'] === 'true' && $feed_settings['follow_button_settings']['follow_button_position'] !== 'footer') {
-                do_action('ninja_tiktok_feed/tiktok_follow_button', $feed_settings, $header);
+                do_action('custom_tiktok_feed/tiktok_follow_button', $feed_settings, $header);
             }
     echo '</div>
         </div>

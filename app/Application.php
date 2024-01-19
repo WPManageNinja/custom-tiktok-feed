@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaTiktokFeed\Application;
+namespace CustomTiktokFeed\Application;
 
 class Application
 {
@@ -13,8 +13,8 @@ class Application
     {
         $router = $app->router;
 
-        require_once NINJA_TIKTOK_FEED_DIR . 'app/Hooks/actions.php';
-        require_once NINJA_TIKTOK_FEED_DIR . 'app/Hooks/filters.php';
-        require_once NINJA_TIKTOK_FEED_DIR . 'app/Http/Routes/api.php';
+        require_once CUSTOM_TIKTOK_FEED_DIR . 'app/Hooks/actions.php';
+        require_once CUSTOM_TIKTOK_FEED_DIR . 'app/Hooks/filters.php';
+        require_once CUSTOM_TIKTOK_FEED_DIR . 'app/Http/Routes/api.php';
     }
 }

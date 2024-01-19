@@ -21,7 +21,7 @@ echo '<div class="wpsr-tiktok-feed-footer wpsr-tiktok-feed-follow-button-group w
 //pagination
 $feed_type = Arr::get($feed_settings, 'source_settings.feed_type', '');
 if (count($feeds) > $paginate && $layout_type !== 'carousel' && $pagination_type === 'load_more' ) {
-    do_action('ninja_tiktok_feed/load_more_tiktok_button', $feed_settings, $templateId, $paginate, $layout_type, $total, $feed_type);
+    do_action('custom_tiktok_feed/load_more_tiktok_button', $feed_settings, $templateId, $paginate, $layout_type, $total, $feed_type);
 }
 
 if (Arr::get($feed_settings, 'follow_button_settings.follow_button_position') !== 'header' && Arr::get($feed_settings, 'follow_button_settings.display_follow_button') ) {
@@ -31,7 +31,7 @@ if (Arr::get($feed_settings, 'follow_button_settings.follow_button_position') !=
      *
      * @hooked render_tiktok_like_button_html 10
      * */
-    do_action('ninja_tiktok_feed/tiktok_follow_button', $feed_settings, $header);
+    do_action('custom_tiktok_feed/tiktok_follow_button', $feed_settings, $header);
 
 }
 echo '</div>';

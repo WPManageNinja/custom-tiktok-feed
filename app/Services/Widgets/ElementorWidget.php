@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaTiktokFeed\Application\Services\Widgets;
+namespace CustomTiktokFeed\Application\Services\Widgets;
 use Elementor\Plugin as Elementor;
 
 class ElementorWidget
@@ -46,8 +46,8 @@ class ElementorWidget
     public function init_widgets()
     {
         $widgets_manager = Elementor::instance()->widgets_manager;
-        if ( file_exists( NINJA_TIKTOK_FEED_DIR.'app/Services/Widgets/TikTokWidget.php' ) ) {
-            require_once NINJA_TIKTOK_FEED_DIR.'app/Services/Widgets/TikTokWidget.php';
+        if ( file_exists( CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/TikTokWidget.php' ) ) {
+            require_once CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/TikTokWidget.php';
             $widgets_manager->register( new TikTokWidget() );
         }
     }

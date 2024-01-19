@@ -1,5 +1,5 @@
 <?php
-namespace NinjaTiktokFeed\Application\Services\Widgets;
+namespace CustomTiktokFeed\Application\Services\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -19,7 +19,7 @@ class TikTokWidget extends Widget_Base
     }
 
     public function get_title() {
-        return __( 'Social Ninja TikTok Feed', 'wp-social-reviews' );
+        return __( 'Social Custom TikTok Feed', 'wp-social-reviews' );
     }
 
     public function get_icon() {
@@ -65,7 +65,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_social_ninja_tiktok_templates',
             [
-                'label' => __('Social Ninja TikTok Feed', 'wp-social-reviews'),
+                'label' => __('Social Custom TikTok Feed', 'wp-social-reviews'),
             ]
         );
 

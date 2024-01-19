@@ -20,8 +20,8 @@ class WPSR_Fl_TikTok_Module extends FLBuilderModule {
             'name'          => __('TikTok Feeds', 'wp-social-reviews'),
             'description'   => '',
             'category'		=> __('WP Social Ninja', 'wp-social-reviews'),
-            'dir'           => NINJA_TIKTOK_FEED_DIR . 'app/Services/Widgets/Beaver/TikTok/',
-            'url'           => NINJA_TIKTOK_FEED_URL . 'app/Services/Widgets/Beaver/TikTok/',
+            'dir'           => CUSTOM_TIKTOK_FEED_DIR . 'app/Services/Widgets/Beaver/TikTok/',
+            'url'           => CUSTOM_TIKTOK_FEED_URL . 'app/Services/Widgets/Beaver/TikTok/',
             'editor_export' => true, // Defaults to true and can be omitted.
             'enabled'       => true, // Defaults to true and can be omitted.
             'partial_refresh' => true, // Set this to true to enable partial refresh.
