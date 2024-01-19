@@ -18,12 +18,20 @@ $attrs = [
 
 ?>
 <div class="wpsr-tiktok-feed-image">
-    <a <?php Helper::printInternalString(implode(' ', $attrs)); ?>>
-        <img src="<?php echo esc_url($previewImage); ?>" alt="<?php echo esc_attr($description); ?>"/>
-        <?php if ($template_meta['post_settings']['display_play_icon'] === 'true'): ?>
-            <div class="wpsr-tiktok-feed-video-play">
-                <div class="wpsr-tiktok-feed-video-play-icon"></div>
-            </div>
-        <?php endif; ?>
-    </a>
+    <?php if ($display_mode === 'tiktok'): ?>
+        <a <?php Helper::printInternalString(implode(' ', $attrs)); ?>>
+    <?php else: ?>
+        <div class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link">
+    <?php endif; ?>
+            <img src="<?php echo esc_url($previewImage); ?>" alt="<?php echo esc_attr($description); ?>"/>
+            <?php if ($template_meta['post_settings']['display_play_icon'] === 'true'): ?>
+                <div class="wpsr-tiktok-feed-video-play">
+                    <div class="wpsr-tiktok-feed-video-play-icon"></div>
+                </div>
+            <?php endif; ?>
+    <?php if ($display_mode === 'tiktok'): ?>
+        </a>
+    <?php else: ?>
+        </div>
+    <?php endif; ?>
 </div>
