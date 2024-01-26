@@ -123,10 +123,4 @@ class TiktokTemplateHandler
     {
         return Config::formatTiktokConfig($configs, $response);
     }
-    public function loadTikTokView($fileName, $data)
-    {
-        $html = $this->loadView($fileName, $data);
-        header("Content-Type: text/html");
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
-    }
 }

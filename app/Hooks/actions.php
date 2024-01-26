@@ -32,8 +32,6 @@ $app->addAction('custom_tiktok_feed/load_more_tiktok_button', 'CustomTiktokFeed\
 
 $app->addAction('wp_ajax_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
 $app->addAction('wp_ajax_nopriv_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
-$app->addAction('custom_tiktok_feed/load_tiktok_view', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@loadTikTokView', 10, 2);
-
 
 /*
  * Oxygen Widget Init
@@ -51,41 +49,9 @@ if (defined('ELEMENTOR_VERSION')) {
     new CustomTiktokFeed\Application\Services\Widgets\ElementorWidget();
 }
 
-
 /*
  * Beaver Builder Widget Init
  */
 if ( class_exists( 'FLBuilder' ) ) {
     new CustomTiktokFeed\Application\Services\Widgets\Beaver\BeaverWidget();
 }
-
-
-//add_action('rest_api_init', function () use ($app)  {
-//    register_rest_route('wpsocialreviews', '/tiktok_callback/', array(
-//        'methods'             => 'GET',
-//        'callback'            => function (\WP_REST_Request $request) use ($app) {
-//            $code = $request->get_param('code');
-//            if (isset($code)) {
-//                $filename = 'admin/html_code';
-//                $data = [
-//                    'code' => $code
-//                ];
-//                do_action('custom_tiktok_feed/load_tiktok_view', $filename, $data);
-//
-//                die();
-//            } else {
-//                return rest_ensure_response(array(
-//                    'success' => false,
-//                    'message' => 'An error occurred while retrieving the access code. Please try again later.'
-//                ));
-//                die();
-//            }
-//        },
-//        'permission_callback' => function() {
-//            if(current_user_can('manage_options')) {
-//                return false;
-//            }
-//            return true;
-//        }
-//    ));
-//});
