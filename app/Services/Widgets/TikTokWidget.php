@@ -641,7 +641,7 @@ class TikTokWidget extends Widget_Base
         $settings = $this->get_settings_for_display();
         extract($settings);
         if(!empty($tiktok_feed_template_list)){
-            $postId = absint(Arr::get($_REQUEST, 'editor_post_id'));
+            $postId  = get_the_ID();
             if ($postId) {
                 Helper::saveTemplateMeta($postId, 'tt');
             }

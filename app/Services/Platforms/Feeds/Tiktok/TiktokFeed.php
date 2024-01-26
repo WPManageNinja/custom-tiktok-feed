@@ -25,7 +25,7 @@ class TiktokFeed extends BaseFeed
     protected $cacheHandler;
     private $client_key = 'aw4cddbhcvsbl34m';
     private $client_secret = 'IV2QhJ7nxhvEthCI2QqZTTPpoNZOPZB6';
-    private $redirect_uri = 'https://wpsocialninja.com/wp-json/wpsocialreviews/tiktok_callback';
+    private $redirect_uri = 'https://wpsocialninja.com/api/tiktok_callback';
 
 
     public function __construct()

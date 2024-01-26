@@ -415,7 +415,9 @@ class TikTokWidget extends OxygenEl
 
     function init() {
         $this->El->useAJAXControls();
-        if ( isset( $_GET['ct_builder'] ) ) {
+
+        $ct_builder = $_GET['ct_builder'] ?? false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if ( $ct_builder ) {
             wp_enqueue_style(
                 'wp_social_ninja_tt',
                 WPSOCIALREVIEWS_URL . 'assets/css/wp_social_ninja_tt.css',
