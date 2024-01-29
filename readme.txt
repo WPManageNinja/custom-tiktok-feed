@@ -142,7 +142,13 @@ Custom TikTok Feed has advanced customization and styling options to organize yo
 For any queries, our support team is always open to hear from you. Contact our support forum here.
 
 == Screenshots ==
-
+1. Custom TikTok Feed by WP Social Ninja
+2. Multiple Layout Types
+3. Connect multiple accounts
+4. Combined Account Feed
+5. Create multiple templates
+6. Template Settings
+7. 100% Responsive
 
 == Changelog ==
 
