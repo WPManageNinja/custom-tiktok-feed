@@ -74,7 +74,7 @@ if ($header_settings['display_header'] === 'true' && !empty($header)) {
                          *
                          * @hooked render_tiktok_feed_statistics 10
                          * */
-                        do_action('custom_tiktok_feed/tiktok_header_statistics', $header_settings, $header);
+                        do_action('custom_tiktok_feed/tiktok_header_statistics', $header_settings, $header, $translations);
 
                 echo' </div>
             </div>';
