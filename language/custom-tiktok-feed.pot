@@ -1,0 +1,169 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom TikTok Feed\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-29 04:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.6; wp-6.4.2\n"
+"X-Domain: custom-tiktok-feed"
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:203
+msgid "Author"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:191
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:283
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:308
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:327
+msgid "Background Color:"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:136
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:155
+msgid "Bottom Spacing"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:183
+msgid "Box"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:794
+msgid "Cache cleared successfully!"
+msgstr ""
+
+#: custom-tiktok-feed-boot.php:49
+msgid "Click Here to Activate the Plugin"
+msgstr ""
+
+#: custom-tiktok-feed-boot.php:46
+msgid "Click Here to Install the Plugin"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:200
+msgid "Content"
+msgstr ""
+
+#. Description of the plugin
+msgid "Create eye-catchy and responsive TikTok feed on your WordPress website."
+msgstr ""
+
+#. Name of the plugin
+msgid "Custom TikTok Feed"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:148
+msgid "Description"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:267
+msgid "Follow Button"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:110
+msgid "Follow on TikTok"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:126
+msgid "Header"
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://wpsocialninja.com/"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:317
+msgid "Item Box"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:115
+msgid "Load More"
+msgstr ""
+
+#: app/Hooks/Handlers/ShortcodeHandler.php:51
+msgid "No Templates found!! Please save and try again"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:292
+msgid "Pagination"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:293
+msgid "Please select an Account to get feeds."
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:219
+msgid "Post Date"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:235
+msgid "Post Text"
+msgstr ""
+
+#: app/Hooks/Handlers/ShortcodeHandler.php:41
+msgid "Posts are not available!"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:258
+msgid "Read More Link Color:"
+msgstr ""
+
+#. Author of the plugin
+msgid "Social Feed - WP Social Ninja Team"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:725
+msgid "Something went wrong"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:167
+msgid "Statistics"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:331
+msgid "Success"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:269
+msgid "Successfully Disconnected!"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:359
+msgid "Template Saved Successfully!!"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:140
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:159
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:175
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:211
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:227
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:243
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:277
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:302
+msgid "Text Color:"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:43
+msgid "TikTok"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:129
+msgid "User Name"
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:56
+msgid "You are Successfully Verified."
+msgstr ""
+
+#: app/Views/public/feeds-templates/tiktok/template1.php:12
+msgid "You need to upgrade to pro to use this feature."
+msgstr ""
