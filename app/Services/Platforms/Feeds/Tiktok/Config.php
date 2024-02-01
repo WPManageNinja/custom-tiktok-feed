@@ -545,7 +545,7 @@ class Config
                     ),
                 ),
                 'post_content' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_content.color.text_color', '')
                     ),

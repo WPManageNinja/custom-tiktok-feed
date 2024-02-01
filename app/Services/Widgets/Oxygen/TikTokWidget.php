@@ -190,12 +190,12 @@ class TikTokWidget extends OxygenEl
          * Content
          *****************************/
         $tiktok_content_section = $this->addControlSection( "wpsr_tiktok_content_section", __("Content", "wp-social-reviews"), "assets/icon.png", $this );
-        $tiktok_content_section->typographySection( __('Post Text'), '.wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p', $this );
+        $tiktok_content_section->typographySection( __('Post Text'), '.wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text', $this );
         $tiktok_content_section->addPreset(
             "padding",
             "wpsr_tiktok_content_padding",
             __("Padding", "wp-social-reviews"),
-            '.wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p'
+            '.wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text'
         )->whiteList();
 
         $tiktok_author_section = $tiktok_content_section->addControlSection( "wpsr_tiktok_author_section", __("Author", "wp-social-reviews"), "assets/icon.png", $this );

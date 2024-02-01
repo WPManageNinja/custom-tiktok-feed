@@ -3,6 +3,8 @@ use WPSocialReviews\Framework\Support\Arr;
 $profileImage = Arr::get($account, 'profile_image_url', '');
 $userName = Arr::get($account, 'name', '');
 $mediaUrl = Arr::get($feed, 'media.url', '');
+$displayPlatformIcon = Arr::get($template_meta, 'post_settings.display_platform_icon');
+$profileUrl = Arr::get($account, 'profile_url', '');
 ?>
 <div class="wpsr-tiktok-feed-video-playmode wpsr-feed-link">
     <div class="wpsr-tiktok-feed-link-inner">
@@ -21,7 +23,7 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
 
                 <div class="wpsr-feed-avatar-right">
                     <?php if( Arr::get($template_meta, 'post_settings.display_author_name') === 'true'){ ?>
-                        <a class="wpsr-tiktok-feed-author-name" href="<?php echo esc_url($mediaUrl); ?>" target="_blank" rel="nofollow">
+                        <a class="wpsr-tiktok-feed-author-name" href="<?php echo esc_url($profileUrl); ?>" target="_blank" rel="nofollow">
                             <?php echo esc_html($userName); ?>
                         </a>
                     <?php }
@@ -33,6 +35,16 @@ $mediaUrl = Arr::get($feed, 'media.url', '');
                     do_action('custom_feed_for_tiktok/tiktok_feed_date', $template_meta, $feed);
                     ?>
                 </div>
+                <?php
+                if ($displayPlatformIcon === 'true') {
+                    /**
+                     * tiktok_feed_icon hook.
+                     *
+                     * @hooked TiktokTemplateHandler::renderFeedIcon 10
+                     * */
+                    do_action('custom_tiktok_feed/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-temp-2');
+                }
+                ?>
             </div>
         <?php } ?>
     </div>

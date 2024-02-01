@@ -542,7 +542,7 @@ class TiktokFeed extends BaseFeed
                             $accountDetails = $this->getAccountDetails($accountId);
                             $feed['from']['avatar_url'] = Arr::get($accountDetails, 'data.user.avatar_url', '');
                             $feed['from']['display_name'] = Arr::get($accountDetails, 'data.user.display_name', '');
-                            $feed['from']['profile_url'] = Arr::get($accountDetails, 'data.user.profile_url', '');
+                            $feed['from']['profile_url'] = Arr::get($accountDetails, 'data.user.profile_deep_link', '');
                             $feed['from']['id'] = Arr::get($accountDetails, 'data.user.open_id', '');
                         }
                     }
