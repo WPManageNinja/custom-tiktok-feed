@@ -1,6 +1,6 @@
 <?php
 
-namespace CustomTiktokFeed\Application\Traits;
+namespace CustomFeedForTiktok\Application\Traits;
 
 Trait LoadView
 {
@@ -8,7 +8,7 @@ Trait LoadView
     {
         // normalize the filename
         $fileName = str_replace(array('../', './'), '', $fileName);
-        $basePath = CUSTOM_TIKTOK_FEED_DIR . 'app/Views/';
+        $basePath = CUSTOM_FEED_FOR_TIKTOK_DIR . 'app/Views/';
 
 
         $filePath = $basePath . $fileName . '.php';

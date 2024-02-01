@@ -10,7 +10,7 @@
  */
 
 /**
- * @var $app CustomTiktokFeed\Application\Application
+ * @var $app CustomFeedForTiktok\Application\Application
  */
 
 /*******
@@ -19,15 +19,15 @@
  *
  *******/
 
-(new \CustomTiktokFeed\Application\Hooks\Handlers\PlatformHandler())->register();
+(new \CustomFeedForTiktok\Application\Hooks\Handlers\PlatformHandler())->register();
 
-$app->addAction('custom_tiktok_feed/tiktok_feed_template_item_wrapper_before', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
-$app->addAction('custom_tiktok_feed/tiktok_feed_author', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 2);
-$app->addAction('custom_tiktok_feed/tiktok_feed_description', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
-$app->addAction('custom_tiktok_feed/tiktok_feed_media', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
-$app->addAction('custom_tiktok_feed/tiktok_feed_icon', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
+$app->addAction('custom_feed_for_tiktok/tiktok_feed_template_item_wrapper_before', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
+$app->addAction('custom_feed_for_tiktok/tiktok_feed_author', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 2);
+$app->addAction('custom_feed_for_tiktok/tiktok_feed_description', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
+$app->addAction('custom_feed_for_tiktok/tiktok_feed_media', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
+$app->addAction('custom_feed_for_tiktok/tiktok_feed_icon', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
 
-$app->addAction('custom_tiktok_feed/load_more_tiktok_button', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
+$app->addAction('custom_feed_for_tiktok/load_more_tiktok_button', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderLoadMoreButton', 10, 7);
 
 
 $app->addAction('wp_ajax_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
@@ -37,8 +37,8 @@ $app->addAction('wp_ajax_nopriv_wpsr_get_more_feeds', 'ShortcodeHandler@handleLo
  * Oxygen Widget Init
  */
 if (class_exists('OxyEl') ) {
-    if ( file_exists( CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/Oxygen/OxygenWidget.php' ) ) {
-        new CustomTiktokFeed\Application\Services\Widgets\Oxygen\OxygenWidget();
+    if ( file_exists( CUSTOM_FEED_FOR_TIKTOK_DIR.'app/Services/Widgets/Oxygen/OxygenWidget.php' ) ) {
+        new CustomFeedForTiktok\Application\Services\Widgets\Oxygen\OxygenWidget();
     }
 }
 
@@ -46,12 +46,12 @@ if (class_exists('OxyEl') ) {
  * Elementor Widget Init
  */
 if (defined('ELEMENTOR_VERSION')) {
-    new CustomTiktokFeed\Application\Services\Widgets\ElementorWidget();
+    new CustomFeedForTiktok\Application\Services\Widgets\ElementorWidget();
 }
 
 /*
  * Beaver Builder Widget Init
  */
 if ( class_exists( 'FLBuilder' ) ) {
-    new CustomTiktokFeed\Application\Services\Widgets\Beaver\BeaverWidget();
+    new CustomFeedForTiktok\Application\Services\Widgets\Beaver\BeaverWidget();
 }

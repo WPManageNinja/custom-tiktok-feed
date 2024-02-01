@@ -1,5 +1,5 @@
 <?php
-namespace CustomTiktokFeed\Application\Services\Widgets\Oxygen;
+namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 
 if (!class_exists('OxyEl') ) {
     return;
@@ -15,8 +15,8 @@ class OxygenWidget
 
     public function initWidgets()
     {
-        if ( file_exists( CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/Oxygen/TikTokWidget.php' ) ) {
-            require_once CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/Oxygen/TikTokWidget.php';
+        if ( file_exists( CUSTOM_FEED_FOR_TIKTOK_DIR.'app/Services/Widgets/Oxygen/TikTokWidget.php' ) ) {
+            require_once CUSTOM_FEED_FOR_TIKTOK_DIR.'app/Services/Widgets/Oxygen/TikTokWidget.php';
         }
     }
 

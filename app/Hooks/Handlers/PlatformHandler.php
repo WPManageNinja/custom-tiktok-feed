@@ -1,8 +1,8 @@
 <?php
 
-namespace CustomTiktokFeed\Application\Hooks\Handlers;
+namespace CustomFeedForTiktok\Application\Hooks\Handlers;
 
-use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
+use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
 
 class PlatformHandler
 {

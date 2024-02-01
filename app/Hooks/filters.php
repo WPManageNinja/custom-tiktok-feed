@@ -10,10 +10,10 @@
 
 /**
  * $app
- * @var $app CustomTiktokFeed\Application\Application
+ * @var $app CustomFeedForTiktok\Application\Application
  */
 
 // tiktok feed hooks
-$app->addFilter('wpsocialreviews/get_paginated_feed_html', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@getPaginatedFeedHtml', 10, 2);
-$app->addFilter('wpsocialreviews/render_tiktok_template', 'CustomTiktokFeed\Application\Hooks\Handlers\ShortcodeHandler@renderTiktokTemplate', 10, 2);
-$app->addFilter('wpsocialreviews/format_tiktok_config', 'CustomTiktokFeed\Application\Hooks\Handlers\TiktokTemplateHandler@formatTiktokConfig', 10, 2);
+$app->addFilter('wpsocialreviews/get_paginated_feed_html', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@getPaginatedFeedHtml', 10, 2);
+$app->addFilter('wpsocialreviews/render_tiktok_template', 'CustomFeedForTiktok\Application\Hooks\Handlers\ShortcodeHandler@renderTiktokTemplate', 10, 2);
+$app->addFilter('wpsocialreviews/format_tiktok_config', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@formatTiktokConfig', 10, 2);

@@ -1,4 +1,4 @@
-=== Custom TikTok Feed ===
+=== Custom Feed for TikTok ===
 Contributors: devutpol
 Tags: Tiktok, tiktok feed, tiktok video, tiktok gallery, tiktok widgets, tiktok plugin, feed
 Requires at least: 5.6
@@ -8,17 +8,17 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Explore the power of Custom TikTok Feed, the top-notch plugin for displaying your videos with user-friendly and up-to-date features
+Explore the power of Custom Feed for TikTok, the top-notch plugin for displaying your videos with user-friendly and up-to-date features
 
 == Description ==
 
-**Custom TikTok Feed** is the most feature-rich, easy-to-use TikTok feed plugin for your WordPress website. Display your TikTok videos with the most user-friendly and updated features of Custom TikTok Feed!
+**Custom Feed for TikTok** is the most feature-rich, easy-to-use TikTok feed plugin for your WordPress website. Display your TikTok videos with the most user-friendly and updated features of Custom Feed for TikTok!
 
 This plugin is specially built for TikTok feed to give you the smoothest integration and the most handy experience for embedding your TikTok gallery on your website. You will get multiple features to showcase your TikTok feed by different template layouts, filter through hashtags, style preferences to suit your website, and many more with this TikTok feed plugin for WordPress.
 
-== Why Custom TikTok Feed is the best TikTok feed plugin for WordPress ==
+== Why Custom Feed for TikTok is the best TikTok feed plugin for WordPress ==
 
-**Easy to Integrate:** It’s easy to start with Custom TikTok Feed, without any hassle you can create an Access code to integrate your account.
+**Easy to Integrate:** It’s easy to start with Custom Feed for TikTok, without any hassle you can create an Access code to integrate your account.
 
 **Customizable:** To make your TikTok feed widget how you wish, you will get advanced features and styling options with this TikTok Feed plugin.
 
@@ -28,17 +28,17 @@ This plugin is specially built for TikTok feed to give you the smoothest integra
 
 **SEO-Friendly:** We use shortcodes and ALT tags (sourced from TikTok post captions) for SEO-friendly widgets, employ caching for top-notch performance. Boost performance with caching, and we ensure optimal integration with maintained nofollow and dofollow attributes.
 
-**Embed multiple accounts:** If you have multiple user accounts on TikTok and want to showcase them on your website, don’t worry; you can connect them all with Custom TikTok Feed.
+**Embed multiple accounts:** If you have multiple user accounts on TikTok and want to showcase them on your website, don’t worry; you can connect them all with Custom Feed for TikTok.
 
-**Third-Party Integration:** Showcasing your TikTok feed is easy with Custom TikTok Feed. It has three popular third-party integrations to create your TikTok feed widget according to your choice: **Elementor Page Builder**, **Oxygen Page Builder**, and **Beaver Page Builder**.
+**Third-Party Integration:** Showcasing your TikTok feed is easy with Custom Feed for TikTok. It has three popular third-party integrations to create your TikTok feed widget according to your choice: **Elementor Page Builder**, **Oxygen Page Builder**, and **Beaver Page Builder**.
 
-**Auto Sync:** The best user tool will always make your work easy. Custom TikTok Feed will save you from manual feed updates; its auto-sync functionality will automatically update your feeds.
+**Auto Sync:** The best user tool will always make your work easy. Custom Feed for TikTok will save you from manual feed updates; its auto-sync functionality will automatically update your feeds.
 
 **24/7 Support:** Our support team is always ready to solve your issues. For any queries or help, you will find us through the support ticket.
 
 == Benefits ==
 
-**User engagement:** The more engaging content you keep on your website, the more engagement you’ll get from your audiences. Embed TikTok feed with Custom TikTok Feed and boost user engagement.
+**User engagement:** The more engaging content you keep on your website, the more engagement you’ll get from your audiences. Embed TikTok feed with Custom Feed for TikTok and boost user engagement.
 
 **Generate sales:** Give your website an extra punch! Share your TikTok videos to reach a larger audience, enhance your brand promotion and drive more sale.
 
@@ -48,25 +48,25 @@ This plugin is specially built for TikTok feed to give you the smoothest integra
 
 **Boosts content visibility:** The best way to improve your content visibility is by showcasing your posts on your business website besides posting them on your social media profile. Embed TikTok feed on your website to get maximum visibility and a wider audience.
 
-**User-generated content:** Bring your user-generated content on your website with Custom TikTok Feed. Make your site trendy and updated using specific keywords/hashtags.
+**User-generated content:** Bring your user-generated content on your website with Custom Feed for TikTok. Make your site trendy and updated using specific keywords/hashtags.
 
-== Custom TikTok Feed free features ==
+== Custom Feed for TikTok free features ==
 
 **Layout & columns:** For displaying your TikTok feed, you will get **Grid** layout type; you can set column numbers and gaps between the columns to represent your TikTok videos.
 
-**Number of feeds:** This filter option of Custom TikTok Feed will allow you to show how many feeds you want to show.
+**Number of feeds:** This filter option of Custom Feed for TikTok will allow you to show how many feeds you want to show.
 
 **Posts order:** Display your TikTok feed with your desired post order. You have Ascending and Descending orders to choose from.
 
 **Feed Settings:** The multiple feed setting options will allow you to open your post either in default or in TikTok. Also, you can choose to display/hide the **Author Name**, **Photo**, **Description**, or **Platform Icon**.
 
-**Header Settings:** To give your TikTok feed a different look or decorate it diversely, you can use the header part of your TikTok where you have a **Profile picture**, **Account Name**; with **Custom TikTok Feed**, you are free to hide/display them in your feed.
+**Header Settings:** To give your TikTok feed a different look or decorate it diversely, you can use the header part of your TikTok where you have a **Profile picture**, **Account Name**; with **Custom Feed for TikTok**, you are free to hide/display them in your feed.
 
 **Pagination:** If you have multiple videos and want to keep them on multiple pages, you have **Pagination** option, it will let you select how many feeds you want to show on one page and customize the button text.
 
-**Feed Cache Time:** Custom TikTok Feed lets you cache the data it receives from TikTok to speed up the website. You can set the period for feed loading time.
+**Feed Cache Time:** Custom Feed for TikTok lets you cache the data it receives from TikTok to speed up the website. You can set the period for feed loading time.
 
-== Custom TikTok Feed Pro features ==
+== Custom Feed for TikTok Pro features ==
 
 **Multiple User Accounts:** The limitless features help you not just connect one account but also connect multiple TikTok accounts to your WordPress website.
 
@@ -90,15 +90,15 @@ This plugin is specially built for TikTok feed to give you the smoothest integra
 
 = What is a TikTok plugin? =
 
-A TikTok plugin will let you fetch your TikTok videos and embed them on your website. Custom TikTok Feed is the best TikTok feed plugin for your WordPress website, which will help you to showcase your TikTok feed in the simplest and easiest way.
+A TikTok plugin will let you fetch your TikTok videos and embed them on your website. Custom Feed for TikTok is the best TikTok feed plugin for your WordPress website, which will help you to showcase your TikTok feed in the simplest and easiest way.
 
 = Can you embed a TikTok video on WordPress? =
 
-Yes, embedding TikTok video is easy when you use **Custom TikTok Feed**, WordPress plugin for TikTok feed. With its easy installation process and unlimited customization options you can create a TikTok feed and embed it on your WordPress website.
+Yes, embedding TikTok video is easy when you use **Custom Feed for TikTok**, WordPress plugin for TikTok feed. With its easy installation process and unlimited customization options you can create a TikTok feed and embed it on your WordPress website.
 
 = How do I show TikTok feed on my website? =
 
-Here are the steps you need to follow to show your TikTok feed with Custom TikTok Feed:
+Here are the steps you need to follow to show your TikTok feed with Custom Feed for TikTok:
 
 Choose **TikTok** from the **Social Feed** on the “WP Social Ninja” dashboard
 Generate the Access code to connect your TikTok account
@@ -113,14 +113,14 @@ Of course, you can! You are able to connect more than one account and fetch feed
 
 = How to customize TikTok feed? =
 
-Custom TikTok Feed has advanced customization and styling options to organize your TikTok feed. Once you connect your account with Custom TikTok Feed, you can do the customization with just a few clicks; to do it you don’t need to do any code or have any advanced skills.
+Custom Feed for TikTok has advanced customization and styling options to organize your TikTok feed. Once you connect your account with Custom Feed for TikTok, you can do the customization with just a few clicks; to do it you don’t need to do any code or have any advanced skills.
 
 = Where can I get support? =
 
 For any queries, our support team is always open to hear from you. Contact our support forum here.
 
 == Screenshots ==
-1. Custom TikTok Feed by WP Social Ninja
+1. Custom Feed for TikTok by WP Social Ninja
 2. Multiple Layout Types
 3. Connect multiple accounts
 4. Combined Account Feed

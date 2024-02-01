@@ -1,5 +1,5 @@
 <?php
-namespace CustomTiktokFeed\Application\Services\Widgets\Oxygen;
+namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
 use WPSocialReviews\App\Services\Widgets\Helper;
 
@@ -8,7 +8,7 @@ class TikTokWidget extends OxygenEl
     public $css_added = false;
 
     function name() {
-        return __( "TikTok", 'wp-social-reviews' );
+        return __( "TikTok", 'custom-feed-for-tiktok' );
     }
 
     function slug() {
@@ -150,7 +150,7 @@ class TikTokWidget extends OxygenEl
         $tiktok_header_box->addStyleControls(
             array(
                 array(
-                    "name" 				=> __('Background Color','wp-social-reviews'),
+                    "name" 				=> __('Background Color','custom-feed-for-tiktok'),
                     "selector" 			=> '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper',
                     "property" 			=> 'background-color'
                 )
@@ -160,28 +160,28 @@ class TikTokWidget extends OxygenEl
         $tiktok_header_box->addPreset(
             "padding",
             "wpsr_tiktok_header_box_padding",
-            __("Padding", 'wp-social-reviews'),
+            __("Padding", 'custom-feed-for-tiktok'),
             '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper'
         )->whiteList();
 
         $tiktok_header_box->addPreset(
             "margin",
             "wpsr_tiktok_header_box_margin",
-            __("Margin", 'wp-social-reviews'),
+            __("Margin", 'custom-feed-for-tiktok'),
             '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper'
         )->whiteList();
 
         $tiktok_header_box->addPreset(
             "border",
             "wpsr_tiktok_header_box_border",
-            __("Border", 'wp-social-reviews'),
+            __("Border", 'custom-feed-for-tiktok'),
             '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper'
         )->whiteList();
 
         $tiktok_header_box->addPreset(
             "border-radius",
             "wpsr_tiktok_header_box_border_radius",
-            __("Border Radius", 'wp-social-reviews'),
+            __("Border Radius", 'custom-feed-for-tiktok'),
             '.wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper'
         )->whiteList();
 
@@ -285,7 +285,7 @@ class TikTokWidget extends OxygenEl
         $tiktok_follow_section->addStyleControls(
             array(
                 array(
-                    "name" 				=> __('Color','wp-social-reviews'),
+                    "name" 				=> __('Color','custom-feed-for-tiktok'),
                     "selector" 			=> '.wpsr-tiktok-feed-follow-button-group .wpsr-tiktok-feed-btn a',
                     "property" 			=> 'color'
                 )
@@ -294,7 +294,7 @@ class TikTokWidget extends OxygenEl
         $tiktok_follow_section->addStyleControls(
             array(
                 array(
-                    "name" 				=> __('Background Color','wp-social-reviews'),
+                    "name" 				=> __('Background Color','custom-feed-for-tiktok'),
                     "selector" 			=> '.wpsr-tiktok-feed-follow-button-group .wpsr-tiktok-feed-btn a',
                     "property" 			=> 'background-color'
                 )
@@ -303,7 +303,7 @@ class TikTokWidget extends OxygenEl
         $tiktok_follow_section->addPreset(
             "padding",
             "wpsr_tiktok_header_padding",
-            __("Padding", 'wp-social-reviews'),
+            __("Padding", 'custom-feed-for-tiktok'),
             '.wpsr-tiktok-feed-follow-button-group .wpsr-tiktok-feed-btn a'
         )->whiteList();
 
@@ -315,7 +315,7 @@ class TikTokWidget extends OxygenEl
         $pagination_section->addStyleControls(
             array(
                 array(
-                    "name" 				=> __('Background Color','wp-social-reviews'),
+                    "name" 				=> __('Background Color','custom-feed-for-tiktok'),
                     "selector" 			=>  '.wpsr_more',
                     "property" 			=> 'background-color'
                 )
@@ -325,14 +325,14 @@ class TikTokWidget extends OxygenEl
         $pagination_section->addPreset(
             "padding",
             "wpsr_tiktok_pagination_padding",
-            __("Padding", 'wp-social-reviews'),
+            __("Padding", 'custom-feed-for-tiktok'),
             '.wpsr_more'
         )->whiteList();
 
         $pagination_section->addPreset(
             "margin",
             "wpsr_tiktok_pagination_margin",
-            __("Margin", 'wp-social-reviews'),
+            __("Margin", 'custom-feed-for-tiktok'),
             '.wpsr_more'
         )->whiteList();
 
@@ -340,14 +340,14 @@ class TikTokWidget extends OxygenEl
         $pagination_section_border->addPreset(
             "border",
             "wpsr_tiktok_pagination_border",
-            __("Border", 'wp-social-reviews'),
+            __("Border", 'custom-feed-for-tiktok'),
             '.wpsr_more'
         )->whiteList();
 
         $pagination_section_border->addPreset(
             "border-radius",
             "wpsr_tiktok_pagination_radius",
-            __("Border Radius", 'wp-social-reviews'),
+            __("Border Radius", 'custom-feed-for-tiktok'),
             '.wpsr_more'
         )->whiteList();
 
@@ -359,7 +359,7 @@ class TikTokWidget extends OxygenEl
         $tiktok_box_section->addStyleControls(
             array(
                 array(
-                    "name" 				=> __('Background Color','wp-social-reviews'),
+                    "name" 				=> __('Background Color','custom-feed-for-tiktok'),
                     "selector" 			=> $selector,
                     "property" 			=> 'background-color'
                 )
@@ -369,14 +369,14 @@ class TikTokWidget extends OxygenEl
         $tiktok_box_sp->addPreset(
             "padding",
             "tiktok_box_padding",
-            __("Padding", 'wp-social-reviews'),
+            __("Padding", 'custom-feed-for-tiktok'),
             $selector
         )->whiteList();
 
         $tiktok_box_sp->addPreset(
             "margin",
             "tiktok_box_margin",
-            __("Margin", 'wp-social-reviews'),
+            __("Margin", 'custom-feed-for-tiktok'),
             $selector
         )->whiteList();
 
@@ -384,21 +384,21 @@ class TikTokWidget extends OxygenEl
         $tiktok_box_border->addPreset(
             "border",
             "tiktok_box_border",
-            __("Border", 'wp-social-reviews'),
+            __("Border", 'custom-feed-for-tiktok'),
             $selector
         )->whiteList();
 
         $tiktok_box_border->addPreset(
             "border-radius",
             "tiktok_box_radius",
-            __("Border Radius", 'wp-social-reviews'),
+            __("Border Radius", 'custom-feed-for-tiktok'),
             $selector
         )->whiteList();
     }
 
     function render( $options, $defaults, $content ) {
         if( $options['wpsr_tiktok'] == "no" ) {
-            echo '<h5 class="wpsr-template-missing">' . __("Select a template", 'wp-social-reviews') . '</h5>';
+            echo '<h5 class="wpsr-template-missing">' . __("Select a template", 'custom-feed-for-tiktok') . '</h5>';
             return;
         }
 

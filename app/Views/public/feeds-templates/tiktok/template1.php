@@ -9,7 +9,7 @@ if (!empty($feeds) && is_array($feeds)) {
 
     // Check if the feed type is user_feed and the pro version is not defined
     if ($feed_type !== 'user_feed' && !defined('WPSOCIALREVIEWS_PRO')) {
-        echo '<p>' . __('You need to upgrade to pro to use this feature.', 'custom-tiktok-feed') . '</p>';
+        echo '<p>' . __('You need to upgrade to pro to use this feature.', 'custom-feed-for-tiktok') . '</p>';
         return;
     }
 
@@ -23,7 +23,7 @@ if (!empty($feeds) && is_array($feeds)) {
     foreach ($feeds as $index => $feed) {
         if ($index >= $sinceId && $index <= $maxId) {
             if ($layout_type !== 'carousel') {
-                do_action('custom_tiktok_feed/tiktok_feed_template_item_wrapper_before', $template_meta);
+                do_action('custom_feed_for_tiktok/tiktok_feed_template_item_wrapper_before', $template_meta);
             }
             $userID = Arr::get($feed, 'user.id');
             $videoID = Arr::get($feed, 'id');
@@ -37,7 +37,7 @@ if (!empty($feeds) && is_array($feeds)) {
                          *
                          * @hooked TiktokTemplateHandler::renderFeedIcon 10
                          * */
-                        do_action('custom_tiktok_feed/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-outer');
+                        do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-outer');
                     }
                     ?>
                     <div class="wpsr-tiktok-feed-inner">
@@ -52,7 +52,7 @@ if (!empty($feeds) && is_array($feeds)) {
                                      *
                                      * @hooked TiktokTemplateHandler::renderFeedIcon 10
                                      * */
-                                    do_action('custom_tiktok_feed/tiktok_feed_icon', $class = 'wpsr-tiktok-icon');
+                                    do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon');
                                 } ?>
                                 <div>
                                     <?php
@@ -61,14 +61,14 @@ if (!empty($feeds) && is_array($feeds)) {
                                      *
                                      * @hooked TiktokTemplateHandler::renderFeedDescription 10
                                      * */
-                                    do_action('custom_tiktok_feed/tiktok_feed_description', $feed, $template_meta);
+                                    do_action('custom_feed_for_tiktok/tiktok_feed_description', $feed, $template_meta);
 
                                     /**
                                      * tiktok_feed_author hook.
                                      *
                                      * @hooked TiktokTemplateHandler::renderFeedAuthor 10
                                      * */
-                                    do_action('custom_tiktok_feed/tiktok_feed_author', $feed, $template_meta);
+                                    do_action('custom_feed_for_tiktok/tiktok_feed_author', $feed, $template_meta);
                                     ?>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@ if (!empty($feeds) && is_array($feeds)) {
                                  *
                                  * @hooked TiktokTemplateHandler::renderFeedMedia 10
                                  * */
-                                do_action('custom_tiktok_feed/tiktok_feed_media', $feed, $template_meta);
+                                do_action('custom_feed_for_tiktok/tiktok_feed_media', $feed, $template_meta);
                                 ?>
                             </div>
                         </div>

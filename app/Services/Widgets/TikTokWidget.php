@@ -1,5 +1,5 @@
 <?php
-namespace CustomTiktokFeed\Application\Services\Widgets;
+namespace CustomFeedForTiktok\Application\Services\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -19,7 +19,7 @@ class TikTokWidget extends Widget_Base
     }
 
     public function get_title() {
-        return __( 'Social Custom TikTok Feed', 'wp-social-reviews' );
+        return __( 'Social Custom Feed for TikTok', 'custom-feed-for-tiktok' );
     }
 
     public function get_icon() {
@@ -65,14 +65,14 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_social_ninja_tiktok_templates',
             [
-                'label' => __('Social Custom TikTok Feed', 'wp-social-reviews'),
+                'label' => __('Social Custom Feed for TikTok', 'custom-feed-for-tiktok'),
             ]
         );
 
         $this->add_control(
             'tiktok_feed_template_list',
             [
-                'label' => __('Select a Template', 'wp-social-reviews'),
+                'label' => __('Select a Template', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::SELECT,
                 'label_block' => true,
                 'options' => Helper::getTemplates($platforms),
@@ -88,7 +88,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_tt_feed_pagination_style',
             [
-                'label' => __('Pagination', 'wp-social-reviews'),
+                'label' => __('Pagination', 'custom-feed-for-tiktok'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -96,7 +96,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_feed_pagination_text_color',
             [
-                'label' => __('Text Color', 'wp-social-reviews'),
+                'label' => __('Text Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -109,7 +109,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'tt_pagination_background',
-                'label' => __( 'Background', 'wp-social-reviews' ),
+                'label' => __( 'Background', 'custom-feed-for-tiktok' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .wpsr_more',
             ]
@@ -119,7 +119,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_pagination_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr_more',
             ]
         );
@@ -127,7 +127,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_pagination_margin',
             [
-                'label' => esc_html__('Margin', 'wp-social-reviews'),
+                'label' => esc_html__('Margin', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -139,7 +139,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_pagination_padding',
             [
-                'label' => esc_html__('Padding', 'wp-social-reviews'),
+                'label' => esc_html__('Padding', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -160,7 +160,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_pagination_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'wp-social-reviews'),
+                'label' => esc_html__('Border Radius', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => ['px'],
@@ -186,7 +186,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_tt_button_style',
             [
-                'label' => __('Follow Button', 'wp-social-reviews'),
+                'label' => __('Follow Button', 'custom-feed-for-tiktok'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -194,7 +194,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_button_text_color',
             [
-                'label' => __('Text Color', 'wp-social-reviews'),
+                'label' => __('Text Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -206,7 +206,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_button_background_color',
             [
-                'label' => __('Background Color', 'wp-social-reviews'),
+                'label' => __('Background Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -219,7 +219,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_button_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-follow-button-group .wpsr-tiktok-feed-btn a',
             ]
         );
@@ -227,7 +227,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_button_padding',
             [
-                'label' => esc_html__('Padding', 'wp-social-reviews'),
+                'label' => esc_html__('Padding', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -244,7 +244,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_tt_content_style',
             [
-                'label' => __('Content', 'wp-social-reviews'),
+                'label' => __('Content', 'custom-feed-for-tiktok'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -252,7 +252,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_author',
             [
-                'label' => __('Author', 'wp-social-reviews'),
+                'label' => __('Author', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -260,7 +260,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_author_text_color',
             [
-                'label' => __('Name Color', 'wp-social-reviews'),
+                'label' => __('Name Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -273,7 +273,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_author_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a'
             ]
         );
@@ -281,7 +281,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_post_date',
             [
-                'label' => __('Post Date', 'wp-social-reviews'),
+                'label' => __('Post Date', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -289,7 +289,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_post_date_color',
             [
-                'label' => __('Date Color', 'wp-social-reviews'),
+                'label' => __('Date Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -302,7 +302,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_post_date_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
             ]
         );
@@ -310,7 +310,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_post_text',
             [
-                'label' => __('Post Text', 'wp-social-reviews'),
+                'label' => __('Post Text', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -318,7 +318,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_post_text_color',
             [
-                'label' => __('Text Color', 'wp-social-reviews'),
+                'label' => __('Text Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -331,7 +331,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_post_title_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p',
             ]
         );
@@ -339,7 +339,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_content_text_read_more_link_color',
             [
-                'label' => __('Read More Link Color', 'wp-social-reviews'),
+                'label' => __('Read More Link Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -355,7 +355,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_tt_header_style',
             [
-                'label' => __('Header', 'wp-social-reviews'),
+                'label' => __('Header', 'custom-feed-for-tiktok'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -363,7 +363,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_username_title',
             [
-                'label' => __('User Name', 'wp-social-reviews'),
+                'label' => __('User Name', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -371,7 +371,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_username_color',
             [
-                'label' => __('Text Color', 'wp-social-reviews'),
+                'label' => __('Text Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -384,7 +384,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_header_username_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-info-name-wrapper a',
             ]
         );
@@ -392,7 +392,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_header_username_spacing',
             [
-                'label' => esc_html__('Bottom Spacing', 'wp-social-reviews'),
+                'label' => esc_html__('Bottom Spacing', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -411,7 +411,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_description',
             [
-                'label' => __('Description', 'wp-social-reviews'),
+                'label' => __('Description', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -419,7 +419,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_description_color',
             [
-                'label' => __('Text Color', 'wp-social-reviews'),
+                'label' => __('Text Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -432,7 +432,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_header_description_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-info-description p',
             ]
         );
@@ -440,7 +440,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_header_description_spacing',
             [
-                'label' => esc_html__('Bottom Spacing', 'wp-social-reviews'),
+                'label' => esc_html__('Bottom Spacing', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -459,7 +459,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_statistics',
             [
-                'label' => __('Statistics', 'wp-social-reviews'),
+                'label' => __('Statistics', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -467,7 +467,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_statistics_color',
             [
-                'label' => __('Color', 'wp-social-reviews'),
+                'label' => __('Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -480,7 +480,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'tt_header_statistics_typography',
-                'label' => __('Typography', 'wp-social-reviews'),
+                'label' => __('Typography', 'custom-feed-for-tiktok'),
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper .wpsr-tiktok-feed-user-info-head .wpsr-tiktok-feed-header-info .wpsr-tiktok-feed-user-info .wpsr-tiktok-feed-user-statistics span',
             ]
         );
@@ -488,7 +488,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_box_title',
             [
-                'label' => __('Box', 'wp-social-reviews'),
+                'label' => __('Box', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -497,7 +497,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_bg_color',
             [
-                'label' => __('Background Color', 'wp-social-reviews'),
+                'label' => __('Background Color', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'separator' => 'before',
@@ -510,7 +510,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_header_padding',
             [
-                'label' => esc_html__('Padding', 'wp-social-reviews'),
+                'label' => esc_html__('Padding', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -530,7 +530,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_header_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'wp-social-reviews'),
+                'label' => esc_html__('Border Radius', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => ['px'],
@@ -556,7 +556,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_tt_box_style',
             [
-                'label' => __('Item Box', 'wp-social-reviews'),
+                'label' => __('Item Box', 'custom-feed-for-tiktok'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -565,7 +565,7 @@ class TikTokWidget extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'tt_box_background',
-                'label' => __( 'Background Color', 'wp-social-reviews' ),
+                'label' => __( 'Background Color', 'custom-feed-for-tiktok' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner',
             ]
@@ -574,7 +574,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_box_margin',
             [
-                'label' => esc_html__('Margin', 'wp-social-reviews'),
+                'label' => esc_html__('Margin', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -586,7 +586,7 @@ class TikTokWidget extends Widget_Base
         $this->add_responsive_control(
             'tt_box_padding',
             [
-                'label' => esc_html__('Padding', 'wp-social-reviews'),
+                'label' => esc_html__('Padding', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -607,7 +607,7 @@ class TikTokWidget extends Widget_Base
         $this->add_control(
             'tt_box_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'wp-social-reviews'),
+                'label' => esc_html__('Border Radius', 'custom-feed-for-tiktok'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => ['px'],

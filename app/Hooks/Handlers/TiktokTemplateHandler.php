@@ -1,13 +1,13 @@
 <?php
 
-namespace CustomTiktokFeed\Application\Hooks\Handlers;
+namespace CustomFeedForTiktok\Application\Hooks\Handlers;
 
-use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
-use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config;
+use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
+use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\Config;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper as GlobalHelper;
 use WPSocialReviews\App\Services\GlobalSettings;
-use CustomTiktokFeed\Application\Traits\LoadView;
+use CustomFeedForTiktok\Application\Traits\LoadView;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
 
 

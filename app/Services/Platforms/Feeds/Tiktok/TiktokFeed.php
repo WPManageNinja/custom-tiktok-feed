@@ -1,8 +1,8 @@
 <?php
 
-namespace CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok;
+namespace CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok;
 
-use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Config as TiktokConfig;
+use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\Config as TiktokConfig;
 use WPSocialReviews\App\Services\DataProtector;
 use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
@@ -40,7 +40,7 @@ class TiktokFeed extends BaseFeed
     {
         $isActive = get_option('wpsr_tiktok_connected_sources_config');
         if ($isActive) {
-            $platforms['tiktok'] = __('TikTok', 'custom-tiktok-feed');
+            $platforms['tiktok'] = __('TikTok', 'custom-feed-for-tiktok');
         }
         return $platforms;
     }
@@ -53,7 +53,7 @@ class TiktokFeed extends BaseFeed
             }
 
             wp_send_json_success([
-                'message' => __('You are Successfully Verified.', 'custom-tiktok-feed'),
+                'message' => __('You are Successfully Verified.', 'custom-feed-for-tiktok'),
                 'status' => true
             ], 200);
 
@@ -266,7 +266,7 @@ class TiktokFeed extends BaseFeed
         }
 
         wp_send_json_success([
-            'message' => __('Successfully Disconnected!', 'custom-tiktok-feed'),
+            'message' => __('Successfully Disconnected!', 'custom-feed-for-tiktok'),
         ], 200);
     }
 
@@ -290,7 +290,7 @@ class TiktokFeed extends BaseFeed
                 $data['items'] = $response;
             }
         } else {
-            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds.', 'custom-tiktok-feed');
+            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
         }
 
         $account = Arr::get($feed_settings, 'header_settings.account_to_show');
@@ -328,7 +328,7 @@ class TiktokFeed extends BaseFeed
 
         $translations = GlobalSettings::getTranslations();
         wp_send_json_success([
-            'message'          => __('Success', 'custom-tiktok-feed'),
+            'message'          => __('Success', 'custom-feed-for-tiktok'),
             'settings'         => $settings,
             'sources'          => $this->getConnectedSourceList(),
             'template_details' => $templateDetails,
@@ -356,7 +356,7 @@ class TiktokFeed extends BaseFeed
 
         $this->cacheHandler->clearPageCaches($this->platform);
         wp_send_json_success([
-            'message' => __('Template Saved Successfully!!', 'custom-tiktok-feed'),
+            'message' => __('Template Saved Successfully!!', 'custom-feed-for-tiktok'),
         ], 200);
     }
 
@@ -411,7 +411,7 @@ class TiktokFeed extends BaseFeed
 
         $totalFeed      = Arr::get($apiSettings, 'feed_count');
         $totalFeed      = !defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 10 ? 10 : $totalFeed;
-        $totalFeed      = apply_filters('custom_tiktok_feed/tiktok_feeds_limit', $totalFeed);
+        $totalFeed      = apply_filters('custom_feed_for_tiktok/tiktok_feeds_limit', $totalFeed);
         if(defined('WPSOCIALREVIEWS_PRO') && $totalFeed > 200){
             $totalFeed = 200;
         }
@@ -467,21 +467,21 @@ class TiktokFeed extends BaseFeed
 
             if($feedType === 'user_feed') {
                 $fields = 'video/list/?fields=id,title,duration,cover_image_url,embed_link,create_time';
-                $fields = apply_filters('custom_tiktok_feed/tiktok_video_api_details', $fields);
+                $fields = apply_filters('custom_feed_for_tiktok/tiktok_video_api_details', $fields);
                 $fetchUrl = $this->remoteFetchUrl . $fields ;
                 $body_args = [
                     'max_count' => $perPage
                 ];
             }
 //            elseif ($feedType === 'specific_videos') {
-//                $fields = apply_filters('custom_tiktok_feed/tiktok_specific_video_api_details', '');
+//                $fields = apply_filters('custom_feed_for_tiktok/tiktok_specific_video_api_details', '');
 //                $fetchUrl = $this->remoteFetchUrl . $fields;
 //
-//                $video_ids = apply_filters('custom_tiktok_feed/tiktok_specific_video_ids', $apiSettings);
+//                $video_ids = apply_filters('custom_feed_for_tiktok/tiktok_specific_video_ids', $apiSettings);
 //
 //                if (empty($video_ids)) {
 //                    return [
-//                        'error_message' => __('Please enter at least one video id', 'custom-tiktok-feed')
+//                        'error_message' => __('Please enter at least one video id', 'custom-feed-for-tiktok')
 //                    ];
 //                }
 //
@@ -722,7 +722,7 @@ class TiktokFeed extends BaseFeed
         } else if ($message) {
             $error = $message;
         } else {
-            $error = __('Something went wrong', 'custom-tiktok-feed');
+            $error = __('Something went wrong', 'custom-feed-for-tiktok');
         }
         return $error;
     }
@@ -791,7 +791,7 @@ class TiktokFeed extends BaseFeed
         $this->cacheHandler->clearPageCaches($this->platform);
         $this->cacheHandler->clearCache();
         wp_send_json_success([
-            'message' => __('Cache cleared successfully!', 'custom-tiktok-feed'),
+            'message' => __('Cache cleared successfully!', 'custom-feed-for-tiktok'),
         ], 200);
     }
 }

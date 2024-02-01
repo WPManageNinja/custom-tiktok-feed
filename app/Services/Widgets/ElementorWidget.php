@@ -1,6 +1,6 @@
 <?php
 
-namespace CustomTiktokFeed\Application\Services\Widgets;
+namespace CustomFeedForTiktok\Application\Services\Widgets;
 use Elementor\Plugin as Elementor;
 
 class ElementorWidget
@@ -10,19 +10,6 @@ class ElementorWidget
         add_action( 'elementor/frontend/after_register_styles', [$this, 'registerAssets'], 10);
         add_action( 'elementor/frontend/after_enqueue_styles', [$this, 'enqueueAssets'], 10);
         add_action( 'elementor/widgets/register', [$this, 'init_widgets'] );
-        add_action( 'elementor/init', [ $this, 'elementor_init' ] );
-    }
-
-    public function elementor_init() {
-        // Add element category in panel
-        Elementor::instance()->elements_manager->add_category(
-            'wp-social-reviews',
-            [
-                'title' => __( 'WP Social Ninja', 'wp-social-reviews' ),
-                'icon' => 'font',
-            ],
-            1
-        );
     }
 
     public function enqueueAssets()
@@ -46,8 +33,8 @@ class ElementorWidget
     public function init_widgets()
     {
         $widgets_manager = Elementor::instance()->widgets_manager;
-        if ( file_exists( CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/TikTokWidget.php' ) ) {
-            require_once CUSTOM_TIKTOK_FEED_DIR.'app/Services/Widgets/TikTokWidget.php';
+        if ( file_exists( CUSTOM_FEED_FOR_TIKTOK_DIR.'app/Services/Widgets/TikTokWidget.php' ) ) {
+            require_once CUSTOM_FEED_FOR_TIKTOK_DIR.'app/Services/Widgets/TikTokWidget.php';
             $widgets_manager->register( new TikTokWidget() );
         }
     }

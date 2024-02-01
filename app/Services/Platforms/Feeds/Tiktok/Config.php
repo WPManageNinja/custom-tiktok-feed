@@ -1,8 +1,8 @@
 <?php
 
-namespace CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok;
+namespace CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok;
 
-use CustomTiktokFeed\Application\Services\Platforms\Feeds\Tiktok\Helper as TiktokHelper;
+use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\Helper as TiktokHelper;
 use WPSocialReviews\Framework\Support\Arr;
 
 if (!defined('ABSPATH')) {
@@ -107,12 +107,12 @@ class Config
                 ),
                 'follow_button_settings' => array(
                     'display_follow_button'      => Arr::get($settings,'follow_button_settings.display_follow_button', 'true'),
-                    'follow_button_text'         => sanitize_text_field(Arr::get($settings,'follow_button_settings.follow_button_text', __('Follow on TikTok', 'custom-tiktok-feed'))),
+                    'follow_button_text'         => sanitize_text_field(Arr::get($settings,'follow_button_settings.follow_button_text', __('Follow on TikTok', 'custom-feed-for-tiktok'))),
                     'follow_button_position'     => Arr::get($settings,'follow_button_settings.follow_button_position', 'header'),
                 ),
                 'pagination_settings' => array(
                     'pagination_type' => Arr::get($settings,'pagination_settings.pagination_type', 'none'),
-                    'load_more_button_text' => sanitize_text_field(Arr::get($settings, 'pagination_settings.load_more_button_text', __('Load More', 'custom-tiktok-feed'))),
+                    'load_more_button_text' => sanitize_text_field(Arr::get($settings, 'pagination_settings.load_more_button_text', __('Load More', 'custom-feed-for-tiktok'))),
                     'paginate'        => (int) Arr::get($settings,'pagination_settings.paginate', 6),
                 ),
             ),
@@ -123,21 +123,21 @@ class Config
     {
         return array(
             'header' => array(
-                'title' => __('Header', 'custom-tiktok-feed'),
+                'title' => __('Header', 'custom-feed-for-tiktok'),
                 'key'  => 'header',
                 array(
-                    'title'     => __('User Name', 'custom-tiktok-feed'),
+                    'title'     => __('User Name', 'custom-feed-for-tiktok'),
                     'key'      => 'user_name',
                     'divider' => false,
                     'typography' => true,
                     'padding' => false,
                     'border' => false,
                     'slider' => array(
-                        'title' => __('Bottom Spacing', 'custom-tiktok-feed'),
+                        'title' => __('Bottom Spacing', 'custom-feed-for-tiktok'),
                     ),
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -145,18 +145,18 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Description', 'custom-tiktok-feed'),
+                    'title'     => __('Description', 'custom-feed-for-tiktok'),
                     'key'      => 'description',
                     'divider' => true,
                     'typography' => true,
                     'padding' => false,
                     'border' => false,
                     'slider' => array(
-                        'title' => __('Bottom Spacing', 'custom-tiktok-feed'),
+                        'title' => __('Bottom Spacing', 'custom-feed-for-tiktok'),
                     ),
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -164,7 +164,7 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Statistics', 'custom-tiktok-feed'),
+                    'title'     => __('Statistics', 'custom-feed-for-tiktok'),
                     'key'      => 'statistics',
                     'divider' => true,
                     'typography' => true,
@@ -172,7 +172,7 @@ class Config
                     'border' => false,
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -180,7 +180,7 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Box', 'custom-tiktok-feed'),
+                    'title'     => __('Box', 'custom-feed-for-tiktok'),
                     'key'      => 'header_box',
                     'divider' => false,
                     'typography' => false,
@@ -188,7 +188,7 @@ class Config
                     'border' => true,
                     'styles' => array(
                         array(
-                            'title'      => __('Background Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Background Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'background_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -197,10 +197,10 @@ class Config
                 )
             ),
             'content' => array(
-                'title' => __('Content', 'custom-tiktok-feed'),
+                'title' => __('Content', 'custom-feed-for-tiktok'),
                 'key'  => 'content',
                 array(
-                    'title'     => __('Author', 'custom-tiktok-feed'),
+                    'title'     => __('Author', 'custom-feed-for-tiktok'),
                     'key'      => 'author',
                     'divider' => false,
                     'typography' => true,
@@ -208,7 +208,7 @@ class Config
                     'border' => false,
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -216,7 +216,7 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Post Date', 'custom-tiktok-feed'),
+                    'title'     => __('Post Date', 'custom-feed-for-tiktok'),
                     'key'      => 'post_date',
                     'divider' => false,
                     'typography' => true,
@@ -224,7 +224,7 @@ class Config
                     'border' => false,
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -232,7 +232,7 @@ class Config
                     )
                 ),
                 array(
-                    'title'     => __('Post Text', 'custom-tiktok-feed'),
+                    'title'     => __('Post Text', 'custom-feed-for-tiktok'),
                     'key'      => 'post_content',
                     'divider' => false,
                     'typography' => true,
@@ -240,7 +240,7 @@ class Config
                     'border' => false,
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -255,7 +255,7 @@ class Config
                     'border' => false,
                     'styles' => array(
                         array(
-                            'title'      => __('Read More Link Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Read More Link Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -264,7 +264,7 @@ class Config
                 ),
             ),
             'follow_button' => array(
-                'title' => __('Follow Button', 'custom-tiktok-feed'),
+                'title' => __('Follow Button', 'custom-feed-for-tiktok'),
                 'key'  => 'follow_button',
                 array(
                     'key'      => 'follow_button',
@@ -274,13 +274,13 @@ class Config
                     'border' => false,
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
                         ),
                         array(
-                            'title'      => __('Background Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Background Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'background_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -289,7 +289,7 @@ class Config
                 )
             ),
             'pagination' => array(
-                'title' => __('Pagination', 'custom-tiktok-feed'),
+                'title' => __('Pagination', 'custom-feed-for-tiktok'),
                 'key'  => 'pagination',
                 array(
                     'key'      => 'tiktok_pagination',
@@ -299,13 +299,13 @@ class Config
                     'border' => true,
                     'styles' => array(
                         array(
-                            'title'      => __('Text Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'text_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
                         ),
                         array(
-                            'title'      => __('Background Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Background Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'background_color',
                             'type'      => 'color_picker',
                             'flex'      => true,
@@ -314,7 +314,7 @@ class Config
                 )
             ),
             'item' => array(
-                'title' => __('Item Box', 'custom-tiktok-feed'),
+                'title' => __('Item Box', 'custom-feed-for-tiktok'),
                 'key'  => 'item_box',
                 array(
                     'key'      => 'item_box',
@@ -324,7 +324,7 @@ class Config
                     'border' => true,
                     'styles' => array(
                         array(
-                            'title'      => __('Background Color:', 'custom-tiktok-feed'),
+                            'title'      => __('Background Color:', 'custom-feed-for-tiktok'),
                             'fieldKey'  => 'background_color',
                             'type'      => 'color_picker',
                             'flex'      => true,

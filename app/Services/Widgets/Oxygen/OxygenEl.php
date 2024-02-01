@@ -1,5 +1,5 @@
 <?php
-namespace CustomTiktokFeed\Application\Services\Widgets\Oxygen;
+namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 
 
 if (!class_exists('OxyEl') ) {
