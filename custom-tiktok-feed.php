@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name:  Custom TikTok Feed
-Plugin URI:   https://wpsocialninja.com/
+Plugin URI:   https://github.com/WPManageNinja/custom-tiktok-feed
 Description:  Create eye-catchy and responsive TikTok feed on your WordPress website.
 Version:      1.0.0
 Author:       Social Feed - WP Social Ninja Team
-Author URI:   https://wpsocialninja.com/
+Author URI:   https://github.com/devutpol
 License:      GPLv2 or later
 Text Domain:  custom-tiktok-feed
 Domain Path:  /language

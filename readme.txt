@@ -1,5 +1,5 @@
-=== Custom TikTok Feed by WP Social Ninja ===
-Contributors: techjewel, adreastrian, devutpol, wpmanageninja
+=== Custom TikTok Feed ===
+Contributors: devutpol
 Tags: Tiktok, tiktok feed, tiktok video, tiktok gallery, tiktok widgets, tiktok plugin, feed
 Requires at least: 5.6
 Tested up to: 6.4
@@ -15,9 +15,6 @@ Explore the power of Custom TikTok Feed, the top-notch plugin for displaying you
 **Custom TikTok Feed** is the most feature-rich, easy-to-use TikTok feed plugin for your WordPress website. Display your TikTok videos with the most user-friendly and updated features of Custom TikTok Feed!
 
 This plugin is specially built for TikTok feed to give you the smoothest integration and the most handy experience for embedding your TikTok gallery on your website. You will get multiple features to showcase your TikTok feed by different template layouts, filter through hashtags, style preferences to suit your website, and many more with this TikTok feed plugin for WordPress.
-
-👉 Join Our FB Community: [Facebook Group](https://www.facebook.com/groups/wpsocial)
-👉 Get Support: [Support Ticket](https://wpmanageninja.com/support-tickets/)
 
 == Why Custom TikTok Feed is the best TikTok feed plugin for WordPress ==
 
@@ -88,25 +85,6 @@ This plugin is specially built for TikTok feed to give you the smoothest integra
 **Display Follow Button:** Display your Follow Button as you have on your TikTok app and let your audience follow you directly from your website to get a better reach. You can place the button either in **Header**,**Footer**, or **Both**; also customize the button text.
 
 **Advanced Style Setting:** Lastly, give a vibrant look to your website with your TikTok feed with the in-depth styling options. TikTok Feed by WP Social Ninja has detailed customization for styling your TikTok feed, where you can specifically work on each element without having any technical knowledge.
-
-== Installation ==
-
-This section describes how to install the plugin and get it working.
-Install from WordPress Admin Panel:
-
-1. Login to the WordPress Admin section
-2. Go to Plugins > Add New
-3. Type “Custom TikTok Feed” on the Search bar and enter
-4. Find this plugin and Click “Install Now”
-5. Activate The Plugin
-6. Use [wp_social_ninja id="template_id" platform="tiktok"] Shortcode on your next page or post
-
-= Manual Installation =
-1. Download the plugin from the WordPress.org repository
-2. On your WordPress admin dashboard, go to Plugins > Add New > Upload Plugin
-3. Upload the downloaded Plugin (custom-tiktok-feed.zip) file and Click Install Now
-4. Activate “Custom TikTok Feed by” from your Plugins page
-5. Use Custom TikTok Feed on your site from WP Social Ninja dashboard
 
 == FAQ ==
 
