@@ -42,7 +42,7 @@ $profileUrl = Arr::get($account, 'profile_url', '');
                      *
                      * @hooked TiktokTemplateHandler::renderFeedIcon 10
                      * */
-                    do_action('custom_tiktok_feed/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-temp-2');
+                    do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-temp-2');
                 }
                 ?>
             </div>
