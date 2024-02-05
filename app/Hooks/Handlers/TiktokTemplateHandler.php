@@ -62,7 +62,7 @@ class TiktokTemplateHandler
             'feed'          => $feed,
             'allowed_tags'  => $allowed_tags,
             'message'       => $text,
-            'trim_title_words'  => Arr::get($template_meta, 'post_settings.content_length' , null),
+            'content_length'  => Arr::get($template_meta, 'post_settings.content_length' , null),
         ));
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
