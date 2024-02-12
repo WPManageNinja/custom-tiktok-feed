@@ -33,7 +33,7 @@ class TiktokTemplateHandler
         $html = $this->loadView('public/feeds-templates/tiktok/elements/item-parent-wrapper', array(
             'classes' => $classes,
         ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function renderFeedAuthor($feed = [], $template_meta = [])
@@ -44,7 +44,7 @@ class TiktokTemplateHandler
             'template_meta' => $template_meta
         ));
 
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function renderFeedDescription($feed = [], $template_meta = [])
@@ -64,7 +64,7 @@ class TiktokTemplateHandler
             'message'       => $text,
             'trim_title_words'  => Arr::get($template_meta, 'post_settings.content_length' , null),
         ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function renderFeedMedia($feed = [], $template_meta = [])
@@ -73,7 +73,7 @@ class TiktokTemplateHandler
             'feed'          => $feed,
             'template_meta' => $template_meta,
         ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function renderFeedIcon($class = '')
@@ -81,7 +81,7 @@ class TiktokTemplateHandler
         $html = $this->loadView('public/feeds-templates/tiktok/elements/icon', array(
             'class' => $class
         ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function getPaginatedFeedHtml($templateId = null, $page = null , $feed_id = null , $feed_type = '')
@@ -116,7 +116,7 @@ class TiktokTemplateHandler
             'feed' => $feed,
             'total' => $total
         ));
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function formatTiktokConfig($configs = [] , $response = [])

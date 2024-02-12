@@ -35,7 +35,7 @@ class OxygenEl extends \OxyEl
 
     function isBuilderEditorActive()
     {
-        $oxygen_iframe = $_GET['oxygen_iframe'] ?? false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $oxygen_iframe = isset($_GET['oxygen_iframe']) && sanitize_text_field(wp_unslash($_GET['oxygen_iframe']));
 
         if( $oxygen_iframe || defined('OXY_ELEMENTS_API_AJAX') ) {
             return true;

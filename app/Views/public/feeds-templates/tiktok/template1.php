@@ -9,7 +9,7 @@ if (!empty($feeds) && is_array($feeds)) {
 
     // Check if the feed type is user_feed and the pro version is not defined
     if ($feed_type !== 'user_feed' && !defined('WPSOCIALREVIEWS_PRO')) {
-        echo '<p>' . __('You need to upgrade to pro to use this feature.', 'custom-feed-for-tiktok') . '</p>';
+        echo '<p>' . esc_html__('You need to upgrade to pro to use this feature.', 'custom-feed-for-tiktok') . '</p>';
         return;
     }
 
@@ -29,7 +29,7 @@ if (!empty($feeds) && is_array($feeds)) {
             $videoID = Arr::get($feed, 'id');
             $videoLink = 'https://www.tiktok.com/@' . $userID . '/video/' . $videoID;
             ?>
-            <div role="group" class="wpsr-tiktok-feed-item <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>">
+            <div role="group" class="wpsr-tiktok-feed-item <?php echo esc_html(($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''); ?>">
                 <?php if ($feed_type === 'user_feed') {
                     if ($displayPlatformIcon === 'true') {
                         /**

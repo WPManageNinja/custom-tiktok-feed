@@ -398,7 +398,7 @@ class TikTokWidget extends OxygenEl
 
     function render( $options, $defaults, $content ) {
         if( $options['wpsr_tiktok'] == "no" ) {
-            echo '<h5 class="wpsr-template-missing">' . __("Select a template", 'custom-feed-for-tiktok') . '</h5>';
+            echo '<h5 class="wpsr-template-missing">' . esc_html__('Select a template', 'custom-feed-for-tiktok') . '</h5>';
             return;
         }
 
@@ -407,16 +407,16 @@ class TikTokWidget extends OxygenEl
         }
 
         if ( function_exists('do_oxygen_elements') ) {
-            echo do_oxygen_elements('[wp_social_ninja id="'. $options['wpsr_tiktok'] .'" platform="tiktok"]');
+            echo wp_kses_post(do_oxygen_elements('[wp_social_ninja id="' . esc_html($options['wpsr_tiktok']) . '" platform="tiktok"]'));
         } else {
-            echo do_shortcode('[wp_social_ninja id="'. $options['wpsr_tiktok'] .'" platform="tiktok"]');
+            echo wp_kses_post(do_shortcode('[wp_ social_ninja id="' . esc_html($options['wpsr_tiktok']) . '" platform="tiktok"]'));
         }
     }
 
     function init() {
         $this->El->useAJAXControls();
 
-        $ct_builder = $_GET['ct_builder'] ?? false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $ct_builder = isset($_GET['ct_builder']) && sanitize_text_field(wp_unslash($_GET['ct_builder']));
         if ( $ct_builder ) {
             wp_enqueue_style(
                 'wp_social_ninja_tt',

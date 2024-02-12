@@ -645,7 +645,7 @@ class TikTokWidget extends Widget_Base
             if ($postId) {
                 Helper::saveTemplateMeta($postId, 'tt');
             }
-            echo do_shortcode('[wp_social_ninja id="' . $tiktok_feed_template_list . '" platform="tiktok"]');
+            echo wp_kses_post(do_shortcode('[wp_social_ninja id="' . $tiktok_feed_template_list . '" platform="tiktok"]'));
         }
     }
 

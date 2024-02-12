@@ -11,6 +11,8 @@ Text Domain:  custom-feed-for-tiktok
 Domain Path:  /language
 */
 
+defined('ABSPATH') or die;
+
 if (defined('CUSTOM_FEED_FOR_TIKTOK_MAIN_FILE')) {
     return;
 }
