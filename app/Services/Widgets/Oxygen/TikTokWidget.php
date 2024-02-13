@@ -3,6 +3,10 @@ namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
 use WPSocialReviews\App\Services\Widgets\Helper;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class TikTokWidget extends OxygenEl
 {
     public $css_added = false;

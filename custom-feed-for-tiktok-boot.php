@@ -7,6 +7,10 @@ define('CUSTOM_FEED_FOR_TIKTOK', true);
 define('CUSTOM_FEED_FOR_TIKTOK_URL', plugin_dir_url(__FILE__));
 define('CUSTOM_FEED_FOR_TIKTOK_DIR', plugin_dir_path(__FILE__));
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 spl_autoload_register(function ($class){
     $match = 'CustomFeedForTiktok';
     if ( ! preg_match("/\b{$match}\b/", $class)) {

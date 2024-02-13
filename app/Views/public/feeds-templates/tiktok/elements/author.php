@@ -1,5 +1,10 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $profileImage = Arr::get($account, 'profile_image_url', '');
 $userName = Arr::get($account, 'name', '');
 $mediaUrl = Arr::get($feed, 'media.url', '');

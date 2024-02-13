@@ -1,6 +1,10 @@
 <?php
 namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 if (!class_exists('OxyEl') ) {
     return;
 }

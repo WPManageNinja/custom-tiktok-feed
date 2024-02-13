@@ -2,6 +2,10 @@
 
 use WPSocialReviews\Framework\Support\Arr;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 //carousel
 $dataAttrs  = array();
 $sliderData = array();

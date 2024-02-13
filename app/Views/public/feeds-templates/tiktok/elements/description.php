@@ -1,5 +1,10 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $mediaUrl = Arr::get($feed, 'media.url', '');
 ?>
 <div class="wpsr-feed-description-link">

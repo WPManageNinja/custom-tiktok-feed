@@ -1,6 +1,10 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $feed_type = $feed_type ? $feed_type : '';
 $feed_id =  Arr::get($feed, 'id', '');
 $load_more_button_text = Arr::get($template_meta, 'pagination_settings.load_more_button_text');

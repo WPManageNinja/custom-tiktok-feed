@@ -2,6 +2,10 @@
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $userID = Arr::get($feed, 'user.id', '');
 $feedID = Arr::get($feed, 'id', '');
 $previewImage = Arr::get($feed, 'media.preview_image_url', '');

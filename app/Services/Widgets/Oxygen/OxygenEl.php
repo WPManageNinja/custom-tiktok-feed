@@ -1,10 +1,22 @@
 <?php
 namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 
 if (!class_exists('OxyEl') ) {
     return;
 }
+
+/**
+ * Class CustomFeedForTiktok\Application\Services\Widgets\Oxygen\OxygenEl
+ *
+ * @copyright 2024 Soflyy
+ * @license   https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU General Public License v2.0
+ * @link      https://oxygenbuilder.com/license/
+ */
 
 class OxygenEl extends \OxyEl
 {

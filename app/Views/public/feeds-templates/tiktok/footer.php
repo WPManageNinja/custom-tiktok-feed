@@ -1,6 +1,10 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 echo '</div>'; // row end
 
 if( $layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) {

@@ -1,6 +1,10 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 if (!empty($feeds) && is_array($feeds)) {
     $feed_type = Arr::get($template_meta, 'source_settings.feed_type');
     $column = isset($template_meta['column_number']) ? $template_meta['column_number'] : 4;

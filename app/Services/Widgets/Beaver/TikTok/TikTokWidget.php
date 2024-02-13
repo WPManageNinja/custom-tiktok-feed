@@ -1,5 +1,18 @@
 <?php
 use WPSocialReviews\App\Services\Widgets\Helper;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Class CustomFeedForTiktok\Application\Services\Widgets\Beaver\TikTok\TikTokWidget\WPSR_Fl_TikTok_Module
+ *
+ * @copyright 2024 Fastline Media LLC
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
+ * @link      https://www.wpbeaverbuilder.com/terms-and-conditions/
+ */
+
 /**
  * This is an example module with only the basic
  * setup necessary to get it working.

@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $template_id = $settings->template_id;
 if(!$settings->template_id){
     return;
