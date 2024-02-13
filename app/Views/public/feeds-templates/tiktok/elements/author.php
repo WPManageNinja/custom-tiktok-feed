@@ -28,7 +28,7 @@ if ($displayLikesCount === 'false' && $displayCommentsCount === 'false' && $disp
          * */
         do_action('custom_feed_for_tiktok/tiktok_feed_statistics', $template_meta, $feed);
         if( is_array($account)){ ?>
-            <div class="<?php echo $classNames; ?>">
+            <div class="<?php echo esc_attr($classNames); ?>">
                 <?php if( Arr::get($account, 'profile_image_url') && Arr::get($template_meta, 'post_settings.display_author_photo') === 'true'){ ?>
                     <img src="<?php echo esc_url($profileImage); ?>" alt="<?php echo esc_attr($userName); ?>" class="wpsr-tiktok-feed-author-avatar" />
                 <?php } ?>
