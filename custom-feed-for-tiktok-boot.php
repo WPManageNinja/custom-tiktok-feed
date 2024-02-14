@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 !defined('WPINC') && die;
 
@@ -6,10 +9,6 @@ define('CUSTOM_FEED_FOR_TIKTOK_VERSION', '1.0.0');
 define('CUSTOM_FEED_FOR_TIKTOK', true);
 define('CUSTOM_FEED_FOR_TIKTOK_URL', plugin_dir_url(__FILE__));
 define('CUSTOM_FEED_FOR_TIKTOK_DIR', plugin_dir_path(__FILE__));
-
-if (!defined('ABSPATH')) {
-    exit;
-}
 
 spl_autoload_register(function ($class){
     $match = 'CustomFeedForTiktok';

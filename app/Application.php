@@ -2,6 +2,10 @@
 
 namespace CustomFeedForTiktok\Application;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
 class Application
 {
     public function __construct($app)

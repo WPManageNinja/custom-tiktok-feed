@@ -1,15 +1,4 @@
 <?php
-namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
-
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-
-if (!class_exists('OxyEl') ) {
-    return;
-}
-
 /**
  * Class CustomFeedForTiktok\Application\Services\Widgets\Oxygen\OxygenEl
  *
@@ -17,6 +6,17 @@ if (!class_exists('OxyEl') ) {
  * @license   https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU General Public License v2.0
  * @link      https://oxygenbuilder.com/license/
  */
+
+namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+
+if (!class_exists('OxyEl') ) {
+    return;
+}
 
 class OxygenEl extends \OxyEl
 {
@@ -43,17 +43,6 @@ class OxygenEl extends \OxyEl
     function button_priority()
     {
         return '';
-    }
-
-    function isBuilderEditorActive()
-    {
-        $oxygen_iframe = isset($_GET['oxygen_iframe']) && sanitize_text_field(wp_unslash($_GET['oxygen_iframe']));
-
-        if( $oxygen_iframe || defined('OXY_ELEMENTS_API_AJAX') ) {
-            return true;
-        }
-
-        return false;
     }
 
     function save_meta($options)

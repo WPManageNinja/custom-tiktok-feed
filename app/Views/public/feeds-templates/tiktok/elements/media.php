@@ -2,8 +2,8 @@
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Helper;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
 $userID = Arr::get($feed, 'user.id', '');

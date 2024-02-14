@@ -1,6 +1,9 @@
 <?php
 
 namespace CustomFeedForTiktok\Application\Hooks\Handlers;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\TiktokFeed;
 use CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok\Config;

@@ -1,25 +1,26 @@
 <?php
-use WPSocialReviews\App\Services\Widgets\Helper;
-
-if (!defined('ABSPATH')) {
-    exit;
-}
-
 /**
- * Class CustomFeedForTiktok\Application\Services\Widgets\Beaver\TikTok\TikTokWidget\WPSR_Fl_TikTok_Module
+ * Class CustomFeedForTiktok\Application\Services\Widgets\Beaver\TikTok\CFFT_Fl_TikTok_Module
  *
  * @copyright 2024 Fastline Media LLC
  * @license   https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  * @link      https://www.wpbeaverbuilder.com/terms-and-conditions/
  */
 
+use WPSocialReviews\App\Services\Widgets\Helper;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+
 /**
  * This is an example module with only the basic
  * setup necessary to get it working.
  *
- * @class WPSR_Fl_TikTok_Module
+ * @class CFFT_Fl_TikTok_Module
  */
-class WPSR_Fl_TikTok_Module extends FLBuilderModule {
+class CFFT_Fl_TikTok_Module extends FLBuilderModule {
 
     /**
      * Constructor function for the module. You must pass the
@@ -60,7 +61,7 @@ class WPSR_Fl_TikTok_Module extends FLBuilderModule {
 /**
  * Register the module and its form settings.
  */
-FLBuilder::register_module('WPSR_Fl_TikTok_Module', array(
+FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
     'general'       => array( // Tab
         'title'         => __('General', 'custom-feed-for-tiktok'), // Tab title
         'sections'      => array( // Tab Sections

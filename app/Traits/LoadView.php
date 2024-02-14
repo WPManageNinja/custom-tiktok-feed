@@ -1,6 +1,9 @@
 <?php
-
 namespace CustomFeedForTiktok\Application\Traits;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 Trait LoadView
 {
