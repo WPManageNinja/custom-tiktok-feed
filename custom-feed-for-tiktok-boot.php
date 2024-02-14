@@ -56,7 +56,19 @@ class CustomFeedForTiktokDependency
             $message = 'Custom Feed for TikTok Requires WP Social Ninja Base Plugin, <b><a href="' . $pluginInfo->url
                 . '">' . $install_url_text . '</a></b>';
 
-            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+            // Allowed HTML for wp_kses
+            $allowed_html = array(
+                'a' => array(
+                    'href' => array(),
+                    'title' => array()
+                ),
+                'b' => array(),
+                'br' => array(),
+                'em' => array(),
+                'strong' => array(),
+            );
+
+            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), wp_kses($message, $allowed_html));
         });
     }
 
