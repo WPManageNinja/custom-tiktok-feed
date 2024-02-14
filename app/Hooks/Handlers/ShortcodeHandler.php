@@ -70,6 +70,7 @@ class ShortcodeHandler
             foreach ($feeds as $index => $feed) {
                 /* translators: %s: Human-readable time difference. */
                 $create_time = Arr::get($feed, 'created_at');
+                /* translators: %s: Human-readable time difference. */
                 $feeds[$index]['time_ago'] = sprintf(__('%s ago'), human_time_diff($create_time));
             }
             $shortcodeHandler->makePopupModal($feeds, $settings['header'], $settings['feed_settings'], $templateId, $platform);
