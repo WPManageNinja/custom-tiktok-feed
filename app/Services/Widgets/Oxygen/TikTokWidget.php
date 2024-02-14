@@ -2,9 +2,10 @@
 namespace CustomFeedForTiktok\Application\Services\Widgets\Oxygen;
 use WPSocialReviews\App\Hooks\Handlers\ShortcodeHandler;
 use WPSocialReviews\App\Services\Widgets\Helper;
+use WPSocialReviews\Framework\Support\Arr;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
 class TikTokWidget extends OxygenEl
@@ -419,9 +420,15 @@ class TikTokWidget extends OxygenEl
 
     function init() {
         $this->El->useAJAXControls();
+        $post_id 	= isset($_REQUEST['post_id']) ? intval( $_REQUEST['post_id'] ) : null;
+
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce($_REQUEST['nonce'], 'oxygen-nonce-' . $post_id) ) {
+            return;
+        }
 
         $ct_builder = isset($_GET['ct_builder']) && sanitize_text_field(wp_unslash($_GET['ct_builder']));
-        if ( $ct_builder ) {
+
+        if ($ct_builder) {
             wp_enqueue_style(
                 'wp_social_ninja_tt',
                 WPSOCIALREVIEWS_URL . 'assets/css/wp_social_ninja_tt.css',
@@ -430,10 +437,11 @@ class TikTokWidget extends OxygenEl
             );
             wp_enqueue_script('wp-social-review');
             add_action('wp_footer', array(new ShortcodeHandler(), 'loadLocalizeScripts'), 99);
-            if(defined('WPSOCIALREVIEWS_PRO')){
+            if (defined('WPSOCIALREVIEWS_PRO')) {
                 wp_enqueue_style(
                     'swiper',
-                    WPSOCIALREVIEWS_PRO_URL . 'assets/libs/swiper/swiper-bundle.min.css',
+                    WPSOCIALREVIEWS_PRO_URL
+                    . 'assets/libs/swiper/swiper-bundle.min.css',
                     array(),
                     WPSOCIALREVIEWS_VERSION
                 );

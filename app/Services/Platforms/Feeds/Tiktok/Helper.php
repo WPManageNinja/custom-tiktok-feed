@@ -4,8 +4,8 @@ namespace CustomFeedForTiktok\Application\Services\Platforms\Feeds\Tiktok;
 
 use WPSocialReviews\Framework\Support\Arr;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
 class Helper

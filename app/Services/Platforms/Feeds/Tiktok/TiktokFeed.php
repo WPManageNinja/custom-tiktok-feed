@@ -11,8 +11,8 @@ use WPSocialReviews\App\Services\Platforms\Feeds\Common\FeedFilters;
 use WPSocialReviews\App\Services\Platforms\PlatformData;
 use WPSocialReviews\Framework\Support\Arr;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
 class TiktokFeed extends BaseFeed

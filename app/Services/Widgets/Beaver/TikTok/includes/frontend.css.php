@@ -1,4 +1,10 @@
-<?php if ( ! empty( $settings->tt_header_bg_color ) ) { ?>
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+if ( ! empty( $settings->tt_header_bg_color ) ) {
+?>
 .fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-header .wpsr-tiktok-feed-user-info-wrapper {
     background-color: <?php echo esc_attr( FLBuilderColor::hex_or_rgb( $settings->tt_header_bg_color )); ?>;
 }

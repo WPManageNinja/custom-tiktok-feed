@@ -2,9 +2,10 @@
 
 namespace CustomFeedForTiktok\Application\Services\Widgets\Beaver;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
+
 class BeaverWidget
 {
 

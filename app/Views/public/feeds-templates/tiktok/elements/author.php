@@ -1,8 +1,8 @@
 <?php
 use WPSocialReviews\Framework\Support\Arr;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
 $profileImage = Arr::get($account, 'profile_image_url', '');

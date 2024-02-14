@@ -3,8 +3,8 @@
 namespace CustomFeedForTiktok\Application\Services\Widgets;
 use Elementor\Plugin as Elementor;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
 class ElementorWidget

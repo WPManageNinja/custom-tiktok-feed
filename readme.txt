@@ -86,6 +86,20 @@ This plugin is specially built for TikTok feed to give you the smoothest integra
 
 **Advanced Style Setting:** Lastly, give a vibrant look to your website with your TikTok feed with the in-depth styling options. TikTok Feed by WP Social Ninja has detailed customization for styling your TikTok feed, where you can specifically work on each element without having any technical knowledge.
 
+## Third-Party Service Dependency
+
+Custom feed for TikTok relies on the TikTok Feed Display API provided by [TikTok](https://developers.tiktok.com/doc/display-api-overview/). The API is utilized for fetching TikTok feed data to display within the plugin.
+
+### Service Details:
+
+- **Service Provider:** [TikTok](https://developers.tiktok.com/doc/display-api-overview/)
+- **Terms of Use:** [TikTok Feed Display API Terms of Use](https://www.tiktok.com/legal/page/row/terms-of-service/en)
+- **Privacy Policy:** [TikTok Privacy Policy](https://www.tiktok.com/legal/page/row/privacy-policy/en
+
+Additionally, this plugin utilizes a callback URL for authentication purposes. The callback URL is hosted on [wpsocialninja.com](https://wpsocialninja.com/) at [https://wpsocialninja.com/api/tiktok_callback](https://wpsocialninja.com/api/tiktok_callback).
+
+Please review the terms of use and privacy policy of TikTok to understand how your data may be handled when using the TikTok Feed Display API, and ensure compliance with any legal requirements.
+
 == FAQ ==
 
 = What is a TikTok plugin? =

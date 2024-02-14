@@ -1,4 +1,12 @@
 <?php
+/**
+ * Class CustomFeedForTiktok\Application\Services\Widgets\TikTokWidget
+ *
+ * @copyright Elementor
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
+ * @link      https://elementor.com/terms/
+ */
+
 namespace CustomFeedForTiktok\Application\Services\Widgets;
 
 use Elementor\Widget_Base;
@@ -10,7 +18,9 @@ use Elementor\Group_Control_Background;
 use WPSocialReviews\Framework\Support\Arr;
 use WPSocialReviews\App\Services\Widgets\Helper;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 class TikTokWidget extends Widget_Base
 {
