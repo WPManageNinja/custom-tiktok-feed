@@ -89,12 +89,12 @@ class TiktokFeed extends BaseFeed
         ));
 
         if (is_wp_error($response)) {
-            throw new \Exception($response->get_error_message());
+            throw new \Exception($response->get_error_message()); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
         }
 
         if (200 !== wp_remote_retrieve_response_code($response)) {
             $errorMessage = $this->getErrorMessage($response);
-            throw new \Exception($errorMessage);
+            throw new \Exception($errorMessage); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
         }
 
         return $response;
@@ -121,12 +121,12 @@ class TiktokFeed extends BaseFeed
             ]);
 
             if (is_wp_error($response)) {
-                throw new \Exception($response->get_error_message());
+                throw new \Exception($response->get_error_message()); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
 
             if (200 !== wp_remote_retrieve_response_code($response)) {
                 $errorMessage = $this->getErrorMessage($response);
-                throw new \Exception($errorMessage);
+                throw new \Exception($errorMessage); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
 
             if (200 === wp_remote_retrieve_response_code($response)) {
