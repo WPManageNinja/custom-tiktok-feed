@@ -161,7 +161,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a',
+                            'selector'  => '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
                             'property'  => 'color',
                         ),
                     ),
@@ -171,7 +171,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'responsive'  			=> true,
                         'preview'				=> array(
                             'type'					=> 'css',
-                            'selector'				=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a'
+                            'selector'				=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name'
                         )
                     ),
                 ),
@@ -185,7 +185,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
+                            'selector'  => '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
                             'property'  => 'color',
                         ),
                     ),
@@ -195,7 +195,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'responsive'  			=> true,
                         'preview'				=> array(
                             'type'					=> 'css',
-                            'selector'				=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time'
+                            'selector'				=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span'
                         )
                     ),
                 ),

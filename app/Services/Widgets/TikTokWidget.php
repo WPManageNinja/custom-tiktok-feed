@@ -274,7 +274,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a' => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name' => 'color: {{VALUE}}'
                 ],
             ]
         );
@@ -284,7 +284,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_author_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a'
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name'
             ]
         );
 
@@ -303,7 +303,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -313,7 +313,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_date_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
             ]
         );
 

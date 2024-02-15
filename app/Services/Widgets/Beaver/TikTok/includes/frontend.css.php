@@ -42,13 +42,13 @@ if ( ! empty( $settings->tt_header_bg_color ) ) {
 
 
 <?php if ( ! empty( $settings->tt_content_author_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a{
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name{
     color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_content_author_color )); ?>;
 }
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_content_date_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time {
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span {
     color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_content_date_color )); ?>;
 }
 <?php } ?>
@@ -129,14 +129,14 @@ FLBuilderCSS::typography_field_rule( array(
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_content_author_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name",
 ) );
 
 // Post Date Typography
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_content_date_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span",
 ) );
 
 // Post Content Typography

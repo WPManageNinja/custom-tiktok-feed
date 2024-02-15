@@ -491,7 +491,7 @@ class Config
                     ),
                 ),
                 'author' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link a',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.author.color.text_color', '')
                     ),
@@ -518,7 +518,7 @@ class Config
                     ),
                 ),
                 'post_date' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-tiktok-feed-time',
+                    'selector' => $prefix.' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_date.color.text_color', '')
                     ),
