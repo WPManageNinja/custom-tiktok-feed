@@ -88,21 +88,29 @@ class TiktokTemplateHandler
     {
         $shortcodeHandler = new ShortcodeHandler();
         $template_meta = $shortcodeHandler->templateMeta($templateId, 'tiktok');
+        $templateNumber = Arr::get($template_meta, 'feed_settings.template');
         $feed = (new TiktokFeed())->getTemplateMeta($template_meta, $templateId);
         $settings = $shortcodeHandler->formatFeedSettings($feed);
         $pagination_settings = $shortcodeHandler->formatPaginationSettings($feed);
         $sinceId = (($page - 1) * $pagination_settings['paginate']);
         $maxId = ($sinceId + $pagination_settings['paginate']) - 1;
 
-        return (string)$this->loadView('public/feeds-templates/tiktok/template1', array(
-            'templateId' => $templateId,
-            'feeds' => $settings['feeds'],
+        $template_body_data = [
+            'templateId'    => $templateId,
+            'feeds'         => $settings['feeds'],
             'template_meta' => $settings['feed_settings'],
-            'paginate' => $pagination_settings['paginate'],
-            'sinceId' => $sinceId,
-            'maxId' => $maxId,
-            'translations' => GlobalSettings::getTranslations()
-        ));
+            'paginate'      => $pagination_settings['paginate'],
+            'sinceId'       => $sinceId,
+            'maxId'         => $maxId,
+            'translations'  => GlobalSettings::getTranslations()
+        ];
+
+        if ($templateNumber === 'template2') {
+            $html = apply_filters('wpsocialreviews/add_tiktok_feed_template', $template_body_data);
+            return $html;
+        } else {
+            return (string)$this->loadView('public/feeds-templates/tiktok/template1', $template_body_data);
+        }
     }
 
     public function renderLoadMoreButton ($template_meta = null, $templateId = null, $paginate = null, $layout_type = "", $total = null, $feed_type = "", $feed = null)
