@@ -23,6 +23,7 @@
 
 $app->addAction('custom_feed_for_tiktok/tiktok_feed_template_item_wrapper_before', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderTemplateItemWrapper');
 $app->addAction('custom_feed_for_tiktok/tiktok_feed_author', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthor', 10, 2);
+$app->addAction('custom_feed_for_tiktok/tiktok_feed_author_name', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedAuthorName', 10, 2);
 $app->addAction('custom_feed_for_tiktok/tiktok_feed_description', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedDescription', 10, 2);
 $app->addAction('custom_feed_for_tiktok/tiktok_feed_media', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedMedia', 10, 2);
 $app->addAction('custom_feed_for_tiktok/tiktok_feed_icon', 'CustomFeedForTiktok\Application\Hooks\Handlers\TiktokTemplateHandler@renderFeedIcon', 10, 1);
