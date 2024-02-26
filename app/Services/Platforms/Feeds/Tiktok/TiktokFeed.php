@@ -407,6 +407,12 @@ class TiktokFeed extends BaseFeed
     {
         $accessToken    = $this->protector->decrypt($account['access_token']) ? $this->protector->decrypt($account['access_token']) : $account['access_token'];
         $accountId         = Arr::get($account, 'open_id');
+        $account = [
+            'access_token' => $accessToken,
+            'open_id' => $accountId
+        ];
+        $access_token = $this->maybeRefreshToken($account);
+        $accessToken = $access_token;
         $feedType       = Arr::get($apiSettings, 'feed_type', 'user_feed');
 
         $totalFeed      = Arr::get($apiSettings, 'feed_count');
@@ -542,7 +548,7 @@ class TiktokFeed extends BaseFeed
                             $accountDetails = $this->getAccountDetails($accountId);
                             $feed['from']['avatar_url'] = Arr::get($accountDetails, 'data.user.avatar_url', '');
                             $feed['from']['display_name'] = Arr::get($accountDetails, 'data.user.display_name', '');
-                            $feed['from']['profile_url'] = Arr::get($accountDetails, 'data.user.profile_url', '');
+                            $feed['from']['profile_url'] = Arr::get($accountDetails, 'data.user.profile_deep_link', '');
                             $feed['from']['id'] = Arr::get($accountDetails, 'data.user.open_id', '');
                         }
                     }

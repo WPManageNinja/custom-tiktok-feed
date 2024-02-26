@@ -51,11 +51,11 @@ class ShortcodeHandler
         ];
 
         $template = Arr::get($settings['feed_settings'], 'template', '');
-        if (!isset($templateMapping[$template])) {
-            return '<p>' . __('No Templates found!! Please save and try again', 'custom-feed-for-tiktok') . '</p>';
-        }
+//        if (!isset($templateMapping[$template])) {
+//            return '<p>' . __('No Templates found!! Please save and try again', 'custom-feed-for-tiktok') . '</p>';
+//        }
 
-        $file = $templateMapping[$template];
+//        $file = $templateMapping[$template];
 
         $layout = Arr::get($settings, 'feed_settings.layout_type');
         do_action('wp_social_review_loading_layout_' . $layout, $templateId, $settings);
@@ -82,6 +82,17 @@ class ShortcodeHandler
 
         $html = '';
 
+        $template_body_data = [
+            'templateId'    => $templateId,
+            'feeds'         => $settings['feeds'],
+            'template_meta' => $settings['feed_settings'],
+            'paginate'      => $pagination_settings['paginate'],
+            'sinceId'       => $pagination_settings['sinceId'],
+            'maxId'         => $pagination_settings['maxId'],
+            'pagination_settings' => $pagination_settings,
+            'translations'  => $translations
+        ];
+
         $html .=  $this->loadView('public/feeds-templates/tiktok/header', array(
             'templateId'    => $templateId,
             'template'      => $template,
@@ -92,16 +103,11 @@ class ShortcodeHandler
             'translations'  => $translations
         ));
 
-        $html .= $this->loadView($file, array(
-            'templateId'    => $templateId,
-            'feeds'         => $settings['feeds'],
-            'template_meta' => $settings['feed_settings'],
-            'paginate'      => $pagination_settings['paginate'],
-            'sinceId'       => $pagination_settings['sinceId'],
-            'maxId'         => $pagination_settings['maxId'],
-            'pagination_settings' => $pagination_settings,
-            'translations'  => $translations
-        ));
+        if (defined('WPSOCIALREVIEWS_PRO') && $template !== 'template1') {
+            $html .= apply_filters('wpsocialreviews/add_tiktok_feed_template', $template_body_data);
+        } else {
+            $html .= $this->loadView('public/feeds-templates/tiktok/template1', $template_body_data);
+        }
 
         $html .= $this->loadView('public/feeds-templates/tiktok/footer', array(
             'templateId'      => $templateId,

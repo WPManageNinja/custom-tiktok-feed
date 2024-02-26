@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 $mediaUrl = Arr::get($feed, 'media.url', '');
 ?>
 <div class="wpsr-feed-description-link">
-    <p>
+    <p class="wpsr-feed-description-text wpsr-tiktok-feed-content">
         <?php
-        if ($trim_title_words) {
-            echo esc_html(wp_trim_words($message, $trim_title_words, '...'));
+        if ($content_length) {
+            echo esc_html(wp_trim_words($message, $content_length, '...'));
         } else {
             echo esc_html($message);
         }

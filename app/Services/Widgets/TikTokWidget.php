@@ -332,7 +332,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -342,7 +342,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_title_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text',
             ]
         );
 

@@ -54,9 +54,8 @@ if ( ! empty( $settings->tt_header_bg_color ) ) {
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_post_content_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p{
-    color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_post_content_color )); ?>;
-}
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text{
+    color: <?php echo FLBuilderColor::hex_or_rgb( $settings->tt_post_content_color ); ?>;
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_post_content_rm_link_color ) ) { ?>
@@ -143,7 +142,7 @@ FLBuilderCSS::typography_field_rule( array(
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_post_content_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link p",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text",
 ) );
 
 // Load More Typography

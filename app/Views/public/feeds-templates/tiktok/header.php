@@ -24,6 +24,7 @@ $feed_type = Arr::get($feed_settings, 'source_settings.feed_type');
 
 // wrapper classes
 $classes   = array('wpsr-tiktok-feed-wrapper', 'wpsr-feed-wrap', 'wpsr_content');
+$classes[] = $template === 'template2' ? 'wpsr-tiktok-feed-template2' : '';
 $classes[] = 'wpsr-tiktok-feed-' . esc_attr($template) . '';
 $classes[] = 'wpsr-tiktok-' . esc_attr($feed_type) . '';
 $classes[] = $layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO') ? 'wpsr-tiktok-feed-slider-activate' : '';

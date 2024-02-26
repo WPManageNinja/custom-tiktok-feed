@@ -33,6 +33,7 @@ $app->addAction('custom_feed_for_tiktok/load_more_tiktok_button', 'CustomFeedFor
 $app->addAction('wp_ajax_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
 $app->addAction('wp_ajax_nopriv_wpsr_get_more_feeds', 'ShortcodeHandler@handleLoadMoreAjax');
 
+
 /*
  * Oxygen Widget Init
  */
