@@ -30,64 +30,77 @@ if (!empty($feeds) && is_array($feeds)) {
             $videoLink = 'https://www.tiktok.com/@' . $userID . '/video/' . $videoID;
             ?>
             <div role="group" class="wpsr-tiktok-feed-item <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>">
-                <?php if ($feed_type === 'user_feed') {
-                    if ($displayPlatformIcon === 'true') {
-                        /**
-                         * tiktok_feed_icon hook.
-                         *
-                         * @hooked TiktokTemplateHandler::renderFeedIcon 10
-                         * */
-                        do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-outer');
-                    }
+                <div class="wpsr-tiktok-feed-playmode wpsr-tiktok-feed-inner" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>" data-template-id="<?php echo esc_attr($templateId); ?>">
+                    <div class="wpsr-tiktok-feed-image">
+                    <?php
+                    /**
+                     * tiktok_feed_media hook.
+                     *
+                     * @hooked TiktokTemplateHandler::renderFeedMedia 10
+                     * */
+                    do_action('custom_feed_for_tiktok/tiktok_feed_media', $feed, $template_meta);
                     ?>
-                    <div class="wpsr-tiktok-feed-inner">
-                        <div class="wpsr-tiktok-feed-statistics">
-                            <a href="<?php echo esc_url($videoLink); ?>" class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link" target="_blank" rel="nofollow">
-                            </a>
-
-                            <div class="wpsr-tiktok-icon-position" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>" data-template-id="<?php echo esc_attr($templateId); ?>">
-                                <?php if ($displayPlatformIcon === 'true') {
-                                    /**
-                                     * tiktok_feed_icon hook.
-                                     *
-                                     * @hooked TiktokTemplateHandler::renderFeedIcon 10
-                                     * */
-                                    do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon');
-                                } ?>
-                                <div>
-                                    <?php
-                                    /**
-                                     * tiktok_feed_description hook.
-                                     *
-                                     * @hooked TiktokTemplateHandler::renderFeedDescription 10
-                                     * */
-                                    do_action('custom_feed_for_tiktok/tiktok_feed_description', $feed, $template_meta);
-
-                                    /**
-                                     * tiktok_feed_author hook.
-                                     *
-                                     * @hooked TiktokTemplateHandler::renderFeedAuthor 10
-                                     * */
-                                    do_action('custom_feed_for_tiktok/tiktok_feed_author', $feed, $template_meta);
-                                    ?>
+                    <?php if ($feed_type === 'user_feed') { ?>
+                        <div class="wpsr-tiktok-feed-content-box">
+                            <?php if ($template_meta['post_settings']['display_play_icon'] === 'true'): ?>
+                                <div class="wpsr-tiktok-feed-video-play">
+                                    <div class="wpsr-tiktok-feed-video-play-icon"></div>
                                 </div>
-                            </div>
-                        </div>
+                            <?php endif; ?>
 
-                        <div class="wpsr-tiktok-feed-content-wrapper">
-                            <div class="wpsr-tiktok-feed-playmode wpsr-tiktok-feed-inner" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>" data-template-id="<?php echo esc_attr($templateId); ?>">
-                                <?php
+                            <?php
+                            if ($displayPlatformIcon === 'true') {
                                 /**
-                                 * tiktok_feed_media hook.
+                                 * tiktok_feed_icon hook.
                                  *
-                                 * @hooked TiktokTemplateHandler::renderFeedMedia 10
+                                 * @hooked TiktokTemplateHandler::renderFeedIcon 10
                                  * */
-                                do_action('custom_feed_for_tiktok/tiktok_feed_media', $feed, $template_meta);
-                                ?>
-                            </div>
+                                 do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon-outer');
+                            }
+
+                            /**
+                             * tiktok_feed_statistics hook.
+                             *
+                             * @hooked render_tiktok_feed_statistics 10
+                             * */
+                            do_action('custom_feed_for_tiktok/tiktok_feed_statistics', $template_meta, $feed);
+
+                            /**
+                             * tiktok_feed_author hook.
+                             *
+                             * @hooked TiktokTemplateHandler::renderFeedAuthor 10
+                             * */
+                            do_action('custom_feed_for_tiktok/tiktok_feed_author', $feed, $template_meta);
+                            ?>
                         </div>
+                    <?php } ?>
                     </div>
-                <?php } ?>
+                    <div class="wpsr-tiktok-feed-image-hover-over-content">
+                        <?php
+                        if ($displayPlatformIcon === 'true') {
+                            /**
+                             * tiktok_feed_icon hook.
+                             *
+                             * @hooked TiktokTemplateHandler::renderFeedIcon 10
+                             * */
+                             do_action('custom_feed_for_tiktok/tiktok_feed_icon', $class = 'wpsr-tiktok-icon');
+                        }
+                        /**
+                         * tiktok_feed_description hook.
+                         *
+                         * @hooked TiktokTemplateHandler::renderFeedDescription 10
+                         * */
+                        do_action('custom_feed_for_tiktok/tiktok_feed_description', $feed, $template_meta);
+
+                        /**
+                         * tiktok_feed_author_name hook.
+                         *
+                         * @hooked render_author_name 10
+                         * */
+                        do_action('custom_feed_for_tiktok/tiktok_feed_author_name', $feed, $template_meta);
+                        ?>
+                    </div>
+                </div>
             </div>
             <?php if ($layout_type !== 'carousel') { ?>
                 </div>

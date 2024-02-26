@@ -47,6 +47,16 @@ class TiktokTemplateHandler
         echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
     }
 
+    public function renderFeedAuthorName($feed = [], $template_meta = [])
+    {
+        $html = $this->loadView('public/feeds-templates/tiktok/elements/author-name', array(
+            'account'       => Arr::get($feed, 'user'),
+            'template_meta' => $template_meta
+        ));
+
+        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+    }
+
     public function renderFeedDescription($feed = [], $template_meta = [])
     {
         if (Arr::get($template_meta, 'post_settings.display_description') === 'false') {
