@@ -57,7 +57,7 @@ class TiktokTemplateHandler
             'template_meta' => $template_meta
         ));
 
-        echo $html; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+        echo wp_kses_post($html);
     }
 
     public function renderFeedDescription($feed = [], $template_meta = [])
