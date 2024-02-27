@@ -195,12 +195,12 @@ class TikTokWidget extends OxygenEl
          * Content
          *****************************/
         $tiktok_content_section = $this->addControlSection( "wpsr_tiktok_content_section", __("Content", "wp-social-reviews"), "assets/icon.png", $this );
-        $tiktok_content_section->typographySection( __('Post Text'), '.wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text', $this );
+        $tiktok_content_section->typographySection( __('Post Text'), '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text', $this );
         $tiktok_content_section->addPreset(
             "padding",
             "wpsr_tiktok_content_padding",
             __("Padding", "wp-social-reviews"),
-            '.wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text'
+            '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text'
         )->whiteList();
 
         $tiktok_author_section = $tiktok_content_section->addControlSection( "wpsr_tiktok_author_section", __("Author", "wp-social-reviews"), "assets/icon.png", $this );
@@ -208,28 +208,28 @@ class TikTokWidget extends OxygenEl
             array(
                 array(
                     "name" 				=> __('Color', "wp-social-reviews"),
-                    "selector" 			=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                     "property" 			=> 'color',
                 ),
                 array(
                     "name" 				=> __('Font Size', "wp-social-reviews"),
-                    "selector" 			=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                     "property" 			=> 'font-size',
                     'control_type' 		=> 'slider-measurebox'
                 ),
                 array(
                     "name" 				=> __('Font Weight', "wp-social-reviews"),
-                    "selector" 			=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                     "property" 			=> 'font-weight',
                 ),
                 array(
                     "name" 				=> __('Line Height', "wp-social-reviews"),
-                    "selector" 			=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                     "property" 			=> 'line-height',
                 ),
                 array(
                     "name" 				=> __('Bottom Spacing', "wp-social-reviews"),
-                    "selector" 			=> '.wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                     "property" 			=> 'margin-bottom',
                     "control_type" 		=> 'slider-measurebox',
                     'unit' 				=> 'px'
@@ -242,28 +242,28 @@ class TikTokWidget extends OxygenEl
             array(
                 array(
                     "name" 				=> __('Color', "wp-social-reviews"),
-                    "selector" 			=> ' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                     "property" 			=> 'color',
                 ),
                 array(
                     "name" 				=> __('Font Size', "wp-social-reviews"),
-                    "selector" 			=> ' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                     "property" 			=> 'font-size',
                     'control_type' 		=> 'slider-measurebox'
                 ),
                 array(
                     "name" 				=> __('Font Weight', "wp-social-reviews"),
-                    "selector" 			=> ' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                     "property" 			=> 'font-weight',
                 ),
                 array(
                     "name" 				=> __('Line Height', "wp-social-reviews"),
-                    "selector" 			=> ' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                     "property" 			=> 'line-height',
                 ),
                 array(
                     "name" 				=> __('Bottom Spacing', "wp-social-reviews"),
-                    "selector" 			=> ' .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
+                    "selector" 			=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                     "property" 			=> 'margin-bottom',
                     "control_type" 		=> 'slider-measurebox',
                     'unit' 				=> 'px'

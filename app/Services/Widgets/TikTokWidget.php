@@ -274,7 +274,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name' => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name' => 'color: {{VALUE}}'
                 ],
             ]
         );
@@ -284,7 +284,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_author_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link .wpsr-tiktok-feed-author-name'
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name'
             ]
         );
 
@@ -303,7 +303,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span' => 'color: {{VALUE}}',
+                    '{{WRAPPER}}.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -313,7 +313,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_date_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner > .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-link span',
+                'selector' => '{{WRAPPER}}.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
             ]
         );
 
@@ -332,7 +332,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -342,7 +342,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_title_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-statistics .wpsr-tiktok-icon-position .wpsr-feed-description-link .wpsr-feed-description-text',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
             ]
         );
 
