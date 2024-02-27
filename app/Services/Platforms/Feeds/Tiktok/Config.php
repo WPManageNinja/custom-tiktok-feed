@@ -491,7 +491,7 @@ class Config
                     ),
                 ),
                 'author' => array(
-                    'selector' => $prefix.'.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name , .wpsr-tiktok-feed-wrapper.wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
+                    'selector' => $prefix.'.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.author.color.text_color', '')
                     ),
@@ -518,7 +518,7 @@ class Config
                     ),
                 ),
                 'post_date' => array(
-                    'selector' => $prefix.'.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-wrapper.wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
+                    'selector' => $prefix.'.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_date.color.text_color', '')
                     ),
@@ -545,7 +545,7 @@ class Config
                     ),
                 ),
                 'post_content' => array(
-                    'selector' => $prefix.'.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text, .wpsr-tiktok-feed-wrapper.wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
+                    'selector' => $prefix.'.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
                     'color'  => array(
                         'text_color' => Arr::get($settings,'styles.post_content.color.text_color', '')
                     ),
@@ -707,7 +707,7 @@ class Config
 
                 ),
                 'item_box' => array(
-                    'selector' => $prefix.' .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner, .wpsr-tiktok-feed-wrapper.wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner',
+                    'selector' => $prefix.'.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner',
                     'color'  => array(
                         'background_color' => Arr::get($settings,'styles.item_box.color.background_color', ''),
                     ),

@@ -42,22 +42,19 @@ if ( ! empty( $settings->tt_header_bg_color ) ) {
 
 
 <?php if ( ! empty( $settings->tt_content_author_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name,
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name {
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name {
     color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_content_author_color )); ?>;
 }
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_content_date_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time,
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time{
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time{
     color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_content_date_color )); ?>;
 }
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_post_content_color ) ) { ?>
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text,
-.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text{
+.fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text{
     color: <?php echo FLBuilderColor::hex_or_rgb( $settings->tt_post_content_color ); ?>;
 <?php } ?>
 
@@ -92,8 +89,7 @@ if ( ! empty( $settings->tt_header_bg_color ) ) {
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_box_bg_color ) ) { ?>
-    .fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner,
-    .fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner{
+    .fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner{
         background-color: <?php echo FLBuilderColor::hex_or_rgb( $settings->tt_box_bg_color ); ?>;
 <?php } ?>
 
@@ -131,21 +127,21 @@ FLBuilderCSS::typography_field_rule( array(
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_content_author_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .fl-node-$id .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name",
 ) );
 
 // Post Date Typography
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_content_date_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .fl-node-$id .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time",
 ) );
 
 // Post Content Typography
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_post_content_typography',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text, .fl-node-$id .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text",
 ) );
 
 // Load More Typography
@@ -159,5 +155,5 @@ FLBuilderCSS::typography_field_rule( array(
 FLBuilderCSS::typography_field_rule( array(
 	'settings'		=> $settings,
 	'setting_name' 	=> 'tt_box_bg_color',
-	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner, .fl-node-$id .wpsr-tiktok-feed-wrapper.wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner",
+	'selector' 		=> ".fl-node-$id .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner",
 ) );

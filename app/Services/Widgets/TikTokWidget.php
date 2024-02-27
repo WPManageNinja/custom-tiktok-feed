@@ -29,7 +29,7 @@ class TikTokWidget extends Widget_Base
     }
 
     public function get_title() {
-        return __( 'Social Custom Feed for TikTok', 'custom-feed-for-tiktok' );
+        return __( 'Social Ninja TikTok Feed', 'custom-feed-for-tiktok' );
     }
 
     public function get_icon() {
@@ -75,7 +75,7 @@ class TikTokWidget extends Widget_Base
         $this->start_controls_section(
             'section_social_ninja_tiktok_templates',
             [
-                'label' => __('Social Custom Feed for TikTok', 'custom-feed-for-tiktok'),
+                'label' => __('Social Ninja TikTok Feed', 'custom-feed-for-tiktok'),
             ]
         );
 
@@ -274,7 +274,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name' => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name' => 'color: {{VALUE}}'
                 ],
             ]
         );
@@ -284,7 +284,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_author_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name'
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name'
             ]
         );
 
@@ -303,7 +303,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}}.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -313,7 +313,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_date_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}}.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
             ]
         );
 
@@ -332,7 +332,7 @@ class TikTokWidget extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -342,19 +342,7 @@ class TikTokWidget extends Widget_Base
             [
                 'name' => 'tt_post_title_typography',
                 'label' => __('Typography', 'custom-feed-for-tiktok'),
-                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
-            ]
-        );
-
-        $this->add_control(
-            'tt_content_text_read_more_link_color',
-            [
-                'label' => __('Read More Link Color', 'custom-feed-for-tiktok'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .wpsr_add_read_more .wpsr_read_more, .wpsr_add_read_more .wpsr_read_less' => 'color: {{VALUE}}; text-decoration-color: {{VALUE}};',
-                ],
+                'selector' => '{{WRAPPER}} .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
             ]
         );
 

@@ -161,7 +161,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
+                            'selector'  => '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name',
                             'property'  => 'color',
                         ),
                     ),
@@ -171,7 +171,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'responsive'  			=> true,
                         'preview'				=> array(
                             'type'					=> 'css',
-                            'selector'				=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name'
+                            'selector'				=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-author-name'
                         )
                     ),
                 ),
@@ -185,7 +185,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
+                            'selector'  => '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time',
                             'property'  => 'color',
                         ),
                     ),
@@ -195,7 +195,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'responsive'  			=> true,
                         'preview'				=> array(
                             'type'					=> 'css',
-                            'selector'				=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time'
+                            'selector'				=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-time'
                         )
                     ),
                 ),
@@ -209,7 +209,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
+                            'selector'  => '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text',
                             'property'  => 'color',
                         ),
                     ),
@@ -229,7 +229,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'responsive'  			=> true,
                         'preview'				=> array(
                             'type'					=> 'css',
-                            'selector'				=> '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text, .wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text'
+                            'selector'				=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text'
                         )
                     ),
                 ),
@@ -331,7 +331,7 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                         'show_reset' => true,
                         'preview'     => array(
                             'type'      => 'css',
-                            'selector'  => '.wpsr-tiktok-feed-template1 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner, .wpsr-tiktok-feed-wrapper.wpsr-tiktok-feed-template2 .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner',
+                            'selector'  => '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner',
                             'property'  => 'background',
                         ),
                     ),
