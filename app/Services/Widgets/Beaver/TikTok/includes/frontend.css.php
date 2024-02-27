@@ -55,7 +55,7 @@ if ( ! empty( $settings->tt_header_bg_color ) ) {
 
 <?php if ( ! empty( $settings->tt_post_content_color ) ) { ?>
 .fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-feed-description-link .wpsr-feed-description-text{
-    color: <?php echo FLBuilderColor::hex_or_rgb( $settings->tt_post_content_color ); ?>;
+    color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_post_content_color )); ?>;
 <?php } ?>
 
 <?php if ( ! empty( $settings->tt_post_content_rm_link_color ) ) { ?>
@@ -90,7 +90,7 @@ if ( ! empty( $settings->tt_header_bg_color ) ) {
 
 <?php if ( ! empty( $settings->tt_box_bg_color ) ) { ?>
     .fl-node-<?php echo esc_attr($id); ?> .wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-inner{
-        background-color: <?php echo FLBuilderColor::hex_or_rgb( $settings->tt_box_bg_color ); ?>;
+        background-color: <?php echo esc_attr(FLBuilderColor::hex_or_rgb( $settings->tt_box_bg_color )); ?>;
 <?php } ?>
 
 <?php
