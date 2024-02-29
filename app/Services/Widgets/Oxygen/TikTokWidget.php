@@ -271,6 +271,40 @@ class TikTokWidget extends OxygenEl
             )
         );
 
+        $tiktok_statistics_count_section = $tiktok_content_section->addControlSection( "wpsr_tiktok_statistics_count_section", __("Statistics Count", "wp-social-reviews"), "assets/icon.png", $this );
+        $tiktok_statistics_count_section->addStyleControls(
+            array(
+                array(
+                    "name" 				=> __('Color', "wp-social-reviews"),
+                    "selector" 			=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                    "property" 			=> 'color',
+                ),
+                array(
+                    "name" 				=> __('Font Size', "wp-social-reviews"),
+                    "selector" 			=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                    "property" 			=> 'font-size',
+                    'control_type' 		=> 'slider-measurebox'
+                ),
+                array(
+                    "name" 				=> __('Font Weight', "wp-social-reviews"),
+                    "selector" 			=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                    "property" 			=> 'font-weight',
+                ),
+                array(
+                    "name" 				=> __('Line Height', "wp-social-reviews"),
+                    "selector" 			=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                    "property" 			=> 'line-height',
+                ),
+                array(
+                    "name" 				=> __('Bottom Spacing', "wp-social-reviews"),
+                    "selector" 			=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                    "property" 			=> 'margin-bottom',
+                    "control_type" 		=> 'slider-measurebox',
+                    'unit' 				=> 'px'
+                )
+            )
+        );
+
 
         /*****************************
          *follow btn

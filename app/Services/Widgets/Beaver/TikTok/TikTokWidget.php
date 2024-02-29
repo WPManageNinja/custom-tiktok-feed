@@ -234,6 +234,30 @@ FLBuilder::register_module('CFFT_Fl_TikTok_Module', array(
                     ),
                 ),
             ),
+            'post_statistics_count' => array(
+                'title'  => __( 'Statistics Count', 'custom-feed-for-tiktok' ),
+                'fields' => array(
+                    'tt_post_statistics_count_color' => array(
+                        'type'        => 'color',
+                        'label'       => __( 'Color', 'custom-feed-for-tiktok' ),
+                        'show_reset' => true,
+                        'preview'     => array(
+                            'type'      => 'css',
+                            'selector'  => '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                            'property'  => 'color',
+                        ),
+                    ),
+                    'tt_post_statistics_count_typography'		=> array(
+                        'type'					=> 'typography',
+                        'label'					=> __('Typography', 'custom-feed-for-tiktok'),
+                        'responsive'  			=> true,
+                        'preview'				=> array(
+                            'type'					=> 'css',
+                            'selector'				=> '.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count'
+                        )
+                    ),
+                ),
+            ),
             'follow_btn_style' => array(
                 'title'  => __( 'Follow Button', 'custom-feed-for-tiktok' ),
                 'fields' => array(

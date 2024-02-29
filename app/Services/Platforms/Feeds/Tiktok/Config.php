@@ -248,6 +248,22 @@ class Config
                     )
                 ),
                 array(
+                    'title'     => __('Statistics Count', 'custom-feed-for-tiktok'),
+                    'key'      => 'statistics_count',
+                    'divider' => false,
+                    'typography' => true,
+                    'padding' => false,
+                    'border' => false,
+                    'styles' => array(
+                        array(
+                            'title'      => __('Text Color:', 'custom-feed-for-tiktok'),
+                            'fieldKey'  => 'text_color',
+                            'type'      => 'color_picker',
+                            'flex'      => true,
+                        )
+                    )
+                ),
+                array(
                     'key'      => 'read_more_link_color',
                     'divider' => false,
                     'typography' => false,
@@ -569,6 +585,33 @@ class Config
                         'font_style'  => Arr::get($settings,'styles.post_content.typography.font_style', ''),
                         'text_transform'  => Arr::get($settings,'styles.post_content.typography.text_transform', ''),
                         'text_decoration'  => Arr::get($settings,'styles.post_content.typography.text_decoration', ''),
+                    ),
+                ),
+                'statistics_count' => array(
+                    'selector' => $prefix.'.wpsr-tiktok-feed-wrapper .wpsr-tiktok-feed-item .wpsr-tiktok-feed-statistics .wpsr-tiktok-feed-reaction-count',
+                    'color'  => array(
+                        'text_color' => Arr::get($settings,'styles.statistics_count.color.text_color', '')
+                    ),
+                    'typography' => array(
+                        'font_size' => array(
+                            'desktop' => Arr::get($settings,'styles.statistics_count.typography.font_size.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.statistics_count.typography.font_size.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.statistics_count.typography.font_size.mobile', ''),
+                        ),
+                        'letter_spacing'  => array(
+                            'desktop' => Arr::get($settings,'styles.statistics_count.typography.letter_spacing.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.statistics_count.typography.letter_spacing.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.statistics_count.typography.letter_spacing.mobile', ''),
+                        ),
+                        'line_height'  => array(
+                            'desktop' => Arr::get($settings,'styles.statistics_count.typography.line_height.desktop', ''),
+                            'tablet' => Arr::get($settings,'styles.statistics_count.typography.line_height.tablet', ''),
+                            'mobile' => Arr::get($settings,'styles.statistics_count.typography.line_height.mobile', ''),
+                        ),
+                        'font_weight'  => Arr::get($settings,'styles.statistics_count.typography.font_weight', ''),
+                        'font_style'  => Arr::get($settings,'styles.statistics_count.typography.font_style', ''),
+                        'text_transform'  => Arr::get($settings,'styles.statistics_count.typography.text_transform', ''),
+                        'text_decoration'  => Arr::get($settings,'styles.statistics_count.typography.text_decoration', ''),
                     ),
                 ),
                 'read_more_link_color' => array(
