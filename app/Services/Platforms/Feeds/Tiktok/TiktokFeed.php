@@ -740,7 +740,7 @@ class TiktokFeed extends BaseFeed
         if (!$existsSettings) {
             $args = array(
                 'global_settings' => array(
-                    'expiration'    => 60*60*6,
+                    'expiration'    => 60*60*24,
                     'caching_type'  => 'background'
                 )
             );
