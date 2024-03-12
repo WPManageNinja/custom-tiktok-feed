@@ -397,7 +397,9 @@ class TiktokFeed extends BaseFeed
 
         $tiktok_feeds = [];
         foreach ($multiple_feeds as $index => $feeds) {
-            $tiktok_feeds = array_merge($tiktok_feeds, $feeds);
+            if(!empty($feeds) && is_array($feeds)) {
+                $tiktok_feeds = array_merge($tiktok_feeds, $feeds);
+            }
         }
 
         return $tiktok_feeds;
