@@ -8,6 +8,7 @@ use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
 use WPSocialReviews\App\Services\Platforms\Feeds\CacheHandler;
 use WPSocialReviews\App\Services\Platforms\Feeds\Common\FeedFilters;
+use WPSocialReviews\App\Services\Platforms\ImageOptimizationHandler;
 use WPSocialReviews\App\Services\Platforms\PlatformData;
 use WPSocialReviews\Framework\Support\Arr;
 
@@ -34,6 +35,7 @@ class TiktokFeed extends BaseFeed
         $this->cacheHandler = new CacheHandler('tiktok');
         $this->protector = new DataProtector();
         $this->platfromData = new PlatformData($this->platform);
+        (new ImageOptimizationHandler($this->platform))->registerHooks();
     }
 
     public function pushValidPlatform($platforms)
@@ -277,7 +279,7 @@ class TiktokFeed extends BaseFeed
         return $sourceList;
     }
 
-    public function getTemplateMeta($settings = array(), $postId = null)
+    public function getTemplateMeta($settings = array())
     {
         $feed_settings = Arr::get($settings, 'feed_settings', array());
         $apiSettings   = Arr::get($feed_settings, 'source_settings', array());
@@ -309,6 +311,19 @@ class TiktokFeed extends BaseFeed
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
         }
         $settings['dynamic'] = $filterResponse;
+
+        $global_settings = get_option('wpsr_facebook_feed_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+
+        $optimized_images = Arr::get($global_settings, 'global_settings.optimized_images', 'false');
+        $has_gdpr = Arr::get($advanceSettings, 'has_gdpr', "false");
+
+        if($has_gdpr === "true" && $optimized_images == "false") {
+            $settings['dynamic']['items'] = [];
+            unset($settings['dynamic']['header']);
+            $settings['dynamic']['error_message'] = __('TikTok feeds are not being displayed due to the "optimize images" option being disabled. If the GDPR settings are set to "Yes," it is necessary to enable the optimize images option.', 'wp-social-reviews');
+        }
+
         return $settings;
     }
 
@@ -321,15 +336,24 @@ class TiktokFeed extends BaseFeed
         $decodedMeta     = json_decode($feed_meta, true);
         $feed_settings   = Arr::get($decodedMeta, 'feed_settings', array());
         $feed_settings   = TiktokConfig::formatTiktokConfig($feed_settings, array());
-        $settings        = $this->getTemplateMeta($feed_settings, $postId);
+        $settings        = $this->getTemplateMeta($feed_settings);
         $templateDetails = get_post($postId);
         $settings['feed_type'] = Arr::get($settings, 'feed_settings.source_settings.feed_type');
         $settings['styles_config'] = $tiktokConfig->formatStylesConfig(json_decode($feed_template_style_meta, true), $postId);
+
+        $global_settings = get_option('wpsr_'.$this->platform.'_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+
+        $image_settings = [
+            'optimized_images' => Arr::get($global_settings, 'global_settings.optimized_images', 'false'),
+            'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
+        ];
 
         $translations = GlobalSettings::getTranslations();
         wp_send_json_success([
             'message'          => __('Success', 'custom-feed-for-tiktok'),
             'settings'         => $settings,
+            'image_settings'   => $image_settings,
             'sources'          => $this->getConnectedSourceList(),
             'template_details' => $templateDetails,
             'elements'         => $tiktokConfig->getStyleElement(),
@@ -369,6 +393,16 @@ class TiktokFeed extends BaseFeed
         $settings['feed_type'] = Arr::get($settings, 'feed_settings.source_settings.feed_type');
 
         $settings['styles_config'] = $styles_config;
+
+        $global_settings = get_option('wpsr_'.$this->platform.'_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+
+        $image_settings = [
+            'optimized_images' => Arr::get($global_settings, 'global_settings.optimized_images', 'false'),
+            'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
+        ];
+        $settings['image_settings'] = $image_settings;
+
         wp_send_json_success([
             'settings' => $settings,
         ]);

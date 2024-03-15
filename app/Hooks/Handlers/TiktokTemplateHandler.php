@@ -102,7 +102,7 @@ class TiktokTemplateHandler
         $shortcodeHandler = new ShortcodeHandler();
         $template_meta = $shortcodeHandler->templateMeta($templateId, 'tiktok');
         $templateNumber = Arr::get($template_meta, 'feed_settings.template');
-        $feed = (new TiktokFeed())->getTemplateMeta($template_meta, $templateId);
+        $feed = (new TiktokFeed())->getTemplateMeta($template_meta);
         $settings = $shortcodeHandler->formatFeedSettings($feed);
         $pagination_settings = $shortcodeHandler->formatPaginationSettings($feed);
         $sinceId = (($page - 1) * $pagination_settings['paginate']);
@@ -143,5 +143,10 @@ class TiktokTemplateHandler
     public function formatTiktokConfig($configs = [] , $response = [])
     {
         return Config::formatTiktokConfig($configs, $response);
+    }
+
+    public function getTemplateMeta($template_meta = [])
+    {
+        return (new TiktokFeed())->getTemplateMeta($template_meta);
     }
 }

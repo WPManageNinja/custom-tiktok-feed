@@ -57,6 +57,7 @@ class Config
                     'hide_posts_by_id' => sanitize_text_field(Arr::get($settings,'filters.hide_posts_by_id', '')),
                 ),
                 'post_settings' => array(
+                    'resolution'              => Arr::get($settings,'post_settings.resolution', 'full'),
                     'display_mode'            => Arr::get($settings,'post_settings.display_mode', 'tiktok'),
                     'display_author_photo'    => Arr::get($settings,'post_settings.display_author_photo', 'true'),
                     'display_author_name'     => Arr::get($settings,'post_settings.display_author_photo', 'true'),
