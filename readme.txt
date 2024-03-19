@@ -1,6 +1,6 @@
 === Custom Feed for TikTok - Social Post Feed Plugin for TikTok ===
-Contributors: devutpol
-Tags: Tiktok, tiktok feed, tiktok video, tiktok gallery, tiktok widgets, tiktok plugin, feed
+Contributors: techjewel, devutpol, tanjimtc71, wpmanageninja
+Tags: TikTok, tiktok feed, tiktok video, tiktok plugin, tiktok gallery
 Requires at least: 5.6
 Tested up to: 6.4
 Requires PHP: 7.4
@@ -14,13 +14,16 @@ Explore the power of Custom Feed for TikTok, the top-notch plugin for displaying
 
 **Custom Feed for TikTok** is the most feature-rich, easy-to-use TikTok feed plugin for your WordPress website. Display your TikTok videos with the most user-friendly and updated features of Custom Feed for TikTok!
 
+[youtube https://www.youtube.com/watch?v=RRLsvexsRBg]
+
 This plugin is specially built for TikTok feed to give you the smoothest integration and the most handy experience for embedding your TikTok gallery on your website. You will get multiple features to showcase your TikTok feed by different template layouts, filter through hashtags, style preferences to suit your website, and many more with this TikTok feed plugin for WordPress.
 
+👉 Official Webpage: [Custom Feed for TikTok](https://wpsocialninja.com/platforms/tiktok-feed/)
 👉 Join FB Community: [Facebook Group](https://www.facebook.com/groups/wpsocial)
 👉 User Guide: [Documents](https://wpsocialninja.com/docs/)
 👉 Get Support: [Support Ticket](https://wpmanageninja.com/support-tickets/)
 
-== Why Custom Feed for TikTok is the best TikTok feed plugin for WordPress ==
+== Why Custom Feed for TikTok is the best TikTok feed plugin ==
 
 **Easy to Integrate:** It’s easy to start with Custom Feed for TikTok; without any hassle, you can create an Access code to integrate your account.
 
@@ -40,7 +43,7 @@ This plugin is specially built for TikTok feed to give you the smoothest integra
 
 **24/7 Customer Support:** Our support team is always ready to solve your issues. For any queries or help, you will find us through the support ticket.
 
-== Benefits ==
+== Benefits of TikTok Feed ==
 
 **User engagement:** Embed TikTok feed with Custom Feed for TikTok and improve user engagement.
 
@@ -150,7 +153,7 @@ Custom Feed for TikTok has advanced customization and styling options to organiz
 
 = Where can I get support? =
 
-For any queries, our support team is always open to hear from you. Contact our support forum here.
+For any queries, our support team is always open to hear from you. Contact our support forum [here](https://wpmanageninja.com/support-tickets/).
 
 ## Third-Party Service Dependency
 
@@ -162,20 +165,22 @@ Custom feed for TikTok relies on the TikTok Feed Display API provided by [TikTok
 
 - Terms of Use: [TikTok Feed Display API Terms of Use](https://www.tiktok.com/legal/page/row/terms-of-service/en)
 
-- Privacy Policy: [TikTok Privacy Policy](https://www.tiktok.com/legal/page/row/privacy-policy/en
+- Privacy Policy: [TikTok Privacy Policy](https://www.tiktok.com/legal/page/row/privacy-policy/en)
 Additionally, this plugin utilizes a callback URL for authentication purposes. The callback URL is hosted on [wpsocialninja.com](https://wpsocialninja.com/) at [https://wpsocialninja.com/api/tiktok_callback](https://wpsocialninja.com/api/tiktok_callback).
 
 Please review the terms of use and privacy policy of TikTok to understand how your data may be handled when using the TikTok Feed Display API and ensure compliance with any legal requirements.
 
 
 == Screenshots ==
-1. Custom Feed for TikTok by WP Social Ninja
-2. Multiple Layout Types
-3. Connect multiple accounts
-4. Combined Account Feed
-5. Create multiple templates
-6. Template Settings
-7. 100% Responsive
+
+== Screenshots ==
+1. Grow your business with the power of Custom Feed for TikTok by WP Social Ninja
+2. Display your TikTok Feed with multiple layout types and make it fit with your brand
+3. Connect your multiple TikTok accounts to show your different products from different accounts
+4. Make a combined account feed with your multiple TikTok posts from multiple businesses
+5. Add variety to your website with multiple templates on your multiple web pages
+6. Decorate your TikTok feed with advanced template settings and make it look trendy and eye-catchy
+7. 100% Responsive on all devices
 
 == Changelog ==
 
