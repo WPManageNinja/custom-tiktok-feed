@@ -7,6 +7,7 @@ use WPSocialReviews\App\Services\DataProtector;
 use WPSocialReviews\App\Services\GlobalSettings;
 use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
 use WPSocialReviews\App\Services\Platforms\Feeds\CacheHandler;
+use WPSocialReviews\App\Services\Platforms\PlatformErrorManager;
 use WPSocialReviews\App\Services\Platforms\Feeds\Common\FeedFilters;
 use WPSocialReviews\App\Services\Platforms\PlatformData;
 use WPSocialReviews\Framework\Support\Arr;
@@ -27,6 +28,7 @@ class TiktokFeed extends BaseFeed
     private $client_secret = 'IV2QhJ7nxhvEthCI2QqZTTPpoNZOPZB6';
     private $redirect_uri = 'https://wpsocialninja.com/api/tiktok_callback';
 
+    protected $errorManager;
 
     public function __construct()
     {
@@ -34,6 +36,7 @@ class TiktokFeed extends BaseFeed
         $this->cacheHandler = new CacheHandler('tiktok');
         $this->protector = new DataProtector();
         $this->platfromData = new PlatformData($this->platform);
+        $this->errorManager = new PlatformErrorManager($this->platform);
     }
 
     public function pushValidPlatform($platforms)
@@ -700,8 +703,9 @@ class TiktokFeed extends BaseFeed
             }
 
             if(Arr::get($accountData, 'response.code') !== 200) {
-                $errorMessage = $this->getErrorMessage($accountData);
-                return ['error_message' => $errorMessage];
+//                $errorMessage = $this->getErrorMessage($accountData);
+//                return ['error_message' => $errorMessage];
+                $accountData = json_decode(wp_remote_retrieve_body($accountData), true);
             }
 
             if(Arr::get($accountData, 'response.code') === 200) {
@@ -783,12 +787,18 @@ class TiktokFeed extends BaseFeed
                 }
             }
 
-            $accountIdPosition = strpos($optionName, '_account_header_');
-            $accountId = substr($optionName, $accountIdPosition + strlen('_account_header_'), strlen($optionName));
+            $accountIdStart = strpos($optionName, 'user_feed_id_') + strlen('user_feed_id_');
+            $numPosition = strpos($optionName, '_num_');
+            $accountId = substr($optionName, $accountIdStart, $numPosition - $accountIdStart);
+
+            error_log('here '.print_r($accountId, 1));
+
             if(!empty($accountId)) {
                 if(isset($connectedSources[$accountId])) {
                     $account = $connectedSources[$accountId];
-                    $this->getHeaderDetails($account, true);
+                    $page_header_response = $this->getHeaderDetails($account, true);
+                    $connectedSources = $this->addPlatformApiErrors($page_header_response, $connectedSources, $account);
+                    update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
                 }
             }
         }
@@ -801,5 +811,23 @@ class TiktokFeed extends BaseFeed
         wp_send_json_success([
             'message' => __('Cache cleared successfully!', 'custom-feed-for-tiktok'),
         ], 200);
+    }
+
+    public function addPlatformApiErrors($response, $connectedAccounts, $accountDetails)
+    {
+        $responseErrorCode = Arr::get($response, 'error.code', '');
+        $userId   = $accountDetails['open_id'];
+
+        if(!empty($responseErrorCode)){
+            $connectedAccounts[$userId]['error_message'] = Arr::get($response, 'error.message', '');
+            $connectedAccounts[$userId]['error_code'] = $responseErrorCode;
+            $connectedAccounts[$userId]['has_critical_error'] = $this->errorManager->isCriticalError($response);
+            $connectedAccounts[$userId]['has_app_permission_error'] = $this->platfromData->isAppPermissionError($response);
+        }
+        $connectedAccounts[$userId]['status'] = 'error';
+
+        $this->errorManager->addError('api', $response, $accountDetails);
+
+        return $connectedAccounts;
     }
 }
