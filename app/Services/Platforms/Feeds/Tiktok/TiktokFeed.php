@@ -123,6 +123,8 @@ class TiktokFeed extends BaseFeed
                 ],
             ]);
 
+            do_action( 'wpsocialreviews/tiktok_api_connect_response', $response );
+
             if (is_wp_error($response)) {
                 throw new \Exception($response->get_error_message()); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
@@ -250,6 +252,11 @@ class TiktokFeed extends BaseFeed
     public function clearVerificationConfigs($userId)
     {
         $sources = $this->getConnectedSourceList();
+
+        $sources[$userId]['user_id'] = $userId;
+        $sources[$userId]['username'] = $userId;
+
+        $this->errorManager->removeErrors('connection',  $sources[$userId]);
         unset($sources[$userId]);
         update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sources));
 
@@ -505,6 +512,7 @@ class TiktokFeed extends BaseFeed
 //            }
 
             $account_data = $this->makeRequest($fetchUrl, $accessToken, $body_args);
+            do_action( 'wpsocialreviews/tiktok_api_connect_response', $account_data );
 
             if(is_wp_error($account_data)) {
                 $errorMessage = ['error_message' => $account_data->get_error_message()];
@@ -790,8 +798,6 @@ class TiktokFeed extends BaseFeed
             $accountIdStart = strpos($optionName, 'user_feed_id_') + strlen('user_feed_id_');
             $numPosition = strpos($optionName, '_num_');
             $accountId = substr($optionName, $accountIdStart, $numPosition - $accountIdStart);
-
-            error_log('here '.print_r($accountId, 1));
 
             if(!empty($accountId)) {
                 if(isset($connectedSources[$accountId])) {
