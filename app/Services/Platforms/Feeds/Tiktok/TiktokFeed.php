@@ -36,6 +36,7 @@ class TiktokFeed extends BaseFeed
         $this->protector = new DataProtector();
         $this->platfromData = new PlatformData($this->platform);
         (new ImageOptimizationHandler($this->platform))->registerHooks();
+        add_action('wpsr_'.$this->platform.'_send_email_report', array($this, 'maybeSendFeedIssueEmail'));
     }
 
     public function pushValidPlatform($platforms)
@@ -279,7 +280,7 @@ class TiktokFeed extends BaseFeed
         return $sourceList;
     }
 
-    public function getTemplateMeta($settings = array())
+    public function getTemplateMeta($settings = array(), $postId = null)
     {
         $feed_settings = Arr::get($settings, 'feed_settings', array());
         $apiSettings   = Arr::get($feed_settings, 'source_settings', array());
@@ -312,15 +313,24 @@ class TiktokFeed extends BaseFeed
         }
         $settings['dynamic'] = $filterResponse;
 
-        $global_settings = get_option('wpsr_facebook_feed_global_settings');
+        $global_settings = get_option('wpsr_tiktok_global_settings');
         $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
 
         $optimized_images = Arr::get($global_settings, 'global_settings.optimized_images', 'false');
         $has_gdpr = Arr::get($advanceSettings, 'has_gdpr', "false");
+        $items = $settings['dynamic']['items'] ?? [];
+
+        foreach ($items as $index => $item) {
+            $userAvatar = $item['user']['profile_image_url'] ?? null;
+            $accountId = $item['user']['name'] ?? null;
+            $headerMeta = 'avatars';
+            $local_avatar = (new ImageOptimizationHandler($this->platform))->maybeLocalHeader($accountId, $userAvatar, $global_settings,$headerMeta);
+            $settings['dynamic']['items'][$index]['user_avatar'] = $local_avatar ?? $userAvatar;
+        }
 
         if($has_gdpr === "true" && $optimized_images == "false") {
             $settings['dynamic']['items'] = [];
-            unset($settings['dynamic']['header']);
+            $settings['dynamic']['header'] = [];
             $settings['dynamic']['error_message'] = __('TikTok feeds are not being displayed due to the "optimize images" option being disabled. If the GDPR settings are set to "Yes," it is necessary to enable the optimize images option.', 'wp-social-reviews');
         }
 
