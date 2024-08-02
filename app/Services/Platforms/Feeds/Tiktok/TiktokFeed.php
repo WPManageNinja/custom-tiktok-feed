@@ -37,6 +37,7 @@ class TiktokFeed extends BaseFeed
         $this->protector = new DataProtector();
         $this->platfromData = new PlatformData($this->platform);
         $this->errorManager = new PlatformErrorManager($this->platform);
+        add_action('wpsr_tiktok_send_email_report', array($this, 'maybeSendFeedIssueEmail'));
     }
 
     public function pushValidPlatform($platforms)
@@ -149,6 +150,10 @@ class TiktokFeed extends BaseFeed
                     'expiration_time' => time() + $expires_in,
                     'refresh_expires_in' => $refresh_expires_in,
                     'open_id' => $open_id,
+                    'error_message'  => '',
+                    'error_code'     => '',
+                    'has_app_permission_error'     => false,
+                    'has_critical_error'     => false,
                 ];
 
                 $sourceList = $this->getConnectedSourceList();
@@ -217,6 +222,10 @@ class TiktokFeed extends BaseFeed
             $expiration_time = time() + $expires_in;
             $open_id = $data['open_id'];
             $accountDetails = $this->getAccountDetails($open_id);
+            $errorMessage = $data['error_message'];
+            $errorCode = $data['error_code'];
+            $hasAppPermissionError = $data['has_app_permission_error'];
+            $hasCriticalError = $data['has_critical_error'];
 
             $data = [
                 'access_token' => $this->protector->encrypt($access_token),
@@ -224,6 +233,10 @@ class TiktokFeed extends BaseFeed
                 'expiration_time' => $expiration_time,
                 'open_id' => $open_id,
                 'avatar_url' => Arr::get($accountDetails, 'data.user.avatar_url', ''),
+                'error_message'  => $errorMessage,
+                'error_code'     => $errorCode,
+                'has_app_permission_error'     => $hasAppPermissionError,
+                'has_critical_error'     => $hasCriticalError,
             ];
 
             $configs = get_option('wpsr_tiktok_connected_sources_config', []);
@@ -253,10 +266,11 @@ class TiktokFeed extends BaseFeed
     {
         $sources = $this->getConnectedSourceList();
 
-        $sources[$userId]['user_id'] = $userId;
+        $sources[$userId]['open_id'] = $userId;
         $sources[$userId]['username'] = $userId;
 
         $this->errorManager->removeErrors('connection',  $sources[$userId]);
+        $this->platfromData->deleteDataByUser($sources[$userId]);
         unset($sources[$userId]);
         update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sources));
 
@@ -415,6 +429,17 @@ class TiktokFeed extends BaseFeed
         return $tiktok_feeds;
     }
 
+    public function getAccountId($connectedSources, $accountId)
+    {
+        foreach ($connectedSources as $source){
+            $source_account_id = Arr::get($source, 'open_id');
+            if($accountId === $source_account_id){
+                $account_id = Arr::get($source, 'open_id');
+                return $account_id;
+            }
+        }
+    }
+
     public function getAccountFeed($account, $apiSettings, $cache = false)
     {
         $accessToken    = $this->protector->decrypt($account['access_token']) ? $this->protector->decrypt($account['access_token']) : $account['access_token'];
@@ -521,6 +546,22 @@ class TiktokFeed extends BaseFeed
 
             if(Arr::get($account_data, 'response.code') !== 200) {
                 $errorMessage = $this->getErrorMessage($account_data);
+                $pages_response_data = json_decode(wp_remote_retrieve_body($account_data), true);
+                $errorCode = Arr::get($account_data, 'response.code');
+                $pages_response_data['error']['code'] = $errorCode;
+                $connectedSources = $this->getConnectedSourceList();
+
+                if(!empty($connectedSources)){
+                    $account_id = $this->getAccountId($connectedSources, $accountId);
+                    foreach ($connectedSources as $key => $source){
+                        $source_account_id = Arr::get($source, 'open_id');
+                        if($source_account_id === $account_id) {
+                            $connectedSources = $this->addPlatformApiErrors($pages_response_data, $connectedSources, $source);
+                        }
+                    }
+                    update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
+                }
+
                 return ['error_message' => $errorMessage];
             }
 
@@ -835,5 +876,13 @@ class TiktokFeed extends BaseFeed
         $this->errorManager->addError('api', $response, $accountDetails);
 
         return $connectedAccounts;
+    }
+
+    public function maybeSendFeedIssueEmail()
+    {
+        if( !$this->errorManager->hasCriticalError($this->platform) ){
+            return;
+        }
+        $this->platfromData->sendScheduleEmailReport();
     }
 }
