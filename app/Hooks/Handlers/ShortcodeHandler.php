@@ -28,27 +28,9 @@ class ShortcodeHandler
         $template_meta = $shortcodeHandler->templateMeta($templateId, $platform);
         $account_ids = Arr::get($template_meta, 'feed_settings.source_settings.selected_accounts');
 
-        if (!empty($template_meta['error_message'])) {
-            return apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $template_meta['error_message']);
-        }
-
-        if (!empty($template_meta['error_message'])) {
-            return $template_meta['error_message'] . '<br/>';
-        }
-
         $feed = (new TiktokFeed())->getTemplateMeta($template_meta, $templateId);
         $settings      = $shortcodeHandler->formatFeedSettings($feed);
 
-        $error_message = Arr::get($settings['dynamic'], 'error_message');
-        if (Arr::get($error_message, 'error_message')) {
-            return $error_message['error_message'];
-        } elseif ($error_message) {
-            return $error_message;
-        }
-
-        if (sizeof(Arr::get($settings, 'feeds')) === 0) {
-            return '<p>' . __('Posts are not available!', 'custom-feed-for-tiktok') . '</p>';
-        }
 
         //template mapping
         $templateMapping = [
@@ -85,12 +67,11 @@ class ShortcodeHandler
         $shortcodeHandler->enqueueScripts();
         do_action('wpsocialreviews/load_template_assets', $templateId);
 
-        $error_message = Arr::get($settings, 'dynamic.error_message');
-
         $html = '';
+        $error_message = Arr::get($settings['dynamic'], 'error_message');
 
-        if (Arr::get($error_message, 'error_message')) {
-            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_message['error_message'], $account_ids);
+        if (Arr::get($error_message, 'error.message')) {
+            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_message['error']['message'], $account_ids);
         } elseif ($error_message) {
             $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_message, $account_ids);
         }

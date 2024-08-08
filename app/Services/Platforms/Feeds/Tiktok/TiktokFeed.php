@@ -320,6 +320,13 @@ class TiktokFeed extends BaseFeed
         $account = Arr::get($feed_settings, 'header_settings.account_to_show');
         if(!empty($account)) {
             $accountDetails = $this->getAccountDetails($account);
+            $connectedSources = $this->getConnectedSourceList();
+            $connectedAccount = Arr::get($connectedSources, $account);
+            $has_account_error_code = Arr::get($connectedAccount, 'error_code');
+            if($has_account_error_code){
+                $settings['dynamic']['error_message'] = Arr::get($connectedAccount, 'error_message');
+            }
+
             if(isset($accountDetails['error_message'])) {
                 $settings['dynamic'] = $accountDetails;
             } else {
@@ -561,8 +568,7 @@ class TiktokFeed extends BaseFeed
                     }
                     update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
                 }
-
-                return ['error_message' => $errorMessage];
+                return ['error_message' => $pages_response_data];
             }
 
             if (Arr::get($account_data, 'response.code') === 200) {
@@ -844,6 +850,7 @@ class TiktokFeed extends BaseFeed
                 if(isset($connectedSources[$accountId])) {
                     $account = $connectedSources[$accountId];
                     $page_header_response = $this->getHeaderDetails($account, true);
+                    $account['username'] = Arr::get($page_header_response, 'data.user.display_name', '');
                     $connectedSources = $this->addPlatformApiErrors($page_header_response, $connectedSources, $account);
                     update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
                 }
