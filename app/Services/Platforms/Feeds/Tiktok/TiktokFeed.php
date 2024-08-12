@@ -124,7 +124,7 @@ class TiktokFeed extends BaseFeed
                 ],
             ]);
 
-            do_action( 'wpsocialreviews/tiktok_api_connect_response', $response );
+            do_action( 'wpsocialreviews/tiktok_feed_api_connect_response', $response );
 
             if (is_wp_error($response)) {
                 throw new \Exception($response->get_error_message()); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
@@ -223,7 +223,7 @@ class TiktokFeed extends BaseFeed
             $open_id = $data['open_id'];
             $accountDetails = $this->getAccountDetails($open_id);
             $errorMessage = $data['error_message'];
-            $errorCode = $data['error_code'];
+            $errorCode = Arr::get($response, 'response.code');
             $hasAppPermissionError = $data['has_app_permission_error'];
             $hasCriticalError = $data['has_critical_error'];
 
@@ -339,7 +339,12 @@ class TiktokFeed extends BaseFeed
         } else {
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
         }
+        $filterResponse['error_message'] = Arr::get($settings, 'dynamic.error_message');
+
         $settings['dynamic'] = $filterResponse;
+        $settings['dynamic']['items'] = Arr::get($data, 'items', []);
+        $settings['dynamic']['header'] = Arr::get($data, 'header', []);
+
         return $settings;
     }
 
@@ -418,9 +423,16 @@ class TiktokFeed extends BaseFeed
         foreach ($ids as $id) {
             if (isset($connectedAccounts[$id])) {
                 $accountInfo = $connectedAccounts[$id];
+                $feedCacheName = 'user_feed_id_' . $id;
                 $feed = $this->getAccountFeed($accountInfo, $apiSettings);
                 if(isset($feed['error_message'])) {
-                    return $feed;
+                    $cacheData = $this->cacheHandler->getFeedCache($feedCacheName);
+                    if($cacheData) {
+                        return [
+                            'error_message' => $feed['error_message'],
+                            'videos' => $cacheData
+                        ];
+                    }
                 }
                 $multiple_feeds[] = $feed['videos'];
             }
@@ -432,7 +444,6 @@ class TiktokFeed extends BaseFeed
                 $tiktok_feeds = array_merge($tiktok_feeds, $feeds);
             }
         }
-
         return $tiktok_feeds;
     }
 
@@ -544,7 +555,7 @@ class TiktokFeed extends BaseFeed
 //            }
 
             $account_data = $this->makeRequest($fetchUrl, $accessToken, $body_args);
-            do_action( 'wpsocialreviews/tiktok_api_connect_response', $account_data );
+            do_action( 'wpsocialreviews/tiktok_feed_api_connect_response', $account_data );
 
             if(is_wp_error($account_data)) {
                 $errorMessage = ['error_message' => $account_data->get_error_message()];
@@ -568,6 +579,11 @@ class TiktokFeed extends BaseFeed
                     }
                     update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
                 }
+
+                if($errorCode && (new PlatformData($this->platform))->isAppPermissionError($account_data)){
+                    do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
+                }
+
                 return ['error_message' => $pages_response_data];
             }
 
@@ -869,16 +885,23 @@ class TiktokFeed extends BaseFeed
 
     public function addPlatformApiErrors($response, $connectedAccounts, $accountDetails)
     {
+        $critical_codes = array(
+            401, // app permissions or scopes
+        );
+
         $responseErrorCode = Arr::get($response, 'error.code', '');
         $userId   = $accountDetails['open_id'];
 
         if(!empty($responseErrorCode)){
             $connectedAccounts[$userId]['error_message'] = Arr::get($response, 'error.message', '');
             $connectedAccounts[$userId]['error_code'] = $responseErrorCode;
-            $connectedAccounts[$userId]['has_critical_error'] = $this->errorManager->isCriticalError($response);
+            $connectedAccounts[$userId]['has_critical_error'] = in_array( $responseErrorCode, $critical_codes, true );
             $connectedAccounts[$userId]['has_app_permission_error'] = $this->platfromData->isAppPermissionError($response);
         }
         $connectedAccounts[$userId]['status'] = 'error';
+
+        $accountDetails['user_id'] = $userId;
+        $accountDetails['username'] = Arr::get($accountDetails, 'display_name');
 
         $this->errorManager->addError('api', $response, $accountDetails);
 
