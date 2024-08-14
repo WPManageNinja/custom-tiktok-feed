@@ -135,6 +135,10 @@ class TiktokFeed extends BaseFeed
                 throw new \Exception($errorMessage); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
 
+            if(Arr::get($response, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($response)){
+                do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
+            }
+
             if (200 === wp_remote_retrieve_response_code($response)) {
                 $responseArr = json_decode(wp_remote_retrieve_body($response), true);
                 $name = Arr::get($responseArr, 'data.user.display_name');
@@ -580,7 +584,7 @@ class TiktokFeed extends BaseFeed
                     update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
                 }
 
-                if($errorCode && (new PlatformData($this->platform))->isAppPermissionError($account_data)){
+                if(Arr::get($pages_response_data, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($pages_response_data)){
                     do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
                 }
 
@@ -769,14 +773,22 @@ class TiktokFeed extends BaseFeed
             );
             $accountData = wp_remote_get($fetchUrl , $args);
 
+            do_action( 'wpsocialreviews/tiktok_feed_api_connect_response', $accountData);
+
             if(is_wp_error($accountData)) {
                 return ['error_message' => $accountData->get_error_message()];
+            }
+
+            if(Arr::get($accountData, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($accountData)){
+                do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
             }
 
             if(Arr::get($accountData, 'response.code') !== 200) {
 //                $errorMessage = $this->getErrorMessage($accountData);
 //                return ['error_message' => $errorMessage];
+                $errorCode = Arr::get($accountData, 'response.code');
                 $accountData = json_decode(wp_remote_retrieve_body($accountData), true);
+                $accountData['error']['code'] = $errorCode;
             }
 
             if(Arr::get($accountData, 'response.code') === 200) {
