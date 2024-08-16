@@ -219,6 +219,23 @@ class TiktokFeed extends BaseFeed
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
+        if (isset($data['error_description'])) {
+            $errorMessage = $data['error_description'];
+            $errorCode = Arr::get($data, 'error');
+
+            $data = [
+                'error_message'  => $errorMessage,
+                'error_code'     => $errorCode,
+            ];
+
+            $sourceList = $this->getConnectedSourceList();
+            $existingData = $sourceList[$userId];
+            $mergedData = array_merge($existingData, $data);
+            $sourceList[$userId] = $mergedData;
+            update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
+            return $data;
+        }
+
         if (isset($data['open_id']) && isset($data['access_token'])) {
             $access_token = $data['access_token'];
             $refresh_token = $data['refresh_token'];
@@ -327,14 +344,38 @@ class TiktokFeed extends BaseFeed
             $connectedSources = $this->getConnectedSourceList();
             $connectedAccount = Arr::get($connectedSources, $account);
             $has_account_error_code = Arr::get($connectedAccount, 'error_code');
-            if($has_account_error_code){
-                $settings['dynamic']['error_message'] = Arr::get($connectedAccount, 'error_message');
-            }
 
             if(isset($accountDetails['error_message'])) {
                 $settings['dynamic'] = $accountDetails;
             } else {
                 $data['header'] = $accountDetails;
+            }
+
+            if($has_account_error_code){
+                $errorMessage = Arr::get($connectedAccount, 'error_message');
+
+                if (empty($errorMessage)) {
+                    $errorMessage = __('There has been a problem with your account. Please reconnect your account.', 'custom-feed-for-tiktok');
+                }
+
+                if($has_account_error_code === 'invalid_grant'){
+                    $accountDetails['user_id'] = Arr::get($accountDetails, 'data.user.open_id');
+                    $accountDetails['username'] = Arr::get($accountDetails, 'data.user.display_name');
+                    $errorArray = [
+                        'message' => $errorMessage,
+                        'code' => $has_account_error_code,
+                    ];
+                    $errorResponse = [
+                        'error' => $errorArray,
+                    ];
+                    $this->errorManager->addError('api', $errorResponse, $accountDetails);
+                    $errorMessage =  sprintf(__('There has been a problem with your account(%s). Your access token is invalid has expired. Please reconnect your account. Otherwise, the feed will no longer work.', 'custom-feed-for-tiktok'), Arr::get($connectedAccount, 'display_name'));
+                }
+                $errorData = [
+                    'error_message' => $errorMessage,
+                    'error_code' => $has_account_error_code,
+                ];
+                $settings['dynamic']['error'] = $errorData;
             }
         }
 
@@ -343,12 +384,7 @@ class TiktokFeed extends BaseFeed
         } else {
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
         }
-        $filterResponse['error_message'] = Arr::get($settings, 'dynamic.error_message');
-
-        $settings['dynamic'] = $filterResponse;
-        $settings['dynamic']['items'] = Arr::get($data, 'items', []);
-        $settings['dynamic']['header'] = Arr::get($data, 'header', []);
-
+        $settings['dynamic'] = array_merge($settings['dynamic'], $filterResponse);
         return $settings;
     }
 
@@ -438,7 +474,9 @@ class TiktokFeed extends BaseFeed
                         ];
                     }
                 }
-                $multiple_feeds[] = $feed['videos'];
+                if(!empty($feed['videos'])) {
+                    $multiple_feeds[] = $feed['videos'];
+                }
             }
         }
 
@@ -471,6 +509,9 @@ class TiktokFeed extends BaseFeed
             'open_id' => $accountId
         ];
         $access_token = $this->maybeRefreshToken($account);
+        if(isset($access_token['error_message'])){
+            return $access_token['error_message'];
+        }
         $accessToken = $access_token;
         $feedType       = Arr::get($apiSettings, 'feed_type', 'user_feed');
 
