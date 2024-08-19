@@ -162,6 +162,11 @@ class TiktokFeed extends BaseFeed
 
                 $sourceList = $this->getConnectedSourceList();
                 $sourceList[$open_id] = $data;
+                $accountArgs = [
+                    'open_id' => $open_id,
+                    'username' => $name,
+                ];
+                $this->errorManager->removeErrors('connection', $accountArgs);
                 update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
 
                 // add global tiktok settings when user verified
@@ -227,12 +232,7 @@ class TiktokFeed extends BaseFeed
                 'error_message'  => $errorMessage,
                 'error_code'     => $errorCode,
             ];
-
-            $sourceList = $this->getConnectedSourceList();
-            $existingData = $sourceList[$userId];
-            $mergedData = array_merge($existingData, $data);
-            $sourceList[$userId] = $mergedData;
-            update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
+            $this->updateSourceList($userId, $data);
             return $data;
         }
 
@@ -260,18 +260,20 @@ class TiktokFeed extends BaseFeed
                 'has_critical_error'     => $hasCriticalError,
             ];
 
-            $configs = get_option('wpsr_tiktok_connected_sources_config', []);
-            $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];
-
-            $existingData = $sourceList[$userId];
-            $mergedData = array_merge($existingData, $data);
-
-            $sourceList[$userId] = $mergedData;
-            update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
+            $this->updateSourceList($userId, $data);
             return $access_token;
         } else {
             return false;
         }
+    }
+
+    private function updateSourceList($userId, array $data)
+    {
+        $sourceList = $this->getConnectedSourceList();
+        $existingData = $sourceList[$userId] ?? [];
+        $mergedData = array_merge($existingData, $data);
+        $sourceList[$userId] = $mergedData;
+        update_option('wpsr_tiktok_connected_sources_config', ['sources' => $sourceList]);
     }
 
     public function getVerificationConfigs()
@@ -344,6 +346,7 @@ class TiktokFeed extends BaseFeed
             $connectedSources = $this->getConnectedSourceList();
             $connectedAccount = Arr::get($connectedSources, $account);
             $has_account_error_code = Arr::get($connectedAccount, 'error_code');
+            $settings['dynamic'] = [];
 
             if(isset($accountDetails['error_message'])) {
                 $settings['dynamic'] = $accountDetails;

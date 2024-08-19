@@ -22,11 +22,11 @@ class ShortcodeHandler
             do_action('litespeed_tag_add', 'wpsn_purge_tiktok');
         }
 
-        do_action('wpsocialreviews/before_display_tiktok_feed');
         $shortcodeHandler = new BaseShortCodeHandler();
 
         $template_meta = $shortcodeHandler->templateMeta($templateId, $platform);
         $account_ids = Arr::get($template_meta, 'feed_settings.source_settings.selected_accounts');
+        do_action('wpsocialreviews/before_display_tiktok_feed', $account_ids);
 
         $feed = (new TiktokFeed())->getTemplateMeta($template_meta, $templateId);
         $settings      = $shortcodeHandler->formatFeedSettings($feed);
@@ -68,12 +68,12 @@ class ShortcodeHandler
         do_action('wpsocialreviews/load_template_assets', $templateId);
 
         $html = '';
-        $error_message = Arr::get($settings['dynamic'], 'error_message');
+        $error_data = Arr::get($settings['dynamic'], 'error');
 
-        if (Arr::get($error_message, 'error.message')) {
-            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_message['error']['message'], $account_ids);
-        } elseif ($error_message) {
-            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_message, $account_ids);
+        if (Arr::get($error_data, 'error.message')) {
+            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data['error']['message'], $account_ids);
+        } elseif ($error_data) {
+            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data, $account_ids);
         }
 
         $template_body_data = [
