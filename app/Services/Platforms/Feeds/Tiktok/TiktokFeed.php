@@ -290,6 +290,7 @@ class TiktokFeed extends BaseFeed
         $sources = $this->getConnectedSourceList();
 
         $sources[$userId]['open_id'] = $userId;
+        $sources[$userId]['user_id'] = $userId;
         $sources[$userId]['username'] = $userId;
 
         $this->errorManager->removeErrors('connection',  $sources[$userId]);
