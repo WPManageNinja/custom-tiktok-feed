@@ -356,9 +356,14 @@ class TiktokFeed extends BaseFeed
 
             if($has_account_error_code){
                 $errorMessage = Arr::get($connectedAccount, 'error_message');
+                $userName = Arr::get($connectedAccount, 'display_name');
 
                 if (empty($errorMessage)) {
-                    $errorMessage = __('There has been a problem with your account. Please reconnect your account.', 'custom-feed-for-tiktok');
+                    $errorMessage = sprintf(__('There has been a problem with your account (%s). Please reconnect your account.', 'custom-feed-for-tiktok'), $userName);
+                }
+
+                if($has_account_error_code === 401){
+                    $errorMessage = sprintf(__('There has been a problem with your account (%s). The user has not authorized application or revoked permission. Please reconnect your account.', 'custom-feed-for-tiktok'), $userName);
                 }
 
                 if($has_account_error_code === 'invalid_grant'){
@@ -372,7 +377,7 @@ class TiktokFeed extends BaseFeed
                         'error' => $errorArray,
                     ];
                     $this->errorManager->addError('api', $errorResponse, $accountDetails);
-                    $errorMessage =  sprintf(__('There has been a problem with your account(%s). Your access token is invalid has expired. Please reconnect your account. Otherwise, the feed will no longer work.', 'custom-feed-for-tiktok'), Arr::get($connectedAccount, 'display_name'));
+                    $errorMessage =  sprintf(__('There has been a problem with your account(%s). Your access token is invalid has expired. Please reconnect your account. Otherwise, the feed will no longer work.', 'custom-feed-for-tiktok'), $userName);
                 }
                 $errorData = [
                     'error_message' => $errorMessage,
