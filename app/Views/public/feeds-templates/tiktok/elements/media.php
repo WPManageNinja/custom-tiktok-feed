@@ -11,6 +11,8 @@ $feedID = Arr::get($feed, 'id', '');
 $previewImage = Arr::get($feed, 'media.preview_image_url', '');
 $description = Arr::get($feed, 'text', '');
 $display_mode = Arr::get($template_meta, 'post_settings.display_mode');
+$media_url = Arr::get($feed, 'media_url', '');
+$default_media = Arr::get($feed, 'default_media', '');
 $videoUrl = 'https://www.tiktok.com/@'.$userID.'/video/'.$feedID;
 
 $attrs = [
@@ -27,7 +29,7 @@ $attrs = [
     <?php else: ?>
         <div class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link">
     <?php endif; ?>
-            <img src="<?php echo esc_url($previewImage); ?>" alt="<?php echo esc_attr($description); ?>"/>
+            <img src="<?php echo esc_url($media_url ? $media_url : $default_media); ?>" alt="<?php echo esc_attr($description); ?>"/>
     <?php if ($display_mode !== 'none'): ?>
         </a>
     <?php else: ?>
