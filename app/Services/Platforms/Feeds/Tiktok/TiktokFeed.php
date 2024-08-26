@@ -288,9 +288,9 @@ class TiktokFeed extends BaseFeed
         if(!empty(Arr::get($apiSettings, 'selected_accounts'))) {
             $response = $this->apiConnection($apiSettings);
             if(isset($response['error_message'])) {
-                $settings['dynamic'] = $response;
+                $settings['dynamic']['error_message'] = $response['error_message'];
             } else {
-                $data['items'] = $response;
+                $data['items'] = $response['items'];
             }
         } else {
             $settings['dynamic']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
@@ -433,9 +433,13 @@ class TiktokFeed extends BaseFeed
                 $accountInfo = $connectedAccounts[$id];
                 $feed = $this->getAccountFeed($accountInfo, $apiSettings);
                 if(isset($feed['error_message'])) {
-                    return $feed;
+                    $error_message .= $feed['error_message'];
+                    continue;
                 }
                 $multiple_feeds[] = $feed['videos'];
+            }
+            else{
+                $error_message  .= sprintf(__('There are multiple accounts being used on this template. The account ID(%s) associated with your configuration settings has been deleted. To view your feed from this account, please reauthorize and reconnect it.', 'wp-social-reviews'), $id);
             }
         }
 
@@ -446,7 +450,10 @@ class TiktokFeed extends BaseFeed
             }
         }
 
-        return $tiktok_feeds;
+        return [
+            'items' => $tiktok_feeds,
+            'error_message' => $error_message
+        ];
     }
 
     public function getAccountFeed($account, $apiSettings, $cache = false)
