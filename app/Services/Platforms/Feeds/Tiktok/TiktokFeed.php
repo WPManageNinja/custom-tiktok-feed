@@ -341,7 +341,7 @@ class TiktokFeed extends BaseFeed
                 $data['items'] = $response['items'];
             }
         } else {
-            $settings['dynamic']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
+            $settings['dynamic']['error']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
         }
 
         $account = Arr::get($feed_settings, 'header_settings.account_to_show');
@@ -391,7 +391,7 @@ class TiktokFeed extends BaseFeed
             }
         }
 
-        if (Arr::get($settings, 'dynamic.error_message')) {
+        if (Arr::get($settings, 'dynamic.error.error_message')) {
             $filterResponse = $settings['dynamic'];
         } else {
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
