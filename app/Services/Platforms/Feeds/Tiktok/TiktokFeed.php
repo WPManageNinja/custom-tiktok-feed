@@ -9,6 +9,7 @@ use WPSocialReviews\App\Services\Platforms\Feeds\BaseFeed;
 use WPSocialReviews\App\Services\Platforms\Feeds\CacheHandler;
 use WPSocialReviews\App\Services\Platforms\PlatformErrorManager;
 use WPSocialReviews\App\Services\Platforms\Feeds\Common\FeedFilters;
+use WPSocialReviews\App\Services\Platforms\ImageOptimizationHandler;
 use WPSocialReviews\App\Services\Platforms\PlatformData;
 use WPSocialReviews\Framework\Support\Arr;
 
@@ -36,6 +37,7 @@ class TiktokFeed extends BaseFeed
         $this->cacheHandler = new CacheHandler('tiktok');
         $this->protector = new DataProtector();
         $this->platfromData = new PlatformData($this->platform);
+        (new ImageOptimizationHandler($this->platform))->registerHooks();
         $this->errorManager = new PlatformErrorManager($this->platform);
         add_action('wpsr_tiktok_send_email_report', array($this, 'maybeSendFeedIssueEmail'));
     }
@@ -333,9 +335,9 @@ class TiktokFeed extends BaseFeed
         if(!empty(Arr::get($apiSettings, 'selected_accounts'))) {
             $response = $this->apiConnection($apiSettings);
             if(isset($response['error_message'])) {
-                $settings['dynamic'] = $response;
+                $settings['dynamic']['error_message'] = $response['error_message'];
             } else {
-                $data['items'] = $response;
+                $data['items'] = $response['items'];
             }
         } else {
             $settings['dynamic']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
@@ -394,6 +396,28 @@ class TiktokFeed extends BaseFeed
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
         }
         $settings['dynamic'] = array_merge($settings['dynamic'], $filterResponse);
+
+        $global_settings = get_option('wpsr_tiktok_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+
+        $optimized_images = Arr::get($global_settings, 'global_settings.optimized_images', 'false');
+        $has_gdpr = Arr::get($advanceSettings, 'has_gdpr', "false");
+        $items = $settings['dynamic']['items'] ?? [];
+
+        foreach ($items as $index => $item) {
+            $userAvatar = $item['user']['profile_image_url'] ?? null;
+            $accountId = $item['user']['name'] ?? null;
+            $headerMeta = 'avatars';
+            $local_avatar = (new ImageOptimizationHandler($this->platform))->maybeLocalHeader($accountId, $userAvatar, $global_settings,$headerMeta);
+            $settings['dynamic']['items'][$index]['user_avatar'] = $local_avatar ?? $userAvatar;
+        }
+
+        if($has_gdpr === "true" && $optimized_images == "false") {
+            $settings['dynamic']['items'] = [];
+            $settings['dynamic']['header'] = [];
+            $settings['dynamic']['error_message'] = __('TikTok feeds are not being displayed due to the "optimize images" option being disabled. If the GDPR settings are set to "Yes," it is necessary to enable the optimize images option.', 'wp-social-reviews');
+        }
+
         return $settings;
     }
 
@@ -406,15 +430,24 @@ class TiktokFeed extends BaseFeed
         $decodedMeta     = json_decode($feed_meta, true);
         $feed_settings   = Arr::get($decodedMeta, 'feed_settings', array());
         $feed_settings   = TiktokConfig::formatTiktokConfig($feed_settings, array());
-        $settings        = $this->getTemplateMeta($feed_settings, $postId);
+        $settings        = $this->getTemplateMeta($feed_settings);
         $templateDetails = get_post($postId);
         $settings['feed_type'] = Arr::get($settings, 'feed_settings.source_settings.feed_type');
         $settings['styles_config'] = $tiktokConfig->formatStylesConfig(json_decode($feed_template_style_meta, true), $postId);
+
+        $global_settings = get_option('wpsr_'.$this->platform.'_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+
+        $image_settings = [
+            'optimized_images' => Arr::get($global_settings, 'global_settings.optimized_images', 'false'),
+            'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
+        ];
 
         $translations = GlobalSettings::getTranslations();
         wp_send_json_success([
             'message'          => __('Success', 'custom-feed-for-tiktok'),
             'settings'         => $settings,
+            'image_settings'   => $image_settings,
             'sources'          => $this->getConnectedSourceList(),
             'template_details' => $templateDetails,
             'elements'         => $tiktokConfig->getStyleElement(),
@@ -454,6 +487,16 @@ class TiktokFeed extends BaseFeed
         $settings['feed_type'] = Arr::get($settings, 'feed_settings.source_settings.feed_type');
 
         $settings['styles_config'] = $styles_config;
+
+        $global_settings = get_option('wpsr_'.$this->platform.'_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+
+        $image_settings = [
+            'optimized_images' => Arr::get($global_settings, 'global_settings.optimized_images', 'false'),
+            'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
+        ];
+        $settings['image_settings'] = $image_settings;
+
         wp_send_json_success([
             'settings' => $settings,
         ]);
@@ -482,10 +525,15 @@ class TiktokFeed extends BaseFeed
                             'videos' => $cacheData
                         ];
                     }
+                    $error_message .= $feed['error_message'];
+                    continue;
                 }
                 if(!empty($feed['videos'])) {
                     $multiple_feeds[] = $feed['videos'];
                 }
+            }
+            else{
+                $error_message  .= sprintf(__('There are multiple accounts being used on this template. The account ID(%s) associated with your configuration settings has been deleted. To view your feed from this account, please reauthorize and reconnect it.', 'wp-social-reviews'), $id);
             }
         }
 
@@ -496,6 +544,11 @@ class TiktokFeed extends BaseFeed
             }
         }
         return $tiktok_feeds;
+
+        return [
+            'items' => $tiktok_feeds,
+            'error_message' => $error_message
+        ];
     }
 
     public function getAccountId($connectedSources, $accountId)
