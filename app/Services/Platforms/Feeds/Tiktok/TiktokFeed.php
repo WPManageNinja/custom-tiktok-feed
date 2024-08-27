@@ -544,7 +544,7 @@ class TiktokFeed extends BaseFeed
 
         return [
             'items' => $tiktok_feeds,
-            'error_message' => $error_message
+            'error_message' => $error_message ?? ''
         ];
     }
 
