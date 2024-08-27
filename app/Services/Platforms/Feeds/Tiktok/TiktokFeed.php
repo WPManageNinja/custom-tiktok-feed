@@ -334,8 +334,9 @@ class TiktokFeed extends BaseFeed
         $data = [];
         if(!empty(Arr::get($apiSettings, 'selected_accounts'))) {
             $response = $this->apiConnection($apiSettings);
-            if(isset($response['error_message'])) {
-                $settings['dynamic']['error_message'] = $response['error_message'];
+            if(isset($response['error_message']) && empty(Arr::get($response, 'items'))) {
+                $settings['dynamic']['error']['error_message'] = $response['error_message'];
+                return $settings;
             } else {
                 $data['items'] = $response['items'];
             }
@@ -519,12 +520,6 @@ class TiktokFeed extends BaseFeed
                 $feed = $this->getAccountFeed($accountInfo, $apiSettings);
                 if(isset($feed['error_message'])) {
                     $cacheData = $this->cacheHandler->getFeedCache($feedCacheName);
-                    if($cacheData) {
-                        return [
-                            'error_message' => $feed['error_message'],
-                            'videos' => $cacheData
-                        ];
-                    }
                     $error_message .= $feed['error_message'];
                     continue;
                 }
@@ -543,7 +538,9 @@ class TiktokFeed extends BaseFeed
                 $tiktok_feeds = array_merge($tiktok_feeds, $feeds);
             }
         }
-        return $tiktok_feeds;
+        if(!empty($cacheData)){
+            $tiktok_feeds = array_merge($tiktok_feeds, $cacheData);
+        }
 
         return [
             'items' => $tiktok_feeds,
