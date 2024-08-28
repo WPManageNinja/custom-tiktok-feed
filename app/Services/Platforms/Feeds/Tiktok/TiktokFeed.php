@@ -358,7 +358,7 @@ class TiktokFeed extends BaseFeed
                 $data['header'] = $accountDetails;
             }
 
-            if($has_account_error_code){
+            if($has_account_error_code && $has_account_error_code !== 'ok'){
                 $errorMessage = Arr::get($connectedAccount, 'error_message');
                 $userName = Arr::get($connectedAccount, 'display_name');
 
