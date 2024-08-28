@@ -332,11 +332,11 @@ class TiktokFeed extends BaseFeed
         $feed_settings = Arr::get($settings, 'feed_settings', array());
         $apiSettings   = Arr::get($feed_settings, 'source_settings', array());
         $data = [];
+        $settings['dynamic'] = [];
         if(!empty(Arr::get($apiSettings, 'selected_accounts'))) {
             $response = $this->apiConnection($apiSettings);
             if(isset($response['error_message']) && empty(Arr::get($response, 'items'))) {
                 $settings['dynamic']['error']['error_message'] = $response['error_message'];
-                return $settings;
             } else {
                 $data['items'] = $response['items'];
             }
@@ -350,7 +350,6 @@ class TiktokFeed extends BaseFeed
             $connectedSources = $this->getConnectedSourceList();
             $connectedAccount = Arr::get($connectedSources, $account);
             $has_account_error_code = Arr::get($connectedAccount, 'error_code');
-            $settings['dynamic'] = [];
 
             if(isset($accountDetails['error_message'])) {
                 $settings['dynamic'] = $accountDetails;
@@ -371,6 +370,15 @@ class TiktokFeed extends BaseFeed
                 }
 
                 if($has_account_error_code === 'invalid_grant'){
+                    $errorMessage =  sprintf(__('There has been a problem with your account(%s). Your access token is invalid has expired. Please reconnect your account. Otherwise, the feed will no longer work.', 'custom-feed-for-tiktok'), $userName);
+                }
+                $errorData = [
+                    'error_message' => $errorMessage,
+                    'error_code' => $has_account_error_code,
+                ];
+                $settings['dynamic']['error'] = $errorData;
+
+                if ($has_account_error_code === 'invalid_grant' || $has_account_error_code === 401) {
                     $accountDetails['user_id'] = Arr::get($accountDetails, 'data.user.open_id');
                     $accountDetails['username'] = Arr::get($accountDetails, 'data.user.display_name');
                     $errorArray = [
@@ -380,19 +388,19 @@ class TiktokFeed extends BaseFeed
                     $errorResponse = [
                         'error' => $errorArray,
                     ];
+                    if(Arr::get($errorResponse, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($errorResponse)){
+                        error_log('TikTok App Permission Revoked');
+                        do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
+                    }
                     $this->errorManager->addError('api', $errorResponse, $accountDetails);
-                    $errorMessage =  sprintf(__('There has been a problem with your account(%s). Your access token is invalid has expired. Please reconnect your account. Otherwise, the feed will no longer work.', 'custom-feed-for-tiktok'), $userName);
                 }
-                $errorData = [
-                    'error_message' => $errorMessage,
-                    'error_code' => $has_account_error_code,
-                ];
-                $settings['dynamic']['error'] = $errorData;
             }
         }
 
         if (Arr::get($settings, 'dynamic.error.error_message')) {
-            $filterResponse = $settings['dynamic'];
+            $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
+
+//            $filterResponse = $settings['dynamic'];
         } else {
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
         }
@@ -513,14 +521,15 @@ class TiktokFeed extends BaseFeed
         $ids = Arr::get($apiSettings, 'selected_accounts');
         $connectedAccounts = $this->getConnectedSourceList();
         $multiple_feeds = [];
+        $cacheData = [];
         foreach ($ids as $id) {
             if (isset($connectedAccounts[$id])) {
                 $accountInfo = $connectedAccounts[$id];
                 $feedCacheName = 'user_feed_id_' . $id;
                 $feed = $this->getAccountFeed($accountInfo, $apiSettings);
-                if(isset($feed['error_message'])) {
+                if(isset($feed['error'])) {
                     $cacheData = $this->cacheHandler->getFeedCache($feedCacheName);
-                    $error_message .= $feed['error_message'];
+                    $error_message = $feed['error']['error_message'];
                     continue;
                 }
                 if(!empty($feed['videos'])) {
@@ -528,10 +537,9 @@ class TiktokFeed extends BaseFeed
                 }
             }
             else{
-                $error_message  .= sprintf(__('There are multiple accounts being used on this template. The account ID(%s) associated with your configuration settings has been deleted. To view your feed from this account, please reauthorize and reconnect it.', 'wp-social-reviews'), $id);
+                $error_message  = sprintf(__('There are multiple accounts being used on this template. The account ID(%s) associated with your configuration settings has been deleted. To view your feed from this account, please reauthorize and reconnect it.', 'wp-social-reviews'), $id);
             }
         }
-
         $tiktok_feeds = [];
         foreach ($multiple_feeds as $index => $feeds) {
             if(!empty($feeds) && is_array($feeds)) {
@@ -569,7 +577,9 @@ class TiktokFeed extends BaseFeed
         ];
         $access_token = $this->maybeRefreshToken($account);
         if(isset($access_token['error_message'])){
-            return $access_token['error_message'];
+            return [
+                'error' => $access_token
+            ];
         }
         $accessToken = $access_token;
         $feedType       = Arr::get($apiSettings, 'feed_type', 'user_feed');
@@ -688,7 +698,12 @@ class TiktokFeed extends BaseFeed
                     do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
                 }
 
-                return ['error_message' => $pages_response_data];
+                $data = [
+                    'error_message'  => $errorMessage,
+                    'error_code'     => $errorCode,
+                ];
+
+                return ['error' => $data];
             }
 
             if (Arr::get($account_data, 'response.code') === 200) {

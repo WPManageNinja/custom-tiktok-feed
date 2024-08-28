@@ -111,7 +111,7 @@ class ShortcodeHandler
             'column_gaps'     => $settings['column_gaps'],
             'paginate'        => $pagination_settings['paginate'],
             'pagination_type' => $pagination_settings['pagination_type'],
-            'header'        => $settings['header']['data']['user'],
+            'header'        => $settings['header']['data']['user'] ?? '',
             'total'           => $pagination_settings['total'],
         ));
 
