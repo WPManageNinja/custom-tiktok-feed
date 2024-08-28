@@ -82,9 +82,12 @@ class TiktokTemplateHandler
 
     public function renderFeedMedia($feed = [], $template_meta = [])
     {
+        $layout_type = Arr::get($template_meta, 'layout_type', '');
+
         $html = $this->loadView('public/feeds-templates/tiktok/elements/media', array(
             'feed'          => $feed,
             'template_meta' => $template_meta,
+            'layout_type'   => $layout_type,
         ));
         echo wp_kses_post($html);
     }
