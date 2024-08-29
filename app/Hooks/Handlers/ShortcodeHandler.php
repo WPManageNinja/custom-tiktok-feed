@@ -70,8 +70,8 @@ class ShortcodeHandler
         $html = '';
         $error_data = Arr::get($settings['dynamic'], 'error');
 
-        if (Arr::get($error_data, 'error.message')) {
-            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data['error']['message'], $account_ids);
+        if (Arr::get($error_data, 'error_message')) {
+            $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data['error_message'], $account_ids);
         } elseif ($error_data) {
             $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data, $account_ids);
         }
