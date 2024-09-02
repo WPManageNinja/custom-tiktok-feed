@@ -245,21 +245,12 @@ class TiktokFeed extends BaseFeed
             $expiration_time = time() + $expires_in;
             $open_id = $data['open_id'];
             $accountDetails = $this->getAccountDetails($open_id);
-            $errorMessage = $data['error_message'];
-            $errorCode = Arr::get($response, 'response.code');
-            $hasAppPermissionError = $data['has_app_permission_error'];
-            $hasCriticalError = $data['has_critical_error'];
 
             $data = [
                 'access_token' => $this->protector->encrypt($access_token),
                 'refresh_token' => $refresh_token,
                 'expiration_time' => $expiration_time,
                 'open_id' => $open_id,
-                'avatar_url' => Arr::get($accountDetails, 'data.user.avatar_url', ''),
-                'error_message'  => $errorMessage,
-                'error_code'     => $errorCode,
-                'has_app_permission_error'     => $hasAppPermissionError,
-                'has_critical_error'     => $hasCriticalError,
             ];
 
             $this->updateSourceList($userId, $data);
@@ -269,7 +260,7 @@ class TiktokFeed extends BaseFeed
         }
     }
 
-    private function updateSourceList($userId, array $data)
+    private function updateSourceList($userId, $data)
     {
         $sourceList = $this->getConnectedSourceList();
         $existingData = $sourceList[$userId] ?? [];
