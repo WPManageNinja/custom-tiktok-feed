@@ -380,10 +380,12 @@ class TiktokFeed extends BaseFeed
                         'error' => $errorArray,
                     ];
                     if(Arr::get($errorResponse, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($errorResponse)){
-                        error_log('TikTok App Permission Revoked');
                         do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
                     }
-                    $this->errorManager->addError('api', $errorResponse, $accountDetails);
+                    $connectedSources = $this->getConnectedSourceList();
+                    $account = $connectedSources[$account];
+                    $account['username'] = Arr::get($account, 'display_name', '');
+                    $this->errorManager->addError('api', $errorResponse, $account);
                 }
             }
         }
@@ -1018,10 +1020,11 @@ class TiktokFeed extends BaseFeed
         }
         $connectedAccounts[$userId]['status'] = 'error';
 
-        $accountDetails['user_id'] = $userId;
-        $accountDetails['username'] = Arr::get($accountDetails, 'display_name');
+        $connectedSources = $this->getConnectedSourceList();
+        $account = $connectedSources[$userId];
+        $account['username'] = Arr::get($account, 'display_name', '');
 
-        $this->errorManager->addError('api', $response, $accountDetails);
+        $this->errorManager->addError('api', $response, $account);
 
         return $connectedAccounts;
     }
