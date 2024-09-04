@@ -23,7 +23,7 @@ $attrs = [
 ];
 
 ?>
-
+    <div class="wpsr-tt-post-media wpsr-animated-background">
     <?php if ($display_mode !== 'none'): ?>
         <a <?php Helper::printInternalString(implode(' ', $attrs)); ?>>
     <?php else: ?>
@@ -35,4 +35,5 @@ $attrs = [
     <?php else: ?>
         </div>
     <?php endif; ?>
+    </div>
 
