@@ -51,6 +51,10 @@ class ShortcodeHandler
         $pagination_settings = $shortcodeHandler->formatPaginationSettings($feed);
 
         $translations = GlobalSettings::getTranslations();
+        $global_settings = get_option('wpsr_tiktok_global_settings');
+        $advanceSettings = (new GlobalSettings())->getGlobalSettings('advance_settings');
+        $hasLatestPost = Arr::get($settings, 'dynamic.has_latest_post', false);
+        $feeds = Arr::get($settings, 'dynamic.items', []);
 
         if (Arr::get($settings['feed_settings'], 'post_settings.display_mode') === 'popup') {
             $feeds = $settings['feeds'];
@@ -64,12 +68,27 @@ class ShortcodeHandler
             $shortcodeHandler->enqueuePopupScripts();
         }
 
+        $image_settings = [
+            'optimized_images' => Arr::get($global_settings, 'global_settings.optimized_images', 'false'),
+            'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
+        ];
+
+        //enable when gdpr is on
+        $resizedImages = Arr::get($settings, 'dynamic.resize_data', []);
+        if(Arr::get($image_settings, 'optimized_images', 'false') === 'true' && (count($resizedImages) < count($feeds) || $hasLatestPost)) {
+            error_log('resizedImages insideinsideinsideinsideinsideinside '.print_r($resizedImages, true));
+            wp_enqueue_script('wpsr-image-resizer');
+        }
+
+//        if (Arr::get($image_settings, 'optimized_images', 'false') === 'true' || Arr::get($settings['feed_settings'], 'pagination_settings.pagination_type') != 'none' || Arr::get($settings['feed_settings'], 'post_settings.display_mode') === 'popup') {
+//            $this->enqueueScripts();
+//        }
+
         $shortcodeHandler->enqueueScripts();
         do_action('wpsocialreviews/load_template_assets', $templateId);
 
         $html = '';
         $error_data = Arr::get($settings['dynamic'], 'error');
-
         if (Arr::get($error_data, 'error_message')) {
             $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data['error_message'], $account_ids);
         } elseif ($error_data) {
