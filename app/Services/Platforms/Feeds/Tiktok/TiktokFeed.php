@@ -515,6 +515,7 @@ class TiktokFeed extends BaseFeed
         $connectedAccounts = $this->getConnectedSourceList();
         $multiple_feeds = [];
         $cacheData = [];
+        $multipleAccountsConnected = count($ids) > 1;
         foreach ($ids as $id) {
             if (isset($connectedAccounts[$id])) {
                 $accountInfo = $connectedAccounts[$id];
@@ -530,7 +531,12 @@ class TiktokFeed extends BaseFeed
                 }
             }
             else{
-                $error_message  = sprintf(__('There are multiple accounts being used on this template. The account ID(%s) associated with your configuration settings has been deleted. To view your feed from this account, please reauthorize and reconnect it.', 'wp-social-reviews'), $id);
+                $base_error_message = __('The account ID(%s) associated with your configuration settings has been deleted. To view your feed from this account, please reauthorize and reconnect it.', 'wp-social-reviews');
+                if ($multipleAccountsConnected) {
+                    $error_message = __('There are multiple accounts being used on this template. ', 'wp-social-reviews') . sprintf($base_error_message, $id);
+                } else {
+                    $error_message = sprintf($base_error_message, $id);
+                }
             }
         }
         $tiktok_feeds = [];
