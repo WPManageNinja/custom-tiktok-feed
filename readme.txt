@@ -186,3 +186,12 @@ Please review the terms of use and privacy policy of TikTok to understand how yo
 
 1.0.0 ( Date: March 12, 2024 )
 - init the first release
+
+1.1.0
+• Added Optimize Images settings option in Settings -> Feed Platforms -> TikTok Settings. This feature automatically saves local copies of TikTok feed images on your server for better performance.
+• Added TikTok Feed GDPR compliant settings option in Settings -> Advanced Settings.
+• Added an option to reset Optimize Images settings in Settings -> Feed Platforms -> TikTok Settings
+• Added an option to customize image resolution in Template Editor -> Post -> Images Resolution.
+• Added a warning notice in the wp social ninja admin area to alert you about critical issues with your TikTok Feed.
+• Enhanced error handling and added more descriptive error messages for TikTok Feed issues.
+• Added automated email notification alerts for critical TikTok Feed issues. You will receive an email notification if any unresolved issues with a TikTok feed arise on your website.
