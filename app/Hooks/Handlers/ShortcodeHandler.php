@@ -73,10 +73,12 @@ class ShortcodeHandler
             'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
         ];
 
+        $dp = $image_settings['optimized_images'] === 'true' ? Arr::get($settings, 'header.avatar.local_avatar') : Arr::get($settings, 'header.data.user.profile_image_url');
+        $settings['header']['data']['user']['avatar_url'] = $dp;
+
         //enable when gdpr is on
         $resizedImages = Arr::get($settings, 'dynamic.resize_data', []);
         if(Arr::get($image_settings, 'optimized_images', 'false') === 'true' && (count($resizedImages) < count($feeds) || $hasLatestPost)) {
-            error_log('resizedImages insideinsideinsideinsideinsideinside '.print_r($resizedImages, true));
             wp_enqueue_script('wpsr-image-resizer');
         }
 
@@ -103,7 +105,8 @@ class ShortcodeHandler
             'sinceId'       => $pagination_settings['sinceId'],
             'maxId'         => $pagination_settings['maxId'],
             'pagination_settings' => $pagination_settings,
-            'translations'  => $translations
+            'translations'  => $translations,
+            'image_settings' => $image_settings
         ];
 
         $html .=  $this->loadView('public/feeds-templates/tiktok/header', array(

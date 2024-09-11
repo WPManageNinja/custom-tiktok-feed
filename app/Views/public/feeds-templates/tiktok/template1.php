@@ -37,8 +37,13 @@ if (!empty($feeds) && is_array($feeds)) {
             <div role="group" class="wpsr-tiktok-feed-item wpsr-tt-post <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>"
                  data-post_id="<?php echo esc_attr($videoID); ?>"
                  data-user_name="<?php echo esc_attr($userName); ?>"
-                 data-image_size="<?php echo esc_attr($template_meta['post_settings']['resolution']); ?>">
-                <div class="wpsr-tiktok-feed-playmode wpsr-tiktok-feed-inner" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>" data-template-id="<?php echo esc_attr($templateId); ?>">
+            >
+                <div class="wpsr-tiktok-feed-playmode wpsr-tiktok-feed-inner" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>"
+                     data-template-id="<?php echo esc_attr($templateId); ?>"
+                     data-optimized_images="<?php echo esc_attr($image_settings['optimized_images']); ?>"
+                     data-has_gdpr="<?php echo esc_attr($image_settings['has_gdpr']); ?>"
+                     data-image_size="<?php echo esc_attr($template_meta['post_settings']['resolution']); ?>"
+                >
                     <div class="wpsr-tiktok-feed-image">
                     <?php
                     /**
