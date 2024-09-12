@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Helper
 {
-    public static function  getConnectedSourceList()
+    public static function getConnectedSourceList()
     {
         $configs = get_option('wpsr_tiktok_connected_sources_config', []);
         $sourceList = Arr::get($configs, 'sources') ? $configs['sources'] : [];

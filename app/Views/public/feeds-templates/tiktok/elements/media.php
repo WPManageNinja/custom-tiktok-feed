@@ -13,7 +13,7 @@ $description = Arr::get($feed, 'text', '');
 $display_mode = Arr::get($template_meta, 'post_settings.display_mode');
 $media_url = Arr::get($feed, 'media_url', '');
 $default_media = Arr::get($feed, 'default_media', '');
-$imgClass = (!str_contains($media_url, 'placeholder') ? 'wpsr-tt-post-img wpsr-show' : 'wpsr-tt-post-img wpsr-hide');
+$imgClass = !empty($media_url) && (!str_contains($media_url, 'placeholder') ? 'wpsr-tt-post-img wpsr-show' : 'wpsr-tt-post-img wpsr-hide');
 $videoUrl = 'https://www.tiktok.com/@'.$userID.'/video/'.$feedID;
 
 $attrs = [

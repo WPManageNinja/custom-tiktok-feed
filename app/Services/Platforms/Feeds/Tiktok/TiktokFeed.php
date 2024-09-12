@@ -165,8 +165,8 @@ class TiktokFeed extends BaseFeed
                 $sourceList = $this->getConnectedSourceList();
                 $sourceList[$open_id] = $data;
                 $accountArgs = [
-                    'open_id' => $open_id,
-                    'username' => $name,
+                    'user_id' => $open_id,
+                    'username' => $open_id,
                 ];
                 $this->errorManager->removeErrors('connection', $accountArgs);
                 update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sourceList));
@@ -370,8 +370,6 @@ class TiktokFeed extends BaseFeed
                 $settings['dynamic']['error'] = $errorData;
 
                 if ($has_account_error_code === 'invalid_grant' || $has_account_error_code === 401) {
-                    $accountDetails['user_id'] = Arr::get($accountDetails, 'data.user.open_id');
-                    $accountDetails['username'] = Arr::get($accountDetails, 'data.user.display_name');
                     $errorArray = [
                         'message' => $errorMessage,
                         'code' => $has_account_error_code,
@@ -382,11 +380,11 @@ class TiktokFeed extends BaseFeed
                     if(Arr::get($errorResponse, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($errorResponse)){
                         do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );
                     }
-                    $connectedSources = $this->getConnectedSourceList();
-                    $account = $connectedSources[$account];
-                    $account['username'] = Arr::get($account, 'display_name', '');
-                    $account['user_id'] = Arr::get($account, 'open_id', '');
-                    $this->errorManager->addError('api', $errorResponse, $account);
+
+//                    $userId = Arr::get($accountDetails, 'data.user.open_id', '');
+//                    $accountDetails['username'] = $userId;
+//                    $accountDetails['user_id'] = $userId;
+//                    $this->errorManager->addError('api', $errorResponse, $accountDetails);
                 }
             }
         }
@@ -1017,7 +1015,7 @@ class TiktokFeed extends BaseFeed
         );
 
         $responseErrorCode = Arr::get($response, 'error.code', '');
-        $userId   = $accountDetails['open_id'];
+        $userId   =  Arr::get($accountDetails, 'open_id', '');
 
         if(!empty($responseErrorCode)){
             $connectedAccounts[$userId]['error_message'] = Arr::get($response, 'error.message', '');
@@ -1026,12 +1024,10 @@ class TiktokFeed extends BaseFeed
             $connectedAccounts[$userId]['has_app_permission_error'] = $this->platfromData->isAppPermissionError($response);
         }
         $connectedAccounts[$userId]['status'] = 'error';
-
-        $connectedSources = $this->getConnectedSourceList();
-        $account = $connectedSources[$userId];
-        $account['username'] = Arr::get($account, 'display_name', '');
-        $account['user_id'] = Arr::get($account, 'open_id', '');
-        $this->errorManager->addError('api', $response, $account);
+        ;
+        $accountDetails['user_id'] = $userId;
+        $accountDetails['username'] = $userId;
+        $this->errorManager->addError('api', $response, $accountDetails);
 
         return $connectedAccounts;
     }
