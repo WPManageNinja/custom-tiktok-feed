@@ -385,6 +385,7 @@ class TiktokFeed extends BaseFeed
                     $connectedSources = $this->getConnectedSourceList();
                     $account = $connectedSources[$account];
                     $account['username'] = Arr::get($account, 'display_name', '');
+                    $account['user_id'] = Arr::get($account, 'open_id', '');
                     $this->errorManager->addError('api', $errorResponse, $account);
                 }
             }
@@ -1029,7 +1030,7 @@ class TiktokFeed extends BaseFeed
         $connectedSources = $this->getConnectedSourceList();
         $account = $connectedSources[$userId];
         $account['username'] = Arr::get($account, 'display_name', '');
-
+        $account['user_id'] = Arr::get($account, 'open_id', '');
         $this->errorManager->addError('api', $response, $account);
 
         return $connectedAccounts;
