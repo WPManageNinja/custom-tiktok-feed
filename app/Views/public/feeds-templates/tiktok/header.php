@@ -32,12 +32,13 @@ $classes[] = $layout_type === 'masonry' ? 'wpsr-tiktok-feed-masonry-activate' : 
 $classes[] = 'wpsr-tiktok-feed-template-' . esc_attr($templateId) . '';
 
 $classes[] = Arr::get($feed_settings, 'post_settings.equal_height') === 'true' ? 'wpsr-has-equal-height' : '';
-$classes[] = $feed_settings['layout_type'] === 'timeline' ? 'wpsr-tiktok-feed-layout-standard' : '';
+$classes[] = Arr::get($feed_settings, 'layout_type') === 'timeline' ? 'wpsr-tiktok-feed-layout-standard' : '';
 $desktop_column_number   = Arr::get($feed_settings, 'responsive_column_number.desktop');
 
-$header_settings = $feed_settings['header_settings'];
-$profile_photo_hide_class = $header_settings['display_profile_photo'] === 'false' ? 'wpsr-tiktok-feed-profile-pic-hide' : '';
-
+$header_settings = Arr::get($feed_settings, 'header_settings');
+$display_profile_photo = Arr::get($header_settings, 'display_profile_photo');
+$profile_photo_hide_class = $display_profile_photo === 'false' ? 'wpsr-tiktok-feed-profile-pic-hide' : '';
+$display_header = Arr::get($header_settings, 'display_header');
 
 echo '<div  id="wpsr-tiktok-feed-' . esc_attr($templateId) . '" class="' . esc_attr(implode(' ', $classes)) . '" ' . esc_attr(implode(' ',
         $dataAttrs)) . '  data-column="' . esc_attr($desktop_column_number) . '">';
@@ -46,23 +47,27 @@ echo '<div class="wpsr-loader">
     </div>';
 echo '<div class="wpsr-container">';
 
-if ($header_settings['display_header'] === 'true' && !empty($header)) {
+if ($display_header === 'true' && !empty($header)) {
+    $avatar_url = Arr::get($header, 'avatar_url', '');
+    $display_name = Arr::get($header, 'display_name', '');
+    $profile_deep_link = Arr::get($header, 'profile_deep_link', '');
+
     echo '<div class="wpsr-row">
         <div class="wpsr-tiktok-feed-header wpsr-col-12 ' . ($header_settings['display_profile_photo'] === 'false' ? 'wpsr-tiktok-feed-profile-pic-hide' : '') . '">
             <div class="wpsr-tiktok-feed-user-info-wrapper">
                 <div class="wpsr-tiktok-feed-user-info-head">
                     <div class="wpsr-tiktok-feed-header-info">';
-                        if ($header['avatar_url'] && $header_settings['display_profile_photo'] === 'true') {
-                            echo '<a rel="nofollow" href="' . esc_url($header['profile_deep_link']) . '" target="_blank" class="wpsr-tiktok-feed-user-profile-pic">
-                                    <img src="' . esc_url($header['avatar_url']) . '" alt="' . esc_attr($header['display_name']) . '">
+                        if ($avatar_url && $header_settings['display_profile_photo'] === 'true') {
+                            echo '<a rel="nofollow" href="' . esc_url($profile_deep_link) . '" target="_blank" class="wpsr-tiktok-feed-user-profile-pic">
+                                    <img src="' . esc_url($avatar_url) . '" alt="' . esc_attr($display_name) . '">
                                   </a>';
                         }
 
                         echo '<div class="wpsr-tiktok-feed-user-info">
                                 <div class="wpsr-tiktok-feed-user-info-name-wrapper">';
-                        if ($header['display_name'] && $header_settings['display_page_name'] === 'true') {
-                            echo '<a class="wpsr-tiktok-feed-user-info-name" rel="nofollow" href="' . esc_url($header['profile_deep_link']) . '" title="' . esc_attr($header['display_name']) . '" target="_blank">
-                                      ' . esc_html($header['display_name']) . '
+                        if ($display_name && $header_settings['display_page_name'] === 'true') {
+                            echo '<a class="wpsr-tiktok-feed-user-info-name" rel="nofollow" href="' . esc_url($profile_deep_link) . '" title="' . esc_attr($display_name) . '" target="_blank">
+                                      ' . esc_html($display_name) . '
                                   </a>';
                         }
                         echo '</div>';
