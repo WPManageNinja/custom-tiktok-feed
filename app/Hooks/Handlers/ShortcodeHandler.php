@@ -72,8 +72,7 @@ class ShortcodeHandler
             'optimized_images' => Arr::get($global_settings, 'global_settings.optimized_images', 'false'),
             'has_gdpr' => Arr::get($advanceSettings, 'has_gdpr', "false")
         ];
-
-        $dp = $image_settings['optimized_images'] === 'true' ? Arr::get($settings, 'header.avatar.local_avatar') : Arr::get($settings, 'header.data.user.profile_image_url');
+        $dp = $image_settings['optimized_images'] === 'true' ? Arr::get($settings, 'header.avatar.local_avatar') : Arr::get($settings, 'header.data.user.avatar_url');
         $settings['header']['data']['user']['avatar_url'] = $dp;
 
         //enable when gdpr is on

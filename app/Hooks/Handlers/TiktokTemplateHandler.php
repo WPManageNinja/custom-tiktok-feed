@@ -107,6 +107,7 @@ class TiktokTemplateHandler
         $pagination_settings = $shortcodeHandler->formatPaginationSettings($feed);
         $sinceId = (($page - 1) * $pagination_settings['paginate']);
         $maxId = ($sinceId + $pagination_settings['paginate']) - 1;
+        $gdpr_settings = (new TiktokFeed())->getGdprSettings('tiktok');
 
         $template_body_data = [
             'templateId'    => $templateId,
@@ -115,7 +116,8 @@ class TiktokTemplateHandler
             'paginate'      => $pagination_settings['paginate'],
             'sinceId'       => $sinceId,
             'maxId'         => $maxId,
-            'translations'  => GlobalSettings::getTranslations()
+            'translations'  => GlobalSettings::getTranslations(),
+            'image_settings' => $gdpr_settings
         ];
 
         if ($templateNumber === 'template2') {
