@@ -287,12 +287,16 @@ class TiktokFeed extends BaseFeed
         $sources[$userId]['username'] = $userId;
 
         $this->errorManager->removeErrors('connection',  $sources[$userId]);
+        $this->errorManager->removeErrors('platform_data_deleted');
+
         $this->platfromData->deleteDataByUser($sources[$userId]);
         unset($sources[$userId]);
         update_option('wpsr_tiktok_connected_sources_config', array('sources' => $sources));
 
         if (!count($sources)) {
             delete_option('wpsr_tiktok_connected_sources_config');
+            delete_option('wpsr_tiktok_local_avatars');
+            delete_option('wpsr_tiktok_revoke_platform_data');
 //            delete_option('wpsr_tiktok_global_settings');
         }
 
@@ -327,12 +331,12 @@ class TiktokFeed extends BaseFeed
         if(!empty(Arr::get($apiSettings, 'selected_accounts'))) {
             $response = $this->apiConnection($apiSettings);
             if(isset($response['error_message']) && empty(Arr::get($response, 'items'))) {
-                $settings['dynamic']['error']['error_message'] = $response['error_message'];
+                $settings['dynamic']['error_message']['error_message'] = $response['error_message'];
             } else {
                 $data['items'] = $response['items'];
             }
         } else {
-            $settings['dynamic']['error']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
+            $settings['dynamic']['error_message']['error_message'] = __('Please select an Account to get feeds.', 'custom-feed-for-tiktok');
         }
 
         $account = Arr::get($feed_settings, 'header_settings.account_to_show');
@@ -367,7 +371,7 @@ class TiktokFeed extends BaseFeed
                     'error_message' => $errorMessage,
                     'error_code' => $has_account_error_code,
                 ];
-                $settings['dynamic']['error'] = $errorData;
+                $settings['dynamic']['error_message'] = $errorData;
 
                 if ($has_account_error_code === 'invalid_grant' || $has_account_error_code === 401) {
                     $errorArray = [
@@ -389,7 +393,7 @@ class TiktokFeed extends BaseFeed
             }
         }
 
-        if (Arr::get($settings, 'dynamic.error.error_message')) {
+        if (Arr::get($settings, 'dynamic.error_message.error_message')) {
             $filterResponse = (new FeedFilters())->filterFeedResponse($this->platform, $feed_settings, $data);
 
 //            $filterResponse = $settings['dynamic'];
@@ -416,7 +420,7 @@ class TiktokFeed extends BaseFeed
         if($has_gdpr === "true" && $optimized_images == "false") {
             $settings['dynamic']['items'] = [];
             $settings['dynamic']['header'] = [];
-            $settings['dynamic']['error']['error_message'] = __('TikTok feeds are not being displayed due to the "optimize images" option being disabled. If the GDPR settings are set to "Yes," it is necessary to enable the optimize images option.', 'wp-social-reviews');
+            $settings['dynamic']['error_message']['error_message'] = __('TikTok feeds are not being displayed due to the "optimize images" option being disabled. If the GDPR settings are set to "Yes," it is necessary to enable the optimize images option.', 'wp-social-reviews');
         }
 
         return $settings;
@@ -679,18 +683,6 @@ class TiktokFeed extends BaseFeed
                 $pages_response_data = json_decode(wp_remote_retrieve_body($account_data), true);
                 $errorCode = Arr::get($account_data, 'response.code');
                 $pages_response_data['error']['code'] = $errorCode;
-                $connectedSources = $this->getConnectedSourceList();
-
-                if(!empty($connectedSources)){
-                    $account_id = $this->getAccountId($connectedSources, $accountId);
-                    foreach ($connectedSources as $key => $source){
-                        $source_account_id = Arr::get($source, 'open_id');
-                        if($source_account_id === $account_id) {
-                            $connectedSources = $this->addPlatformApiErrors($pages_response_data, $connectedSources, $source);
-                        }
-                    }
-                    update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
-                }
 
                 if(Arr::get($pages_response_data, 'error.code') && (new PlatformData('tiktok'))->isAppPermissionError($pages_response_data)){
                     do_action( 'wpsocialreviews/tiktok_feed_app_permission_revoked' );

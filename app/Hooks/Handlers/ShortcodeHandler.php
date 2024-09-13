@@ -90,7 +90,7 @@ class ShortcodeHandler
         do_action('wpsocialreviews/load_template_assets', $templateId);
 
         $html = '';
-        $error_data = Arr::get($settings['dynamic'], 'error');
+        $error_data = Arr::get($settings['dynamic'], 'error_message');
         if (Arr::get($error_data, 'error_message')) {
             $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data['error_message'], $account_ids);
         } elseif ($error_data) {
