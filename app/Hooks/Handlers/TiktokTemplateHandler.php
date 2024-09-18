@@ -82,7 +82,11 @@ class TiktokTemplateHandler
 
     public function renderFeedMedia($feed = [], $template_meta = [])
     {
-        $gdpr_settings = (new TiktokFeed())->getGdprSettings('tiktok');
+        $gdpr_settings = [];
+        $tiktokFeed = new TiktokFeed();
+        if (method_exists($tiktokFeed, 'getGdprSettings')) {
+            $gdpr_settings = (new TiktokFeed())->getGdprSettings('tiktok');
+        }
 
         $html = $this->loadView('public/feeds-templates/tiktok/elements/media', array(
             'feed'          => $feed,

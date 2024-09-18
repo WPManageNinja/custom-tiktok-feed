@@ -26,8 +26,10 @@ class ShortcodeHandler
 
         $template_meta = $shortcodeHandler->templateMeta($templateId, $platform);
         $account_ids = Arr::get($template_meta, 'feed_settings.source_settings.selected_accounts');
-        do_action('wpsocialreviews/before_display_tiktok_feed', $account_ids);
 
+        if(defined('WPSOCIALREVIEWS_VERSION') && version_compare(WPSOCIALREVIEWS_VERSION, '3.14.0', '>=')) {
+            do_action('wpsocialreviews/before_display_tiktok_feed', $account_ids);
+        }
         $feed = (new TiktokFeed())->getTemplateMeta($template_meta, $templateId);
         $settings      = $shortcodeHandler->formatFeedSettings($feed);
 

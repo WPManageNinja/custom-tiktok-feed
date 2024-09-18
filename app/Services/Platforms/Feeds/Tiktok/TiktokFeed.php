@@ -413,8 +413,12 @@ class TiktokFeed extends BaseFeed
             $userAvatar = $item['user']['profile_image_url'] ?? null;
             $accountId = $item['user']['name'] ?? null;
             $headerMeta = 'avatars';
-            $local_avatar = (new ImageOptimizationHandler($this->platform))->maybeLocalHeader($accountId, $userAvatar, $global_settings,$headerMeta);
-            $settings['dynamic']['items'][$index]['user_avatar'] = $local_avatar ?? $userAvatar;
+
+            $imageOptimizationHandler = new ImageOptimizationHandler($this->platform);
+            if (method_exists($imageOptimizationHandler, 'maybeLocalHeader')) {
+                $local_avatar = $imageOptimizationHandler->maybeLocalHeader($accountId, $userAvatar, $global_settings, $headerMeta);
+                $settings['dynamic']['items'][$index]['user_avatar'] = $local_avatar ?? $userAvatar;
+            }
         }
 
         if($has_gdpr === "true" && $optimized_images == "false") {
