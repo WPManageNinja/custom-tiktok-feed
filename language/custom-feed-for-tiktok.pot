@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Feed for TikTok\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 10:09+0000\n"
+"POT-Creation-Date: 2024-09-18 09:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgid "Account Name Typography"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:265
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:203
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:204
 msgid "Author"
 msgstr ""
 
@@ -45,10 +45,10 @@ msgstr ""
 msgid "Background Color"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:191
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:299
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:324
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:343
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:192
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:300
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:325
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:344
 msgid "Background Color:"
 msgstr ""
 
@@ -73,13 +73,13 @@ msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:393
 #: app/Services/Widgets/TikTokWidget.php:441
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:136
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:155
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:137
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:156
 msgid "Bottom Spacing"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:489
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:183
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:184
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:350
 msgid "Box"
 msgstr ""
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Box Background Color"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:800
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:999
 msgid "Cache cleared successfully!"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgid "Color"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:257
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:200
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:201
 msgid "Content"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgid "Date Color"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:412
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:148
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:149
 msgid "Description"
 msgstr ""
 
@@ -139,12 +139,12 @@ msgid "Description Typography"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:199
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:283
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:284
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:262
 msgid "Follow Button"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:110
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:111
 msgid "Follow on TikTok"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgid "General"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:356
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:126
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:127
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:84
 msgid "Header"
 msgstr ""
@@ -171,11 +171,11 @@ msgid "https://github.com/devutpol"
 msgstr ""
 
 #. URI of the plugin
-msgid "https://github.com/WPManageNinja/custom-feed-for-tiktok"
+msgid "https://wpsocialninja.com/platforms/tiktok-feed/"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:557
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:333
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:334
 msgid "Item Box"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Likes Counter Typography"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:115
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:116
 msgid "Load More"
 msgstr ""
 
@@ -215,11 +215,11 @@ msgid "Padding"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:101
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:308
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:309
 msgid "Pagination"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:293
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:339
 msgid "Please select an Account to get feeds."
 msgstr ""
 
@@ -228,26 +228,22 @@ msgid "Post Author"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:294
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:219
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:220
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:180
 msgid "Post Date"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:323
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:235
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:236
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:204
 msgid "Post Text"
-msgstr ""
-
-#: app/Hooks/Handlers/ShortcodeHandler.php:45
-msgid "Posts are not available!"
 msgstr ""
 
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:218
 msgid "Read More Link Color"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:274
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:275
 msgid "Read More Link Color:"
 msgstr ""
 
@@ -269,12 +265,12 @@ msgstr ""
 msgid "Social Ninja TikTok Feed"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:731
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:925
 msgid "Something went wrong"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:460
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:167
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:168
 msgid "Statistics"
 msgstr ""
 
@@ -282,7 +278,7 @@ msgstr ""
 msgid "Statistics Color"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:251
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:252
 #: app/Services/Widgets/Beaver/TikTok/TikTokWidget.php:238
 msgid "Statistics Count"
 msgstr ""
@@ -291,15 +287,15 @@ msgstr ""
 msgid "Style"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:331
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:453
 msgid "Success"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:269
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:314
 msgid "Successfully Disconnected!"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:359
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:482
 msgid "Template Saved Successfully!!"
 msgstr ""
 
@@ -314,20 +310,42 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:140
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:159
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:175
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:211
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:227
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:243
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:259
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:293
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:318
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:141
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:160
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:176
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:212
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:228
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:244
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:260
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:294
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:319
 msgid "Text Color:"
 msgstr ""
 
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:360
+#, php-format
+msgid ""
+"There has been a problem with your account (%s). Please reconnect your "
+"account."
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:364
+#, php-format
+msgid ""
+"There has been a problem with your account (%s). The user has not authorized "
+"application or revoked permission. Please reconnect your account."
+msgstr ""
+
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:368
+#, php-format
+msgid ""
+"There has been a problem with your account(%s). Your access token is invalid "
+"has expired. Please reconnect your account. Otherwise, the feed will no "
+"longer work."
+msgstr ""
+
 #: app/Services/Widgets/Oxygen/TikTokWidget.php:16
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:43
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:49
 msgid "TikTok"
 msgstr ""
 
@@ -353,7 +371,7 @@ msgid "Typography"
 msgstr ""
 
 #: app/Services/Widgets/TikTokWidget.php:364
-#: app/Services/Platforms/Feeds/Tiktok/Config.php:129
+#: app/Services/Platforms/Feeds/Tiktok/Config.php:130
 msgid "User Name"
 msgstr ""
 
@@ -361,7 +379,7 @@ msgstr ""
 msgid "WP Social Ninja"
 msgstr ""
 
-#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:56
+#: app/Services/Platforms/Feeds/Tiktok/TiktokFeed.php:62
 msgid "You are Successfully Verified."
 msgstr ""
 
