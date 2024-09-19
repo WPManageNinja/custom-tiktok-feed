@@ -13,7 +13,7 @@ $description = Arr::get($feed, 'text', '');
 $display_mode = Arr::get($template_meta, 'post_settings.display_mode');
 $media_url = Arr::get($feed, 'media_url', '');
 $default_media = Arr::get($feed, 'media.preview_image_url', '');
-$imgClass = !empty($media_url) && (!str_contains($media_url, 'placeholder') ? 'wpsr-tt-post-img wpsr-show' : 'wpsr-tt-post-img wpsr-hide');
+$imgClass = !empty($media_url) && !str_contains($media_url, 'placeholder') ? 'wpsr-tt-post-img wpsr-show' : 'wpsr-tt-post-img wpsr-hide';
 $videoUrl = 'https://www.tiktok.com/@'.$userID.'/video/'.$feedID;
 $hasGdpr = Arr::get($image_settings, 'has_gdpr', false);
 
@@ -31,8 +31,8 @@ $attrs = [
     <?php else: ?>
         <div class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link ">
     <?php endif; ?>
-    <?php if ($hasGdpr): ?>
-        <img class="wpsr-tt-post-img wpsr-show" src="<?php echo esc_url($media_url); ?>" alt="<?php echo esc_attr($description); ?>"/>
+    <?php if ($hasGdpr === 'true'): ?>
+        <img class="<?php echo esc_attr($imgClass); ?>" src="<?php echo esc_url($media_url); ?>" alt="<?php echo esc_attr($description); ?>"/>
     <?php else: ?>
         <img class="<?php echo esc_attr($imgClass); ?>" src="<?php echo esc_url($default_media); ?>" alt="<?php echo esc_attr($description); ?>"/>
     <?php endif; ?>
