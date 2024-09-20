@@ -16,16 +16,17 @@ $default_media = Arr::get($feed, 'media.preview_image_url', '');
 $imgClass = !empty($media_url) && !str_contains($media_url, 'placeholder') ? 'wpsr-tt-post-img wpsr-show' : 'wpsr-tt-post-img wpsr-hide';
 $videoUrl = 'https://www.tiktok.com/@'.$userID.'/video/'.$feedID;
 $hasGdpr = Arr::get($image_settings, 'has_gdpr', false);
+$animationImgClass = str_contains($media_url, 'placeholder') && $media_url ? 'wpsr-animated-background' : '';
 
 $attrs = [
-    'class'  => 'class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link wpsr-animated-background"',
+    'class'  => 'class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link"',
     'target' => $display_mode !== 'none' ? 'target="_blank"' : '',
     'rel'    => 'rel="nofollow"',
     'href'   =>  $display_mode !== 'none' ? 'href="'.esc_url($videoUrl).'"' : '',
 ];
 
 ?>
-    <div class="wpsr-tt-post-media">
+    <div class="wpsr-tt-post-media <?php echo esc_attr($animationImgClass); ?>">
     <?php if ($display_mode !== 'none'): ?>
         <a <?php Helper::printInternalString(implode(' ', $attrs)); ?>>
     <?php else: ?>
