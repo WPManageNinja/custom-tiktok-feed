@@ -10,6 +10,8 @@ if (!empty($feeds) && is_array($feeds)) {
     $column = isset($template_meta['column_number']) ? $template_meta['column_number'] : 4;
     $columnClass = 'wpsr-col-' . $column;
     $layout_type = isset($template_meta['layout_type']) && defined('WPSOCIALREVIEWS_PRO') ? $template_meta['layout_type'] : 'grid';
+    $upload_dir  = wp_upload_dir();
+    $upload_url  = trailingslashit( $upload_dir['baseurl'] ) . trailingslashit(WPSOCIALREVIEWS_UPLOAD_DIR_NAME);
 
     // Check if the feed type is user_feed and the pro version is not defined
     if ($feed_type !== 'user_feed' && !defined('WPSOCIALREVIEWS_PRO')) {
@@ -46,6 +48,7 @@ if (!empty($feeds) && is_array($feeds)) {
                      data-optimized_images="<?php echo esc_attr($imageOptimization); ?>"
                      data-has_gdpr="<?php echo esc_attr($gdprEnabled); ?>"
                      data-image_size="<?php echo esc_attr($imageResolution); ?>"
+                     data-upload_url="<?php echo esc_attr($upload_url);?>"
                 >
                     <div class="wpsr-tiktok-feed-image">
                     <?php

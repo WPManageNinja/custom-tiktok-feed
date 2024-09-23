@@ -98,6 +98,9 @@ class ShortcodeHandler
             $html .= apply_filters('wpsocialreviews/display_frontend_error_message', $platform, $error_data, $account_ids);
         }
 
+        $upload_dir  = wp_upload_dir();
+        $upload_url  = trailingslashit( $upload_dir['baseurl'] ) . trailingslashit(WPSOCIALREVIEWS_UPLOAD_DIR_NAME);
+
         $template_body_data = [
             'templateId'    => $templateId,
             'feeds'         => $settings['feeds'],
@@ -107,7 +110,8 @@ class ShortcodeHandler
             'maxId'         => $pagination_settings['maxId'],
             'pagination_settings' => $pagination_settings,
             'translations'  => $translations,
-            'image_settings' => $image_settings
+            'image_settings' => $image_settings,
+            'upload_url' => $upload_url
         ];
 
         $html .=  $this->loadView('public/feeds-templates/tiktok/header', array(
