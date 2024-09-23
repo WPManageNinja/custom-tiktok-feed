@@ -49,7 +49,6 @@ if (!empty($feeds) && is_array($feeds)) {
                      data-optimized_images="<?php echo esc_attr($imageOptimization); ?>"
                      data-has_gdpr="<?php echo esc_attr($gdprEnabled); ?>"
                      data-image_size="<?php echo esc_attr($imageResolution); ?>"
-                     data-upload_url="<?php echo esc_attr($upload_url);?>"
                 >
                     <div class="wpsr-tiktok-feed-image">
                     <?php
