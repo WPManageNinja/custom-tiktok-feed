@@ -4,7 +4,7 @@ Tags: TikTok, tiktok feed, tiktok video, tiktok plugin, tiktok gallery
 Requires at least: 5.6
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -183,6 +183,9 @@ Please review the terms of use and privacy policy of TikTok to understand how yo
 7. 100% Responsive on all devices
 
 == Changelog ==
+1.1.1 ( Date: 23 September, 2024 )
+- Resolved an issue with the display of TikTok Feed user names and images on animated backgrounds.
+- Preloader in feed templates not disappearing after storing images locally has been resolved. Preloader now correctly disappears after images are successfully stored.
 
 1.1.0 ( Date: 18 September, 2024 )
 • Added Optimize Images settings option in Settings -> Feed Platforms -> TikTok Settings. This feature automatically saves local copies of TikTok feed images on your server for better performance.
