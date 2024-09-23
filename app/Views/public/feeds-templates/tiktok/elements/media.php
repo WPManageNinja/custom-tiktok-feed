@@ -15,7 +15,7 @@ $media_url = Arr::get($feed, 'media_url', '');
 $default_media = Arr::get($feed, 'media.preview_image_url', '');
 $imgClass = !empty($media_url) && !str_contains($media_url, 'placeholder') ? 'wpsr-tt-post-img wpsr-show' : 'wpsr-tt-post-img wpsr-hide';
 $videoUrl = 'https://www.tiktok.com/@'.$userName.'/video/'.$feedID;
-$hasGdpr = Arr::get($image_settings, 'has_gdpr', false);
+$imageOptimization = Arr::get($image_settings, 'optimized_images');
 $animationImgClass = str_contains($media_url, 'placeholder') && $media_url ? 'wpsr-animated-background' : '';
 
 $attrs = [
@@ -32,7 +32,7 @@ $attrs = [
     <?php else: ?>
         <div class="wpsr-tiktok-feed-video-preview wpsr-tiktok-feed-video-playmode wpsr-feed-link ">
     <?php endif; ?>
-            <img class="<?php echo esc_attr($imgClass); ?>" src="<?php echo esc_url($hasGdpr === 'true' ? $media_url : $default_media); ?>" alt="<?php echo esc_attr($description); ?>"/>
+            <img class="<?php echo esc_attr($imgClass); ?>" src="<?php echo esc_url($imageOptimization === 'true' ? $media_url : $default_media); ?>" alt="<?php echo esc_attr($description); ?>"/>
     <?php if ($display_mode !== 'none'): ?>
         </a>
     <?php else: ?>
