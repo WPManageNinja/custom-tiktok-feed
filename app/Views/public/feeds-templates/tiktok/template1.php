@@ -10,8 +10,6 @@ if (!empty($feeds) && is_array($feeds)) {
     $column = isset($template_meta['column_number']) ? $template_meta['column_number'] : 4;
     $columnClass = 'wpsr-col-' . $column;
     $layout_type = isset($template_meta['layout_type']) && defined('WPSOCIALREVIEWS_PRO') ? $template_meta['layout_type'] : 'grid';
-    $upload_dir  = wp_upload_dir();
-    $upload_url  = trailingslashit( $upload_dir['baseurl'] ) . trailingslashit(WPSOCIALREVIEWS_UPLOAD_DIR_NAME);
 
     // Check if the feed type is user_feed and the pro version is not defined
     if ($feed_type !== 'user_feed' && !defined('WPSOCIALREVIEWS_PRO')) {
