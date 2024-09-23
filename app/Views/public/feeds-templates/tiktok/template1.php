@@ -29,24 +29,25 @@ if (!empty($feeds) && is_array($feeds)) {
             if ($layout_type !== 'carousel') {
                 do_action('custom_feed_for_tiktok/tiktok_feed_template_item_wrapper_before', $template_meta);
             }
-            $userID = Arr::get($feed, 'user.id');
             $userName = Arr::get($feed, 'user.name');
-            $videoID = Arr::get($feed, 'id');
-            $videoLink = 'https://www.tiktok.com/@' . $userID . '/video/' . $videoID;
+            $feedID = Arr::get($feed, 'id');
             $imageOptimization = Arr::get($image_settings, 'optimized_images');
             $gdprEnabled = Arr::get($image_settings, 'has_gdpr');
             $imageResolution = Arr::get($template_meta, 'post_settings.resolution');
+            $dataPlayMode = Arr::get($template_meta, 'post_settings.display_mode');
             ?>
             <div role="group" class="wpsr-tiktok-feed-item wpsr-tt-post <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>"
-                 data-post_id="<?php echo esc_attr($videoID); ?>"
+                 data-post_id="<?php echo esc_attr($feedID); ?>"
                  data-user_name="<?php echo esc_attr($userName); ?>"
                  data-image_size="<?php echo esc_attr($imageResolution); ?>"
             >
-                <div class="wpsr-tiktok-feed-playmode wpsr-tiktok-feed-inner" data-feed_type="<?php echo esc_attr($feed_type); ?>" data-index="<?php echo esc_attr($index); ?>" data-playmode="<?php echo esc_attr($template_meta['post_settings']['display_mode']); ?>"
+                <div class="wpsr-tiktok-feed-playmode wpsr-tiktok-feed-inner"
+                     data-feed_type="<?php echo esc_attr($feed_type); ?>"
+                     data-index="<?php echo esc_attr($index); ?>"
+                     data-playmode="<?php echo esc_attr($dataPlayMode); ?>"
                      data-template-id="<?php echo esc_attr($templateId); ?>"
                      data-optimized_images="<?php echo esc_attr($imageOptimization); ?>"
                      data-has_gdpr="<?php echo esc_attr($gdprEnabled); ?>"
-                     data-image_size="<?php echo esc_attr($imageResolution); ?>"
                 >
                     <div class="wpsr-tiktok-feed-image">
                     <?php
