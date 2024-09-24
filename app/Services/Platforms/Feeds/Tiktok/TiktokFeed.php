@@ -987,9 +987,12 @@ class TiktokFeed extends BaseFeed
                 if(isset($connectedSources[$accountId])) {
                     $account = $connectedSources[$accountId];
                     $page_header_response = $this->getHeaderDetails($account, true);
-                    $account['username'] = Arr::get($page_header_response, 'data.user.display_name', '');
-                    $connectedSources = $this->addPlatformApiErrors($page_header_response, $connectedSources, $account);
-                    update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
+                    $hasApiError = Arr::get($page_header_response, 'error.message', '');
+                    if($hasApiError){
+                        $account['username'] = Arr::get($page_header_response, 'data.user.display_name', '');
+                        $connectedSources = $this->addPlatformApiErrors($page_header_response, $connectedSources, $account);
+                        update_option('wpsr_tiktok_connected_sources_config', array('sources' => $connectedSources));
+                    }
                 }
             }
         }
