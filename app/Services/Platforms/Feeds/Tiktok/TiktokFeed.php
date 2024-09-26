@@ -417,7 +417,7 @@ class TiktokFeed extends BaseFeed
             $imageOptimizationHandler = new ImageOptimizationHandler($this->platform);
             if (method_exists($imageOptimizationHandler, 'maybeLocalHeader')) {
                 $local_avatar = $imageOptimizationHandler->maybeLocalHeader($accountId, $userAvatar, $global_settings, $headerMeta);
-                $settings['dynamic']['items'][$index]['user_avatar'] = $local_avatar ?? $userAvatar;
+                $settings['dynamic']['items'][$index]['user_avatar'] = ($optimized_images == "true" && $local_avatar ) ? $local_avatar : $userAvatar;
             }
         }
 
