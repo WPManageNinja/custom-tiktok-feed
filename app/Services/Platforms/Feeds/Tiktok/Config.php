@@ -49,7 +49,7 @@ class Config
                 'filters'  => array(
                     'total_posts_number'  => array(
                         'desktop'  => (int) Arr::get($settings, 'filters.total_posts_number.desktop', 50),
-                        'mobile'   => (int) Arr::get($settings, 'filters.total_posts_number.mobile')
+                        'mobile'   => (int) Arr::get($settings, 'filters.total_posts_number.mobile', 50)
                     ),
                     'post_order'       => Arr::get($settings,'filters.post_order', 'ascending'),
                     'includes_inputs'  => sanitize_text_field(Arr::get($settings,'filters.includes_inputs', '')),
