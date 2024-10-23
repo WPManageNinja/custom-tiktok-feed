@@ -37,7 +37,7 @@ if (!empty($feeds) && is_array($feeds)) {
             $imageResolution = Arr::get($template_meta, 'post_settings.resolution');
             $dataPlayMode = Arr::get($template_meta, 'post_settings.display_mode');
             ?>
-            <div role="group" class="wpsr-tiktok-feed-item wpsr-tt-post <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>"
+            <div tabindex="0" role="group" class="wpsr-tiktok-feed-item wpsr-tt-post <?php echo ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) ? 'swiper-slide' : ''; ?>"
                  data-post_id="<?php echo esc_attr($feedID); ?>"
                  data-user_name="<?php echo esc_attr($userName); ?>"
                  data-image_size="<?php echo esc_attr($imageResolution); ?>"
