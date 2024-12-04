@@ -104,5 +104,5 @@ if ($layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO')) {
 }
 $rowClasses = $layout_type === 'carousel' && defined('WPSOCIALREVIEWS_PRO') ? 'swiper-wrapper' : 'wpsr-row';
 
-echo '<div class="' . esc_attr($rowClasses) . ' wpsr-tiktok-all-feed wpsr_feeds wpsr-column-gap-' . esc_attr($column_gaps) . '">';
+echo '<div class="' . esc_attr($rowClasses) . ' wpsr-tt-all-feed wpsr_feeds wpsr-column-gap-' . esc_attr($column_gaps) . '">';
 ?>
