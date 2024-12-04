@@ -4,7 +4,7 @@ Tags: TikTok, tiktok feed, tiktok video, tiktok plugin, tiktok gallery
 Requires at least: 5.6
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -183,6 +183,10 @@ Please review the terms of use and privacy policy of TikTok to understand how yo
 7. 100% Responsive on all devices
 
 == Changelog ==
+1.1.3 ( Date: 04 December, 2024 )
+- Fixed an issue with TikTok feed filters on mobile devices
+- Improved accessibility for the TikTok feed
+
 1.1.2 ( Date: 07 October, 2024 )
 - Fixed optimize profile photo invalid url issue
 - Fixed unknown error message display issue
